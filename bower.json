@@ -1,0 +1,25 @@
+{
+  "name": "Itnk5",
+  "description": "",
+  "main": "",
+  "authors": [
+    "alexsynarchin <alexsynarchin@gmail.com>"
+  ],
+  "license": "MIT",
+  "moduleType": [],
+  "homepage": "",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "vendor/bower_dl",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "AdminLTE": "admin-lte#~2.3.2",
+    "jquery": "~2.1.4",
+    "bootstrap": "~3.3.6"
+  }
+}
