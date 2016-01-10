@@ -24,7 +24,8 @@
                             <thead>
                             <tr>
                                 <th>Id</th>
-                                <th>Name</th>
+                                <th>Название</th>
+                                <th>Балансовая стоимость</th>
                             </tr>
                             </thead>
                         </table>
