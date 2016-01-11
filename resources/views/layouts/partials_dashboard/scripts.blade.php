@@ -10,8 +10,10 @@
             serverSide: true,
             ajax: '{!! route('datatables.data') !!}',
             columns: [
-                { data: 'id', name: 'id' },
+                {data: 'rownum', name: 'rownum'},
                 { data: 'name', name: 'name' },
+                { data: 'number', name: 'number' },
+                { data: 'os_date', name: 'os_date' },
                 {data:'carrying_amount', name:'carrying_amount'}
             ]
         });

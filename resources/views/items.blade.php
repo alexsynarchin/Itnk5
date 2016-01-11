@@ -23,8 +23,10 @@
                         <table class="table table-bordered table-hover dataTable" id="items-table">
                             <thead>
                             <tr>
-                                <th>Id</th>
+                                <th>№</th>
                                 <th>Название</th>
+                                <th>Номер</th>
+                                <th>Дата принятия к учету</th>
                                 <th>Балансовая стоимость</th>
                             </tr>
                             </thead>
