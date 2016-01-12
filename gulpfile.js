@@ -34,8 +34,6 @@ elixir(function(mix){
     mix.scripts([
             'js/jquery.js',
             'js/bootstrap.js',
-            'js/jquery.dataTables.js',
-            'js/dataTables.bootstrap.js',
             'js/app.js'
         ],
         'public/assets/js/admin.js',

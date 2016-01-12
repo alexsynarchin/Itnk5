@@ -1,49 +1,39 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    @include('layouts.landing_partials.head')
+    @include('layouts.partials_dashboard.head')
 </head>
-<body>
-<div class="container-fluid">
-    <div class="row">
-        <div class="col-md-6 col-md-offset-3">
-            <div class=" auth-panel panel panel-default">
-                <div class="panel-heading center">Форма авторизации</div>
-                @foreach($errors -> all() as $error)
-                    <p class="alert alert-danger">{!!$error!!}</p>
-                @endforeach
-                <div class="panel-body">
-                    <form class="auth-form form-horizontal" role="form" method="POST" action="{{ url('/auth/login') }}">
-                        <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                        <div class="form-group">
-                            <label class="col-md-3 control-label">Логин</label>
-                            <div class="col-md-7">
-                                <input type="text" class="form-control" name="username" >
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <label class="col-md-3 control-label">Пароль</label>
-                            <div class="col-md-7">
-                                <input type="password" class="form-control" name="password">
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <div class="center ">
-                                <button type="submit" class="btn btn-default ">
-                                    Войти
-                                </button>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
+<body class="hold-transition login-page">
+<div class="login-box">
+    <div class="login-logo">
+        ИТНК Обзор
     </div>
+    <!-- /.login-logo -->
+    <div class="login-box-body">
+        <p class="login-box-msg">Введите ваши логин и пароль</p>
+        @foreach($errors -> all() as $error)
+            <p class="alert alert-danger">{!!$error!!}</p>
+        @endforeach
+        <form action="{{ url('/auth/login') }}" method="post">
+            <input type="hidden" name="_token" value="{{ csrf_token() }}">
+            <div class="form-group has-feedback">
+                <input type="username" class="form-control" placeholder="Username">
+                <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
+            </div>
+            <div class="form-group has-feedback">
+                <input type="password" class="form-control" placeholder="Password">
+                <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+            </div>
+            <div class="center row">
+                <!-- /.col -->
+                    <button type="submit" class="btn btn-primary btn-flat">Войти</button>
+                <!-- /.col -->
+            </div>
+        </form>
+    </div>
+    <!-- /.login-box-body -->
 </div>
-<div class="footer_padding"></div>
-<footer>
-    @include('layouts.landing_partials.footer')
-</footer>
+<!-- /.login-box -->
 </body>
 </html>
+

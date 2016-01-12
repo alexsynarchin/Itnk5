@@ -9,7 +9,7 @@
 <!--Datatables-->
 <link rel="stylesheet" href="https://cdn.datatables.net/1.10.10/css/dataTables.bootstrap.min.css">
 <!--Main css file-->
-<link rel="stylesheet" href="assets/css/admin.css">
+<link rel="stylesheet" href="/assets/css/admin.css">
 <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
 <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
 <!--[if lt IE 9]>

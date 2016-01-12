@@ -30,6 +30,11 @@ Route::get('items',[
     'as' => 'items',
     'uses' => 'DashboardController@items'
 ]);
+Route::get('organization',[
+    'middleware' => 'auth',
+    'as' => 'organization',
+    'uses' => 'OrganizationController@index'
+]);
 // Logging in and out
 get('/auth/login', 'Auth\AuthController@getLogin');
 post('/auth/login', 'Auth\AuthController@postLogin');
