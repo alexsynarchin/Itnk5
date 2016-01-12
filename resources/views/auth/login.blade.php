@@ -17,11 +17,11 @@
         <form action="{{ url('/auth/login') }}" method="post">
             <input type="hidden" name="_token" value="{{ csrf_token() }}">
             <div class="form-group has-feedback">
-                <input type="username" class="form-control" placeholder="Введите логин">
+                <input type="text" mame="username" class="form-control" placeholder="Введите логин">
                 <span class="glyphicon glyphicon-user form-control-feedback"></span>
             </div>
             <div class="form-group has-feedback">
-                <input type="password" class="form-control" placeholder="Введите пароль">
+                <input name="password" type="password" class="form-control" placeholder="Введите пароль">
                 <span class="glyphicon glyphicon-lock form-control-feedback"></span>
             </div>
             <div class="center row">
