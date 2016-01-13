@@ -11,7 +11,7 @@
         </ol>
     </section>
     <section class="content">
-       @include('documents.documents_partials.documents_navigation')
+        @include('documents.documents_partials.documents_navigation')
         <div class="document box">
             <div class="box-header with-border">
                 <h3 class="box-title"><i class="fa fa-file-text-o"></i> Документы <span class="label bg-aqua">4 квартал 2015 года</span></h3>
@@ -70,8 +70,8 @@
             </div>
         </div>
     </section>
-@stop
-@section('user-scripts')
-        <!-- page script -->
+    @stop
+    @section('user-scripts')
+            <!-- page script -->
 
 @stop

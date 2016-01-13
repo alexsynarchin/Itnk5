@@ -8,6 +8,7 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use App\Models;
+use View;
 
 class DocumentController extends Controller
 {
@@ -18,9 +19,12 @@ class DocumentController extends Controller
      */
     public function index()
     {
-        $documents = Auth::user() -> documents;
-        return \View::make('documents')->with('documents', $documents);
+        return View::make('documents');
     }
+    public function firstEnter(){
+        $documents = Auth::user() -> documents;
+        return View::make('documents.firstEnterIndex', ['documents'=>$documents]);
+            }
 
     /**
      * Show the form for creating a new resource.

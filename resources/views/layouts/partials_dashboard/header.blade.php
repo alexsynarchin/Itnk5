@@ -1,5 +1,5 @@
 <figure class="logo">
-    <img src="assets/images/logo-dashboard.png">
+    <img src="/assets/images/logo-dashboard.png">
 </figure>
 <!-- Header Navbar: style can be found in header.less -->
 <nav class="navbar navbar-static-top" role="navigation">

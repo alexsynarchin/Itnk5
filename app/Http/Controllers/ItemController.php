@@ -25,7 +25,6 @@ class ItemController extends Controller
         DB::statement(DB::raw('set @rownum=0'));
         $items = \App\Models\Item::select([
             DB::raw('@rownum  := @rownum  + 1 AS rownum'),
-            'id',
             'name',
             'carrying_amount',
             'number']);

@@ -20,11 +20,27 @@ Route::get('home', [
     'as' => 'home',
     'uses' => 'DashboardController@index'
 ]);
-Route::get('documents', [
+Route::get('firstEnter',[
     'middleware' => 'auth',
-    'as' => 'documents',
-    'uses' => 'DocumentController@index'
+    'uses' => 'DocumentController@firstEnter'
 ]);
+Route::group(['prefix' => 'documents', 'middleware' => 'auth'], function(){
+    Route::get('/', [
+        'as' => 'documents',
+        'uses' => 'DocumentController@index'
+    ]);
+    Route::get('purchase',
+            function(){
+                return View::make('documents.purchase');
+            }
+        );
+    Route::get('depreciation',function(){
+        return View::make('documents.depreciation');
+    });
+    Route::get('decommission', function(){
+       return View::make('documents.decommission');
+    });
+});
 Route::get('items',[
     'middleware' => 'auth',
     'as' => 'items',
@@ -35,6 +51,12 @@ Route::get('organization',[
     'as' => 'organization',
     'uses' => 'OrganizationController@index'
 ]);
+Route::get('profile',[
+    'middleware' => 'auth',
+    'as' => 'profile',
+ function(){
+    return View::make('profile');
+}]);
 // Logging in and out
 get('/auth/login', 'Auth\AuthController@getLogin');
 post('/auth/login', 'Auth\AuthController@postLogin');
