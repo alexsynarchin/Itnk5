@@ -2,20 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="a6453b84-596c-4915-9a5d-a05d01eb2f85" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Http/Controllers/DocumentController.php" afterPath="$PROJECT_DIR$/app/Http/Controllers/DocumentController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Http/Controllers/ItemController.php" afterPath="$PROJECT_DIR$/app/Http/Controllers/ItemController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Http/routes.php" afterPath="$PROJECT_DIR$/app/Http/routes.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/assets/css/admin.css" afterPath="$PROJECT_DIR$/public/assets/css/admin.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/assets/css/admin.css.map" afterPath="$PROJECT_DIR$/public/assets/css/admin.css.map" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/assets/js/admin.js" afterPath="$PROJECT_DIR$/public/assets/js/admin.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/assets/js/admin.js.map" afterPath="$PROJECT_DIR$/public/assets/js/admin.js.map" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/assets/less/Admin.less" afterPath="$PROJECT_DIR$/resources/assets/less/Admin.less" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/documents.blade.php" afterPath="$PROJECT_DIR$/resources/views/documents.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/layouts/partials_dashboard/aside.blade.php" afterPath="$PROJECT_DIR$/resources/views/layouts/partials_dashboard/aside.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/layouts/partials_dashboard/header.blade.php" afterPath="$PROJECT_DIR$/resources/views/layouts/partials_dashboard/header.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/layouts/partials_dashboard/scripts.blade.php" afterPath="$PROJECT_DIR$/resources/views/layouts/partials_dashboard/scripts.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/profile.blade.php" afterPath="$PROJECT_DIR$/resources/views/profile.blade.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/documents/purchase.blade.php" afterPath="$PROJECT_DIR$/resources/views/documents/purchase.blade.php" />
     </list>
     <ignored path="Itnk5.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -40,8 +28,8 @@
       <file leaf-file-name="documents.blade.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/resources/views/documents.blade.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-8.5">
-              <caret line="13" column="7" selection-start-line="13" selection-start-column="7" selection-end-line="13" selection-end-column="68" />
+            <state vertical-scroll-proportion="-20.153847">
+              <caret line="74" column="45" selection-start-line="74" selection-start-column="28" selection-end-line="74" selection-end-column="45" />
               <folding />
             </state>
           </provider>
@@ -77,21 +65,21 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="depreciation.blade.php" pinned="false" current-in-tab="true">
+      <file leaf-file-name="depreciation.blade.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/resources/views/documents/depreciation.blade.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.16256158">
-              <caret line="42" column="25" selection-start-line="0" selection-start-column="0" selection-end-line="76" selection-end-column="5" />
+            <state vertical-scroll-proportion="-20.807692">
+              <caret line="59" column="33" selection-start-line="59" selection-start-column="33" selection-end-line="59" selection-end-column="33" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="purchase.blade.php" pinned="false" current-in-tab="false">
+      <file leaf-file-name="purchase.blade.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/resources/views/documents/purchase.blade.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-9.807693">
-              <caret line="24" column="43" selection-start-line="0" selection-start-column="0" selection-end-line="76" selection-end-column="5" />
+            <state vertical-scroll-proportion="0.5369458">
+              <caret line="58" column="52" selection-start-line="58" selection-start-column="52" selection-end-line="58" selection-end-column="52" />
               <folding />
             </state>
           </provider>
@@ -170,12 +158,12 @@
         <option value="$PROJECT_DIR$/resources/views/profile.blade.php" />
         <option value="$PROJECT_DIR$/resources/assets/less/variables.less" />
         <option value="$PROJECT_DIR$/resources/assets/less/Admin.less" />
-        <option value="$PROJECT_DIR$/resources/views/documents.blade.php" />
-        <option value="$PROJECT_DIR$/resources/views/documents/purchase.blade.php" />
         <option value="$PROJECT_DIR$/resources/views/documents/depreciation.blade.php" />
         <option value="$PROJECT_DIR$/app/Http/routes.php" />
         <option value="$PROJECT_DIR$/resources/views/documents/decommission.blade.php" />
         <option value="$PROJECT_DIR$/resources/views/documents/documents_partials/documents_navigation.blade.php" />
+        <option value="$PROJECT_DIR$/resources/views/documents.blade.php" />
+        <option value="$PROJECT_DIR$/resources/views/documents/purchase.blade.php" />
       </list>
     </option>
   </component>
@@ -1231,14 +1219,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/documents/purchase.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-9.807693">
-          <caret line="24" column="43" selection-start-line="0" selection-start-column="0" selection-end-line="76" selection-end-column="5" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/vendor/bower_dl/AdminLTE/pages/layout/boxed.html">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -1251,14 +1231,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-9.807693">
           <caret line="15" column="70" selection-start-line="15" selection-start-column="23" selection-end-line="15" selection-end-column="70" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/documents.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-8.5">
-          <caret line="13" column="7" selection-start-line="13" selection-start-column="7" selection-end-line="13" selection-end-column="68" />
           <folding />
         </state>
       </provider>
@@ -1289,8 +1261,24 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/resources/views/documents/depreciation.blade.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.16256158">
-          <caret line="42" column="25" selection-start-line="0" selection-start-column="0" selection-end-line="76" selection-end-column="5" />
+        <state vertical-scroll-proportion="-20.807692">
+          <caret line="59" column="33" selection-start-line="59" selection-start-column="33" selection-end-line="59" selection-end-column="33" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/documents.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-20.153847">
+          <caret line="74" column="45" selection-start-line="74" selection-start-column="28" selection-end-line="74" selection-end-column="45" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/documents/purchase.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.5369458">
+          <caret line="58" column="52" selection-start-line="58" selection-start-column="52" selection-end-line="58" selection-end-column="52" />
           <folding />
         </state>
       </provider>
