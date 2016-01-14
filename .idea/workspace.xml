@@ -3,6 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="a6453b84-596c-4915-9a5d-a05d01eb2f85" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/documents/decommission.blade.php" afterPath="$PROJECT_DIR$/resources/views/documents/decommission.blade.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/documents/depreciation.blade.php" afterPath="$PROJECT_DIR$/resources/views/documents/depreciation.blade.php" />
     </list>
     <ignored path="Itnk5.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -57,18 +58,8 @@
       <file leaf-file-name="decommission.blade.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/resources/views/documents/decommission.blade.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.7536946">
-              <caret line="65" column="35" selection-start-line="65" selection-start-column="35" selection-end-line="65" selection-end-column="35" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="depreciation.blade.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/resources/views/documents/depreciation.blade.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-7.730769">
-              <caret line="39" column="24" selection-start-line="39" selection-start-column="24" selection-end-line="39" selection-end-column="50" />
+            <state vertical-scroll-proportion="0.6962233">
+              <caret line="58" column="52" selection-start-line="58" selection-start-column="52" selection-end-line="58" selection-end-column="52" />
               <folding />
             </state>
           </provider>
@@ -157,11 +148,11 @@
         <option value="$PROJECT_DIR$/resources/views/profile.blade.php" />
         <option value="$PROJECT_DIR$/resources/assets/less/variables.less" />
         <option value="$PROJECT_DIR$/resources/assets/less/Admin.less" />
-        <option value="$PROJECT_DIR$/resources/views/documents/depreciation.blade.php" />
         <option value="$PROJECT_DIR$/app/Http/routes.php" />
         <option value="$PROJECT_DIR$/resources/views/documents/documents_partials/documents_navigation.blade.php" />
         <option value="$PROJECT_DIR$/resources/views/documents.blade.php" />
         <option value="$PROJECT_DIR$/resources/views/documents/purchase.blade.php" />
+        <option value="$PROJECT_DIR$/resources/views/documents/depreciation.blade.php" />
         <option value="$PROJECT_DIR$/resources/views/documents/decommission.blade.php" />
       </list>
     </option>
@@ -1258,14 +1249,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/documents/depreciation.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-7.730769">
-          <caret line="39" column="24" selection-start-line="39" selection-start-column="24" selection-end-line="39" selection-end-column="50" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/resources/views/documents/purchase.blade.php">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-8.269231">
@@ -1274,10 +1257,18 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/documents/depreciation.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="2.08867">
+          <caret line="75" column="14" selection-start-line="75" selection-start-column="14" selection-end-line="75" selection-end-column="14" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/resources/views/documents/decommission.blade.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.7536946">
-          <caret line="65" column="35" selection-start-line="65" selection-start-column="35" selection-end-line="65" selection-end-column="35" />
+        <state vertical-scroll-proportion="0.6962233">
+          <caret line="58" column="52" selection-start-line="58" selection-start-column="52" selection-end-line="58" selection-end-column="52" />
           <folding />
         </state>
       </provider>

@@ -14,12 +14,12 @@
         @include('documents.documents_partials.documents_navigation')
         <div class="document box">
             <div class="box-header with-border">
-                <h3 class="box-title"><i class="fa fa-file-text-o"></i> Документы <span class="label bg-aqua">4 квартал 2015 года</span></h3>
+                <h3 class="box-title"><i class="fa fa-file-text-o"></i> Документы списания <span class="label bg-aqua">4 квартал 2015 года</span></h3>
             </div><!-- /.box-header -->
             <div class="box-body">
                 <div class="control-bnts row">
                     <div class="col-xs-4">
-                        <a class="add-btn btn btn-primary" href="#"><i class="fa fa-plus-square-o"></i> Создать документ начисления износа</a>
+                        <a class="add-btn btn btn-primary" href="#"><i class="fa fa-plus-square-o"></i> Создать документ списания</a>
                     </div>
                 </div>
                 <table class="list table table-bordered table-hover">
@@ -28,9 +28,6 @@
                         <th>№</th>
                         <th>
                             Раздел учета ОС
-                        </th>
-                        <th>
-                            Cумма износа
                         </th>
                         <th>
                             Балансовая стоимость
@@ -42,28 +39,24 @@
                     <tr>
                         <td>1</td>
                         <td>Автомобили</td>
-                        <td>100 000</td>
                         <td>12 000 000</td>
                         <td>10 000 000</td>
                     </tr>
                     <tr>
                         <td>2</td>
                         <td>Движимое имущество</td>
-                        <td>250 000</td>
                         <td>1 200 370</td>
                         <td>602 300</td>
                     </tr>
                     <tr>
                         <td>4</td>
                         <td>Особо ценное движимое имущество</td>
-                        <td>130 000</td>
                         <td>3 000 000</td>
                         <td>2 200 000</td>
                     </tr>
                     <tr>
                         <td>3</td>
                         <td>Здания и сооружения</td>
-                        <td>100 000</td>
                         <td>12 000 000</td>
                         <td>10 000 000</td>
                     </tr>
