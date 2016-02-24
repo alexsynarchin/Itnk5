@@ -79,8 +79,8 @@
 
                 },
                 columns: [
-                    { data: 'name', name: 'name' },
                     { data: 'number', name: 'number' },
+                    { data: 'name', name: 'name' },
                     {data: 'okof', name: 'okof' },
                     {data:'carrying_amount', name:'carrying_amount'},
                     {data: 'action', name: 'action', orderable: false, searchable: false}
