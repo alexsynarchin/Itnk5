@@ -179,7 +179,27 @@ class ItemController extends Controller
      */
     public function show($id)
     {
+        $item=\App\Models\Item::find($id);
+        $document=\App\Models\Item::find($id)->document;
+        $type=$item->document->os_type;
+        switch($type){
+            case 'movables'||'value_movables':
+                $variable=\App\Models\Item::find($id)->variable();
+                return View::make('item.show', array('item'=>$item,'document'=>$document, 'variable'=>$variable));
+                break;
+            case 'buildings':
+                $variable=\App\Models\Item::find($id)->variable();
+                $building=\App\Models\Item::find($id)->building();
+                $address=\App\Models\Address::find($id)->address();
+                return View::make('item.show', array('item'=>$item,'document'=>$document, 'building'=>$building, 'address'=>$address, 'variable'=>$variable));
+                break;
+            case 'parcels':
+                $parcel=\App\Models\Item::find($id)->parcel;
+                $address=\App\Models\Address::find($id)->address();
+                return View::make('item.show', array('item'=>$item,'document'=>$document, 'parcel'=>$parcel, 'address'=>$address));
+                break;
 
+        }
     }
 
     /**

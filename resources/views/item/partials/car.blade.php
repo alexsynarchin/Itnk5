@@ -1,7 +1,7 @@
 <div class="form-group">
     <div class="os-form-group col-xs-6">
         <label for="car_type" class="control-label">Тип автомобиля:</label>
-            {{ Form::select('car_type', App\Models\Car::$car_type, isset($item->car->car_type) ? $item->car->car_type : null, array('class' => 'form-control')) }}
+            {!! Form::select('car_type', App\Models\Car::$car_type, isset($item->car->car_type) ? $item->car->car_type : null, array('class' => 'form-control')) !!}
     </div>
 </div>
 <div class="form-group">
