@@ -14,15 +14,37 @@
     <!-- Main content -->
     <section class="content">
         <div class="col-xs-6">
-            <div class="panel panel-default ">
-                <div class="panel-heading"><h5>Данные пользователя</h5></div>
-                <div class="panel-body">
-
+            <div class="box box-primary">
+                <div class="box-header with-border">
+                    <h4>Основная информация:</h4>
+                </div>
+                <div class="box-body">
+                    <div class="row">
+                        <div class="col-xs-4">
+                            <label>Имя:</label>
+                        </div>
+                        <div class="col-xs-8">
+                            {{$user->first_name}}
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-4">
+                            <label>Фамилия:</label>
+                        </div>
+                        <div class="col-xs-8">
+                            {{$user->last_name}}
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-4">
+                            <label>Отчество:</label>
+                        </div>
+                        <div class="col-xs-8">
+                            {{$user->surname}}
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
-
-
-
     </section><!-- /.content -->
 @stop

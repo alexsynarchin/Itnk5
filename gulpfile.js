@@ -14,6 +14,8 @@ gulp.task("copyfilesStyles", function() {
         .pipe(gulp.dest("resources/assets/less/AdminLte"));
     gulp.src("vendor/bower_dl/AdminLTE/build/bootstrap-less/**")
         .pipe(gulp.dest("resources/assets/less/bootstrap-less"));
+    gulp.src("vendor/bower_dl/AdminLTE/plugins/datatables/dataTables.bootstrap.css")
+        .pipe(gulp.dest('public/assets/css'))
 });
 gulp.task("copyfilesJs", function(){
     gulp.src("vendor/bower_dl/AdminLTE/dist/js/app.js")
@@ -39,5 +41,5 @@ elixir(function(mix){
         'public/assets/js/admin.js',
         'resources/assets'
     );
-    mix.less('Admin.less', 'public/assets/css/admin.css');
+    mix.less('admin.less', 'public/assets/css/admin.css');
 });

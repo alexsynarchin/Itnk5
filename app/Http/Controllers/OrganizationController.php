@@ -6,7 +6,9 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 use View;
+
 
 class OrganizationController extends Controller
 {
@@ -17,7 +19,8 @@ class OrganizationController extends Controller
      */
     public function index()
     {
-        return View::make('organization');
+        $organization=Auth::user()->organization;
+        return View::make('organization',['organization' => $organization]);
     }
 
     /**

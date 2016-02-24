@@ -20,14 +20,15 @@ Route::get('home', [
     'as' => 'home',
     'uses' => 'DashboardController@index'
 ]);
-Route::get('firstEnter',[
+Route::get('documents',[
     'middleware' => 'auth',
-    'uses' => 'DocumentController@firstEnter'
+    'uses' => 'DocumentController@index'
 ]);
-Route::group(['prefix' => 'documents', 'middleware' => 'auth'], function(){
+Route::group(['prefix' => 'reports', 'middleware' => 'auth'], function(){
     Route::get('/', [
-        'as' => 'documents',
-        'uses' => 'DocumentController@index'
+        function(){
+            return View::make('reports');
+        }
     ]);
     Route::get('purchase',
             function(){
@@ -54,15 +55,50 @@ Route::get('organization',[
 Route::get('profile',[
     'middleware' => 'auth',
     'as' => 'profile',
- function(){
-    return View::make('profile');
-}]);
+    'uses' => 'UserController@index']);
+//Document Restful
+Route::group(['middleware' => 'auth'],
+    function()
+    {
+        Route::get('document/{id}/destroy',
+                [
+                    'as' => 'document.delete',
+                    'uses' => 'DocumentController@destroy'
+                ]);
+        Route::resource('document', 'DocumentController');
+
+        Route::get('document/{id}/item/create/',[
+            'as' => 'item.create',
+            'uses' => 'ItemController@create'
+        ]);
+        Route::post('item/{id}',[
+            'as' =>'item.store',
+            'uses' => 'ItemController@store'
+        ]);
+        Route::get('item/{id}',[
+            'as' =>'item.show',
+            'uses' => 'ItemController@show'
+        ]);
+        Route::get('item/destroy/{id}',[
+            'as' => 'item.destroy',
+            'uses' => 'ItemController@destroy'
+        ]);
+        Route::get('item/{id}/edit',[
+            'as' => 'item.edit',
+            'uses' => 'ItemController@edit'
+        ]);
+        Route::patch('item/{id}', [
+            'as' => 'item.update',
+            'uses' => 'ItemController@update'
+        ]);
+    }
+
+);
 // Logging in and out
 get('/auth/login', 'Auth\AuthController@getLogin');
 post('/auth/login', 'Auth\AuthController@postLogin');
 get('/auth/logout', 'Auth\AuthController@getLogout');
 //Controllers Routes
-Route::controller('items', 'ItemController',[
-    'anyData'  => 'datatables.data',
-    'getIndex' => 'datatables',
+Route::controller('items' ,'ItemController',[
+    'getDocumentItems' => 'document.items'
 ]);

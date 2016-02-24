@@ -11,19 +11,19 @@ class Item extends Model
         return $this->belongsTo('App\Models\Document');
     }
     public function building(){
-        return $this->hasOne('Building');
+        return $this->hasOne('App\Models\Building');
     }
     public function parcel(){
-        return $this->hasOne('Parcel');
+        return $this->hasOne('App\Models\Parcel');
     }
     public  function address(){
-        return $this->hasOne('Address','item_id');
+        return $this->hasOne('App\Models\Address','item_id');
     }
     public  function variable(){
-        return $this->hasOne('Variable');
+        return $this->hasOne('App\Models\Variable');
     }
     public  function car(){
-        return $this->hasOne('Car');
+        return $this->hasOne('App\Models\Car');
     }
     public static $os_finance = array(
         'budget' => 'Бюджет',
