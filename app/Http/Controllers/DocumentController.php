@@ -171,4 +171,33 @@ class DocumentController extends Controller
                 break;
         }
     }
+    public function postDocSave($id){
+        $document=\App\Models\Document::find($id);
+        $type=$document->os_type;
+        $items=\App\Models\Document::find($document->id)->items;
+        $sum_carrying_amount=0;
+        $sum_residual_value=0;
+        foreach($items as $item){
+            if(isset($item->carrying_amount)){
+                $sum_carrying_amount=$sum_carrying_amount+$item->carrying_amount;
+            }
+            else{
+                $sum_carrying_amount=$sum_carrying_amount;
+            }
+            if($type!='parcels'){
+                $variable=\App\Models\Item::find($item->id)->variable;
+                if(isset($variable->residual_value)){
+                    $sum_residual_value=$sum_residual_value+$variable->residual_value;
+                }
+                $sum_residual_value=$sum_residual_value;
+            }
+        }
+        $document->doc_carrying_amount=$sum_carrying_amount;
+        if($type!='parcels'){
+            $document->doc_residual_value=$sum_residual_value;
+        }
+        $document->save();
+        return Redirect::to('documents');
+
+    }
 }

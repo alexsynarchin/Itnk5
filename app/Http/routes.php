@@ -60,13 +60,16 @@ Route::get('profile',[
 Route::group(['middleware' => 'auth'],
     function()
     {
+        //Документы ввода остатков
         Route::get('document/{id}/destroy',
                 [
                     'as' => 'document.delete',
                     'uses' => 'DocumentController@destroy'
                 ]);
-        Route::resource('document', 'DocumentController');
 
+        Route::resource('document', 'DocumentController');
+        Route::controller('document', 'DocumentController');
+        //Основные средства
         Route::get('document/{id}/item/create/',[
             'as' => 'item.create',
             'uses' => 'ItemController@create'
@@ -91,6 +94,9 @@ Route::group(['middleware' => 'auth'],
             'as' => 'item.update',
             'uses' => 'ItemController@update'
         ]);
+        Route::controller('items' ,'ItemController',[
+            'getDocumentItems' => 'document.items'
+        ]);
     }
 
 );
@@ -98,7 +104,5 @@ Route::group(['middleware' => 'auth'],
 get('/auth/login', 'Auth\AuthController@getLogin');
 post('/auth/login', 'Auth\AuthController@postLogin');
 get('/auth/logout', 'Auth\AuthController@getLogout');
-//Controllers Routes
-Route::controller('items' ,'ItemController',[
-    'getDocumentItems' => 'document.items'
-]);
+
+

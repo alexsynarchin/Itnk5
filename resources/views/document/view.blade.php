@@ -33,7 +33,7 @@
                 <div class="control-bnts row">
                     <div class="col-xs-8">
                         <a href="{{route('item.create', [$document->id])}}" class="add-btn btn btn-primary"><i class="fa fa-plus-square-o"></i> Добавить основное средство</a>
-                        <form method="post" class="inline" action=""><button type="submit" class="add-btn btn btn-success">Сохранить документ</button></form>
+                        <form method="post" class="inline" action="{{action('DocumentController@postDocSave', [$document->id])}}"><input type="hidden" name="_token" value="{{ csrf_token() }}"><button type="submit" class="add-btn btn btn-success">Сохранить документ</button></form>
                     </div>
                 </div>
                 <div class="document_sum">
