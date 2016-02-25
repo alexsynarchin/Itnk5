@@ -23,9 +23,20 @@ class ItemController extends Controller
      */
     public function index()
     {
-
+        return View::make('items');
     }
-    public function getDocumentItems(Request $request){
+    public  function getItemsData(Request $request)
+    {
+        $id = $request->get('id');
+        $items= \App\Models\User::find($id) -> items;
+        $datatables = Datatables::of($items)
+            ->addColumn('action',function ($item) {
+                return '<a href="/item/'.$item->id.'" class="actions icons"><i class="fa fa-eye"></i></a><a href="/item/'.$item->id.'/edit" class="actions icons"><i class="fa fa-pencil-square-o"></i></a><a href="/item/destroy/'.$item->id.'" class="actions icons"><i class="fa fa-trash"></i></a>';
+            });
+        return $datatables->make(true);
+    }
+    public function getDocumentItems(Request $request)
+    {
         $id=$request->get('document_id');
         $items = \App\Models\Item::where('document_id','=', $id);
         $datatables = Datatables::of($items)

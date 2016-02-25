@@ -20,13 +20,14 @@
                         <h3 class="box-title"><i class="fa fa-file-text-o"></i> Основные средства</h3>
                     </div><!-- /.box-header -->
                     <div class="box-body ">
-                        <table class="table table-bordered table-hover dataTable" id="items-table">
+                        <table class="table table-bordered" id="items-table">
                             <thead>
                             <tr>
-                                <th>№</th>
-                                <th>Название</th>
-                                <th>Номер</th>
+                                <th>Инвертарный номер</th>
+                                <th>Наименование</th>
+                                <th>Код ОКОФ</th>
                                 <th>Балансовая стоимость</th>
+                                <th>Действия</th>
                             </tr>
                             </thead>
                         </table>
@@ -37,6 +38,37 @@
 
     </section><!-- /.content -->
 
+@stop
+@section('user-scripts')
+    <script>
+        $(function() {
+            $('#items-table').DataTable({
+                "language": {
+                    "url": "https://cdn.datatables.net/plug-ins/1.10.10/i18n/Russian.json",
+                    "thousands": ","
+                },
+                processing: true,
+                serverSide: true,
+                searchable:true,
+                ajax:
+                {
+                    url:'{!! route('items.data') !!}',
+                    data:{
+                        'id':"{{Auth::user()->id}}"
+                    }
+
+                },
+                columns: [
+                    { data: 'number', name: 'number' },
+                    { data: 'name', name: 'name' },
+                    {data: 'okof', name: 'okof' },
+                    {data:'carrying_amount', name:'carrying_amount'},
+                    {data: 'action', name: 'action', orderable: false, searchable: false}
+
+                ]
+            });
+        });
+    </script>
 @stop
 
 

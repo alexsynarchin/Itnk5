@@ -45,7 +45,7 @@ Route::group(['prefix' => 'reports', 'middleware' => 'auth'], function(){
 Route::get('items',[
     'middleware' => 'auth',
     'as' => 'items',
-    'uses' => 'DashboardController@items'
+    'uses' => 'ItemController@index'
 ]);
 Route::get('organization',[
     'middleware' => 'auth',
@@ -95,7 +95,8 @@ Route::group(['middleware' => 'auth'],
             'uses' => 'ItemController@update'
         ]);
         Route::controller('items' ,'ItemController',[
-            'getDocumentItems' => 'document.items'
+            'getDocumentItems' => 'document.items',
+            'getItemsData' => 'items.data'
         ]);
     }
 

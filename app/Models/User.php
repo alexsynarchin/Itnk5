@@ -43,4 +43,7 @@ class User extends Model implements AuthenticatableContract,
     public function documents(){
         return $this->hasMany('App\Models\Document', 'user_id');
     }
+    public  function items(){
+        return $this -> hasManyThrough('App\Models\Item', 'App\Models\Document');
+    }
 }
