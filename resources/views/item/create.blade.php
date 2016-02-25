@@ -18,7 +18,7 @@
                @include('item.partials.form')
             </div><!-- /.box-body -->
             <div class="box-footer center">
-                <button type="submit" class="btn btn-success">СОХРАНИТЬ ОСНОВНОЕ СРЕДСТВО</button> <a href="{{action('DocumentController@show',[$document->id])}}" class="btn btn-primary">ЗАКРЫТЬ БЕЗ СОХРАНЕНИЯ</a>
+                <button type="submit" class="btn btn-success">СОХРАНИТЬ ОСНОВНОЕ СРЕДСТВО</button> <a href="{{URL::previous()}}" class="btn btn-primary">ЗАКРЫТЬ БЕЗ СОХРАНЕНИЯ</a>
             </div><!-- /.box-footer -->
             {!!  Form::close() !!}
         </div>

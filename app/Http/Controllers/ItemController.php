@@ -177,8 +177,10 @@ class ItemController extends Controller
             $address->building_number=Input::get('building_number');
             $address->building_number_2=Input::get('building_number_2');
             $item->address()->save($address);
-            return Redirect::action('DocumentController@show',[$item->document_id]);
+            //return Redirect::action('DocumentController@show',[$item->document_id]);
+            return redirect()->back();
         }
+
 
     }
 
@@ -305,7 +307,8 @@ class ItemController extends Controller
             $item->car -> color = Input::get('color');
             $item->car -> car_type = Input::get('car_type');
             $item->car->save();
-            return Redirect::action('DocumentController@show',[$item->document_id]);
+            //return Redirect::action('DocumentController@show',[$item->document_id]);
+            return redirect()->back();
         }
         if($type=='buildings'){
             $variable=\App\Models\Item::find($id)->variable();
@@ -385,7 +388,8 @@ class ItemController extends Controller
                 $address->delete();
                 $building->delete();
                 $item->delete();
-                return Redirect::action('DocumentController@show', [$item->document->id]);
+                //return Redirect::action('DocumentController@show', [$item->document->id]);
+                return redirect()->back();
                 break;
             case 'car':
                 $variable=\App\Models\Item::find($id)->variable();
@@ -393,7 +397,8 @@ class ItemController extends Controller
                 $car =\App\Models\Item::find($id)->car();
                 $car->delete();
                 $item->delete();
-                return Redirect::action('DocumentController@show', [$item->document->id]);
+                //return Redirect::action('DocumentController@show', [$item->document->id]);
+                return redirect()->back();
                 break;
             case 'parcels':
                 $parcel=\App\Models\Item::find($id)->parcel();
@@ -406,7 +411,8 @@ class ItemController extends Controller
                 $variable=\App\Models\Item::find($id)->variable();
                 $variable->delete();
                 $item->delete();
-                return Redirect::action('DocumentController@show', [$item->document->id]);
+                //return Redirect::action('DocumentController@show', [$item->document->id]);
+                return redirect()->back();
                 break;
         }
     }

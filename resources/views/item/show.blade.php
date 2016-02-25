@@ -210,7 +210,7 @@
                 @endif
             </div><!-- /.box-body -->
             <div class="box-footer center">
-                <a href="{{action('DocumentController@show',[$item->document_id])}}" class="btn btn-primary">ЗАКРЫТЬ</a>
+                <a href="{{URL::previous()}}" class="btn btn-primary">ЗАКРЫТЬ</a>
             </div><!-- /.box-footer -->
             {!!  Form::close() !!}
         </div>
