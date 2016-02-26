@@ -98,6 +98,7 @@ Route::group(['middleware' => 'auth'],
             'getDocumentItems' => 'document.items',
             'getItemsData' => 'items.data'
         ]);
+        Route::controller('organization', 'OrganizationController');
     }
 
 );
