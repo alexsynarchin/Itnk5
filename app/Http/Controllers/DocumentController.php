@@ -29,9 +29,15 @@ class DocumentController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function residues_entering()
     {
-        return View::make('document.create');
+        $documents = Auth::user() -> documents;
+        return View::make('document.residues_entering', ['documents'=>$documents]);
+    }
+    public function create($document_type)
+    {
+        $type = $document_type;
+        return View::make('document.create',compact('type'));
     }
 
     /**

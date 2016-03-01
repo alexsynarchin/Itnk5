@@ -64,7 +64,7 @@ class ItemController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store($id)
+    public function store(Request $request, $id)
     {
         $document=\App\Models\Document::find($id);
         $type=$document->os_type;
@@ -377,8 +377,8 @@ class ItemController extends Controller
     public function destroy($id)
     {
         $item=\App\Models\Item::find($id);
-        $document=\App\Models\Item::find($id)->document();
-        $type=$item->document->os_type;
+        $document=\App\Models\Item::find($id)->document;
+        $type=$document->os_type;
         switch($type){
             case 'buildings':
                 $variable=\App\Models\Item::find($id)->variable();
@@ -405,7 +405,9 @@ class ItemController extends Controller
                 $address=\App\Models\Item::find($id)->address();
                 $address->delete();
                 $parcel->delete();
-                return Redirect::action('DocumentController@show', [$item->document->id]);
+                $item->delete();
+                //return Redirect::action('DocumentController@show', [$item->document->id]);
+                return redirect()->back();
                 break;
             case 'movables'||'value_movables':
                 $variable=\App\Models\Item::find($id)->variable();

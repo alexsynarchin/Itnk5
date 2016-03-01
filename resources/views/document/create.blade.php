@@ -17,6 +17,7 @@
             </div><!-- /.box-header -->
             <!-- form start -->
             {!!  Form::open(array('action'=> 'DocumentController@store', 'method' => 'post', 'role' => 'form', 'class' => 'form-horizontal'))!!}
+            <input type="hidden" name="document_type" value="{{$type}}">
             <div class="box-body">
                 <div class="form-group">
                     <div class="os-form-group col-md-4 col-md-offset-1 col-xs-4 col-xs-offset-1">

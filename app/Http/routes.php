@@ -61,16 +61,26 @@ Route::group(['middleware' => 'auth'],
     function()
     {
         //Документы ввода остатков
+        Route::get('residues_entering',[
+            'as' => 'residues_entering',
+            'uses' => 'DocumentController@residues_entering'
+        ]);
         Route::get('document/{id}/destroy',
                 [
                     'as' => 'document.delete',
                     'uses' => 'DocumentController@destroy'
                 ]);
+        Route::get('document/{document_type}/create',[
+            'as' => 'document.create',
+            'uses' => 'DocumentController@create'
+        ]);
 
         Route::resource('document', 'DocumentController');
         Route::controller('document', 'DocumentController');
+
+
         //Основные средства
-        Route::get('document/{id}/item/create/',[
+        Route::get('{id}/item/create',[
             'as' => 'item.create',
             'uses' => 'ItemController@create'
         ]);

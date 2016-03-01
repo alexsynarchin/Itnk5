@@ -13,7 +13,7 @@
     <section class="content">
         <div class="box box-info">
             <!-- form start -->
-            {!!  Form::open(array('url' => action('ItemController@store',$document->id), 'method' => 'post', 'role' => 'form', 'class' => 'form-horizontal')) !!}
+            {!!  Form::open(array('url' => action('ItemController@store', [$document->id]), 'method' => 'post', 'role' => 'form', 'class' => 'form-horizontal')) !!}
             <div class="box-body">
                @include('item.partials.form')
             </div><!-- /.box-body -->

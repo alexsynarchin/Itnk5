@@ -20,10 +20,11 @@
                 <div class="box-header with-border">
                     <h3 class="box-title"><i class="fa fa-file-text-o"></i> Документы ввода остатков</h3>
                 </div><!-- /.box-header -->
+                <h1>{{$document_type}}</h1>
                 <div class="box-body">
                     <div class="control-bnts row">
                         <div class="col-xs-4">
-                            <a class="add-btn btn btn-primary" href="/document/create"><i class="fa fa-plus-square-o"></i> Создать документ ввода остатков</a>
+                            <a class="add-btn btn btn-primary" href="{{action('DocumentController@create', $document_type)}}"><i class="fa fa-plus-square-o"></i> Создать документ ввода остатков</a>
                         </div>
                     </div>
                     <table class="list table table-bordered table-hover">
