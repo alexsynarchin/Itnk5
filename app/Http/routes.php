@@ -70,11 +70,11 @@ Route::group(['middleware' => 'auth'],
                     'as' => 'document.delete',
                     'uses' => 'DocumentController@destroy'
                 ]);
+        Route::resource('document', 'DocumentController');
         Route::get('document/{document_type}/create',[
             'as' => 'document.create',
             'uses' => 'DocumentController@create'
         ]);
-        Route::resource('document', 'DocumentController');
         Route::controller('document', 'DocumentController');
         //Основные средства
         Route::get('{id}/item/create',[
