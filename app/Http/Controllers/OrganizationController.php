@@ -28,7 +28,7 @@ class OrganizationController extends Controller
         $organizations= \App\Models\Organization::all();
         $datatables = Datatables::of($organizations)
         ->addColumn('action',function($organization){
-            return 'ХАХА';
+            return 'Действие';
         });
         return $datatables->make(true);
     }
