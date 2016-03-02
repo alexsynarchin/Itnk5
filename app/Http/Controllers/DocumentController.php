@@ -122,7 +122,7 @@ class DocumentController extends Controller
                 }
                 $document->items()->delete();
                 $document->delete();
-                return Redirect::to('documents');
+                return redirect()->back();
                 break;
             case 'value_movables':
                 foreach($document->items as $item){
@@ -131,7 +131,7 @@ class DocumentController extends Controller
                 }
                 $document->items()->delete();
                 $document->delete();
-                return Redirect::to('documents');
+                return redirect()->back();
                 break;
             case 'car':
                 foreach($document->items as $item){
@@ -144,7 +144,7 @@ class DocumentController extends Controller
                 }
                 $document->items()->delete();
                 $document->delete();
-                return Redirect::to('documents');
+                return redirect()->back();
                 break;
             case 'buildings':
                 foreach($document->items as $item){
@@ -162,7 +162,7 @@ class DocumentController extends Controller
                 }
                 $document->items()->delete();
                 $document->delete();
-                return Redirect::to('documents');
+                return redirect()->back();
                 break;
             case 'parcels':
                 foreach($document->items as $item){
@@ -173,7 +173,7 @@ class DocumentController extends Controller
                 }
                 $document->items()->delete();
                 $document->delete();
-                return Redirect::to('documents');
+                return redirect()->back();
                 break;
         }
     }

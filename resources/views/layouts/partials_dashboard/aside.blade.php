@@ -15,6 +15,9 @@
             <li class="{{ Request::is( 'residues_entering') ? 'active' : '' }}"><a href="/residues_entering"><i class="fa fa-folder-open-o"></i> <span>Ввод остатков</span></a></li>
             <li class="{{ Request::is( 'reports') ? 'active' : '' }}"><a href="/reports"><i class="fa fa-file-text-o"></i> <span>Отчеты - 2015</span></a></li>
             <li class="{{ Request::is( 'items') ? 'active' : '' }}"><a href="/items"><i class="fa fa-database"></i> <span>Основные средства</span></a></li>
+            @if(Auth::user() -> username == 'admin')
+                <li class="{{ Request::is( 'admin') ? 'active' : '' }}"><a href="/admin"><i class="fa fa-pencil-square-o"></i></i> <span>Администрирование</span></a></li>
+            @endif
             <li class="{{ Request::is( 'organization') ? 'active' : '' }}"><a href="/organization"><i class="fa fa-building"></i> <span>Организация</span></a></li>
             <li class="{{ Request::is( 'profile') ? 'active' : '' }}"><a href="/profile"><i class="fa fa-user"></i> <span>Профиль</span></a></li>
             <li><a href="auth/logout"><i class="fa fa-sign-out"></i> <span>Выход</span></a></li>

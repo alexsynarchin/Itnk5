@@ -9,6 +9,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use View;
 use App\Models;
+use Yajra\Datatables\Datatables;
 
 
 class OrganizationController extends Controller
@@ -23,6 +24,14 @@ class OrganizationController extends Controller
         $organization=Auth::user()->organization;
         return View::make('organization',['organization' => $organization]);
     }
+    public function getAdminOrganizations(){
+        $organizations= \App\Models\Organization::all();
+        $datatables = Datatables::of($organizations)
+        ->addColumn('action',function($organization){
+            return 'ХАХА';
+        });
+        return $datatables->make(true);
+    }
 
     /**
      * Show the form for creating a new resource.
@@ -31,7 +40,7 @@ class OrganizationController extends Controller
      */
     public function create()
     {
-        //
+        return View::make('organization.create');
     }
 
     /**

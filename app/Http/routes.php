@@ -74,11 +74,8 @@ Route::group(['middleware' => 'auth'],
             'as' => 'document.create',
             'uses' => 'DocumentController@create'
         ]);
-
         Route::resource('document', 'DocumentController');
         Route::controller('document', 'DocumentController');
-
-
         //Основные средства
         Route::get('{id}/item/create',[
             'as' => 'item.create',
@@ -108,7 +105,15 @@ Route::group(['middleware' => 'auth'],
             'getDocumentItems' => 'document.items',
             'getItemsData' => 'items.data'
         ]);
-        Route::controller('organization', 'OrganizationController');
+        Route::resource('organization', 'OrganizationController');
+        Route::controller('organizations', 'OrganizationController',[
+            'getAdminOrganizations' =>'admin.organizations'
+        ]);
+        Route::get('admin',[
+            'as' => 'admin.index',
+            'uses' => 'AdminController@index'
+        ]);
+
     }
 
 );

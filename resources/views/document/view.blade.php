@@ -59,34 +59,32 @@
         </div><!-- /.box -->
     </section>
 @stop
-@section('user-scripts')
-    <script>
-                $(function() {
-            $('#items-table').DataTable({
-                "language": {
-                    "url": "https://cdn.datatables.net/plug-ins/1.10.10/i18n/Russian.json",
-                    "thousands": ","
-                },
-                processing: true,
-                serverSide: true,
-                searchable:true,
-                ajax:
-                {
-                  url:'{!! route('document.items') !!}',
-                   data:{
-                'document_id':"{{$document->id}}"
-            }
+<script>
+    $(function() {
+        $('#items-table').DataTable({
+            "language": {
+                "url": "https://cdn.datatables.net/plug-ins/1.10.10/i18n/Russian.json",
+                "thousands": ","
+            },
+            processing: true,
+            serverSide: true,
+            searchable:true,
+            ajax:
+            {
+                url:'{!! route('document.items') !!}',
+                data:{
+                    'document_id':"{{$document->id}}"
+                }
 
-                },
-                columns: [
-                    { data: 'number', name: 'number' },
-                    { data: 'name', name: 'name' },
-                    {data: 'okof', name: 'okof' },
-                    {data:'carrying_amount', name:'carrying_amount'},
-                    {data: 'action', name: 'action', orderable: false, searchable: false}
+            },
+            columns: [
+                { data: 'number', name: 'number' },
+                { data: 'name', name: 'name' },
+                {data: 'okof', name: 'okof' },
+                {data:'carrying_amount', name:'carrying_amount'},
+                {data: 'action', name: 'action', orderable: false, searchable: false}
 
-                ]
-            });
+            ]
         });
-    </script>
-@stop
+    });
+</script>
