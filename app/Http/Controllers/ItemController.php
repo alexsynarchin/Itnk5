@@ -86,7 +86,7 @@ class ItemController extends Controller
             $variable -> monthly_rate = Input::get('monthly_rate');
             $variable -> useful_life = Input::get('useful_life');
             $item->variable()->save($variable);
-            return Redirect::action('DocumentController@show',[$item->document_id]);
+            return redirect()->back();
         }
         if($type=='car'){
             $item = new \App\Models\Item;
@@ -117,7 +117,7 @@ class ItemController extends Controller
             $car -> color = Input::get('color');
             $car -> car_type = Input::get('car_type');
             $item->car()->save($car);
-            return Redirect::action('DocumentController@show',[$item->document_id]);
+            return redirect()->back();
         }
 
         if($type=='buildings'){
@@ -152,7 +152,7 @@ class ItemController extends Controller
             $address->building_number=Input::get('building_number');
             $address->building_number_2=Input::get('building_number_2');
             $item->address()->save($address);
-            return Redirect::action('DocumentController@show',[$item->document_id]);
+            return redirect()->back();;
         }
         if($type=='parcels'){
             $item=new \App\Models\Item;

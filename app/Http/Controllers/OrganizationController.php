@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Auth;
 use View;
 use App\Models;
 use Yajra\Datatables\Datatables;
+use Illuminate\Support\Facades\Input;
 
 
 class OrganizationController extends Controller
@@ -51,7 +52,35 @@ class OrganizationController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $organization = new \App\Models\Organization;
+        $organization -> full_name = Input::get('full_name');
+        $organization -> short_name = Input::get('short_name');
+        $organization -> inn = Input::get('inn');
+        $organization -> kpp = Input::get('kpp');
+        $organization -> legal_address = Input::get('legal_address');
+        $organization -> fact_address = Input::get('fact_address');
+        $organization -> boss_position = Input::get('boss_position');
+        $organization -> fio = Input::get('fio');
+        $organization -> date = Input::get('date');
+        $organization -> contract_number = Input::get('contract_number');
+        $organization -> operate_foundation = Input::get('operate_foundation');
+        $organization -> rs = Input::get('rs');
+        $organization -> ks = Input::get('ks');
+        $organization -> ls = Input::get('ls');
+        $organization -> bank = Input::get('bank');
+        $organization -> bik = Input::get('bik');
+        $organization -> phone = Input::get('phone');
+        $organization -> email = Input::get('email');
+        $organization -> last_document_number = 1;
+        $organization->save();
+        $user = new \App\Models\User;
+        $user ->first_name = Input::get('first_name');
+        $user ->last_name = Input::get('last_name');
+        $user ->surname = Input::get('surname');
+        $user ->username = Input::get('username');
+        $user ->password = bcrypt(Input::get('password'));
+        $organization->user()->save($user);
+        return redirect()->back();
     }
 
     /**
