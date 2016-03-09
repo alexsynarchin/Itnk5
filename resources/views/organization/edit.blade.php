@@ -7,13 +7,13 @@
         </h1>
         <ol class="breadcrumb">
             <li><a href="#"><i class="fa fa-dashboard"></i> Панель управления</a></li>
-            <li class="active">Новая организация</li>
+            <li class="active">Ввод основного средства</li>
         </ol>
     </section>
     <section class="content">
         <div class="box box-info">
             <!-- form start -->
-            {!!  Form::open(array('url' => action('OrganizationController@store'), 'method' => 'post', 'role' => 'form', 'class' => 'form-horizontal')) !!}
+            {!!  Form::model($organization, array('url' => action('OrganizationController@update', $organization->id), 'method' => 'PATCH', 'role' => 'form', 'class' => 'form-horizontal')) !!}
             <div class="box-body">
                 @include('organization.partials.form')
             </div><!-- /.box-body -->

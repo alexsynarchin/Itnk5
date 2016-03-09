@@ -44,3 +44,9 @@
 @if(($document->os_type=='movables')||($document->os_type=='value_movables')||($document->os_type=='buildings')||($document->os_type=='car'))
     @include('item.partials.variable')
 @endif
+<div class="form-group">
+    <div class="col-md-12">
+        <label for="additional_field" class="control-label">Дополнительная информация:</label>
+        <textarea class="form-control" name="additional_field" rows="3" placeholder="Введите дополнительную информацию"></textarea>
+    </div>
+</div>

@@ -20,6 +20,11 @@ class AdminController extends Controller
     {
         return View::make('admin.index');
     }
+    public function organization($id)
+    {
+        $organization=\App\Models\Organization::find($id);
+        return View::make('admin.organization', compact('organization'));
+    }
 
 
 }

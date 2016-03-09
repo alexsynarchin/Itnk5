@@ -113,6 +113,19 @@ Route::group(['middleware' => 'auth'],
             'as' => 'admin.index',
             'uses' => 'AdminController@index'
         ]);
+        Route::get('admin/organization/{id}',[
+            'as' => 'admin.organization',
+            'uses' => 'AdminController@organization'
+        ]);
+        //Reports
+        Route::get('admin/organization/{id}/report/create',[
+            'as' => 'admin.report.create',
+            'uses' => 'ReportController@create'
+        ]);
+        Route::post('report/{id}',[
+            'as' => 'report.store',
+            'uses' => 'ReportController@store'
+        ]);
 
     }
 

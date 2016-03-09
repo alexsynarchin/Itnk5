@@ -59,6 +59,7 @@
         </div><!-- /.box -->
     </section>
 @stop
+@section('user-scripts')
 <script>
     $(function() {
         $('#items-table').DataTable({
@@ -88,3 +89,4 @@
         });
     });
 </script>
+@stop

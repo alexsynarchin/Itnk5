@@ -11,6 +11,7 @@ use View;
 use App\Models;
 use Yajra\Datatables\Datatables;
 use Illuminate\Support\Facades\Input;
+use Illuminate\Support\Facades\Redirect;
 
 
 class OrganizationController extends Controller
@@ -29,7 +30,7 @@ class OrganizationController extends Controller
         $organizations= \App\Models\Organization::all();
         $datatables = Datatables::of($organizations)
         ->addColumn('action',function($organization){
-            return 'Действие';
+            return '<a href="admin/organization/'.$organization->id.'" class="actions icons"><i class="fa fa-eye"></i></a><a href="/organization/'.$organization->id.'/edit" class="actions icons"><i class="fa fa-pencil-square-o"></i></a>';
         });
         return $datatables->make(true);
     }
@@ -41,7 +42,8 @@ class OrganizationController extends Controller
      */
     public function create()
     {
-        return View::make('organization.create');
+        $form_type='create';
+        return View::make('organization.create',['form_type' => $form_type]);
     }
 
     /**
@@ -80,7 +82,7 @@ class OrganizationController extends Controller
         $user ->username = Input::get('username');
         $user ->password = bcrypt(Input::get('password'));
         $organization->user()->save($user);
-        return redirect()->back();
+        return Redirect::back();
     }
 
     /**
@@ -102,7 +104,10 @@ class OrganizationController extends Controller
      */
     public function edit($id)
     {
-        //
+        $organization = \App\Models\Organization::find($id);
+        $user=\App\Models\Organization::find($id)->user();
+        $form_type='edit';
+        return View::make('organization.edit', array('organization' => $organization, 'user' => $user, 'form_type' => $form_type));
     }
 
     /**
@@ -114,7 +119,34 @@ class OrganizationController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $organization=\App\Models\Organization::find($id);
+        $organization -> full_name = Input::get('full_name');
+        $organization -> short_name = Input::get('short_name');
+        $organization -> inn = Input::get('inn');
+        $organization -> kpp = Input::get('kpp');
+        $organization -> legal_address = Input::get('legal_address');
+        $organization -> fact_address = Input::get('fact_address');
+        $organization -> boss_position = Input::get('boss_position');
+        $organization -> fio = Input::get('fio');
+        $organization -> date = Input::get('date');
+        $organization -> contract_number = Input::get('contract_number');
+        $organization -> operate_foundation = Input::get('operate_foundation');
+        $organization -> rs = Input::get('rs');
+        $organization -> ks = Input::get('ks');
+        $organization -> ls = Input::get('ls');
+        $organization -> bank = Input::get('bank');
+        $organization -> bik = Input::get('bik');
+        $organization -> phone = Input::get('phone');
+        $organization -> email = Input::get('email');
+        $organization->save();
+        $user=\App\Models\Organization::find($id)->user();
+        $organization->user -> username = Input::get('username');
+        $organization->user -> password = Input::get('password');
+        $organization->user -> first_name = Input::get('first_name');
+        $organization->user -> last_name = Input::get('last_name');
+        $organization->user -> surname = Input::get('surname');
+        $organization -> user->save();
+        return Redirect::back();
     }
 
     /**

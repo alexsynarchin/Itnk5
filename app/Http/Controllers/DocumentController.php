@@ -72,7 +72,7 @@ class DocumentController extends Controller
         if (!$document) {
             App::abort(404);
         }
-        return View::make('document/view', array(  'document' => $document ));
+        return View::make('document.view', array(  'document' => $document ));
     }
 
     /**
@@ -203,7 +203,7 @@ class DocumentController extends Controller
             $document->doc_residual_value=$sum_residual_value;
         }
         $document->save();
-        return Redirect::to('documents');
+        return redirect()->back();
 
     }
 }

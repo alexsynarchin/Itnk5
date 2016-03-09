@@ -5666,6 +5666,9 @@ h6,
 .h6 {
   font-family: "KelsonRegular", sans-serif;
 }
+.organization-heading {
+  font-size: 24px;
+}
 .layout-boxed {
   background: #fafdff;
   background-image: none;
