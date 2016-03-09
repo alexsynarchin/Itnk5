@@ -20,7 +20,6 @@
                 <div class="box-header with-border">
                     <h3 class="box-title"><i class="fa fa-file-text-o"></i> Документы ввода остатков</h3>
                 </div><!-- /.box-header -->
-                <h1>{{$document_type}}</h1>
                 <div class="box-body">
                     <div class="control-bnts row">
                         <div class="col-xs-4">
