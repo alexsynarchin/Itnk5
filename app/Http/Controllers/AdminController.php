@@ -23,7 +23,8 @@ class AdminController extends Controller
     public function organization($id)
     {
         $organization=\App\Models\Organization::find($id);
-        return View::make('admin.organization', compact('organization'));
+        $reports=$organization->reports;
+        return View::make('admin.organization', compact('organization','reports'));
     }
 
 

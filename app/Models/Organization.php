@@ -11,4 +11,7 @@ class Organization extends Model
     {
         return $this->hasOne('App\Models\User');
     }
+    public function reports(){
+        return $this -> hasMany('App\Models\Report', 'organization_id');
+    }
 }

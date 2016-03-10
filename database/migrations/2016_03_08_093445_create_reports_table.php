@@ -16,16 +16,11 @@ class CreateReportsTable extends Migration
             $table->increments('id');
             $table->timestamps();
             $table->integer('year')->unsigned();
-            $table->enum('quarter', [
-                'first',
-                'second',
-                'third',
-                'fourth'
-            ]);
+            $table->tinyInteger('quarter');
             $table->enum('state', [
-                'accepted',
                 'not_accepted',
-                'inspection'
+                'inspection',
+                'accepted'
             ]);
             $table->integer('organization_id')->unsigned();
 

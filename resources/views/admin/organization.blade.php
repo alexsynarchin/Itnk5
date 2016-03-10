@@ -22,7 +22,9 @@
                     <div class="box-body">
                         <div class="control-bnts row">
                             <div class="col-xs-4">
-                                <a class="add-btn btn btn-primary" href="{{route('admin.report.create',[$organization->id])}}"><i class="fa fa-plus-square-o"></i> Создать отчет</a>
+                                {!!  Form::open(array('url' => action('ReportController@store',[$organization->id]), 'method' => 'post', 'role' => 'form')) !!}
+                                <button type="submit" class="add-btn btn btn-primary">СОЗДАТЬ ОТЧЕТ</button>
+                                {!!  Form::close() !!}
                             </div>
                         </div>
                         <table class="table table-bordered" id="reports-table">
@@ -34,6 +36,16 @@
                                 <th>Действия</th>
                             </tr>
                             </thead>
+                            @if($reports->count())
+                                @foreach($reports as $report)
+                                    <tr>
+                                        <td>{{$report->year}}</td>
+                                        <td>{{App\Models\Report::$report_quarter[$report->quarter]}}</td>
+                                        <td>{{App\Models\Report::$report_state[$report->state]}}</td>
+                                        <td>Действие</td>
+                                    </tr>
+                                @endforeach
+                            @endif
                         </table>
                     </div><!-- /.box-body -->
                     <div class="box-footer">
