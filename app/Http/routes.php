@@ -122,7 +122,18 @@ Route::group(['middleware' => 'auth'],
             'as' => 'report.store',
             'uses' => 'ReportController@store'
         ]);
-
+        //Ispector
+        Route::get('inspector',[
+            'as' => 'inspector.index',
+            'uses' => 'InspectorController@index'
+        ]);
+        Route::get('inspector/organization/{id}',[
+            'as' => 'inspector.show.organization',
+            'uses' => 'InspectorController@showOrganization'
+        ]);
+        Route::controller('inspector', 'InspectorController', [
+            'getOrganizations' => 'inspector.organizations'
+        ]);
     }
 
 );
