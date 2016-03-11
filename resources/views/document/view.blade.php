@@ -47,7 +47,6 @@
                         <th>Наименование</th>
                         <th>Код ОКОФ</th>
                         <th>Балансовая стоимость</th>
-                        <th>Остаточная стоимость</th>
                         <th>Действия</th>
                     </tr>
                     </thead>
@@ -84,7 +83,6 @@
                 { data: 'name', name: 'name' },
                 {data: 'okof', name: 'okof' },
                 {data:'carrying_amount', name:'carrying_amount'},
-                {data:'variable.residual_value', name:'variable.residual_value'},
                 {data: 'action', name: 'action', orderable: false, searchable: false}
 
             ]
