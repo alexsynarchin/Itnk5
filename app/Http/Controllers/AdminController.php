@@ -48,7 +48,20 @@ class AdminController extends Controller
         $document->save();
         return Redirect::action('AdminController@organization', [$user->organization->id]);
     }
-
+    public function documentEdit($id)
+    {
+        $document = \App\Models\Document::find($id);
+        return View::make('admin.document.edit', array('document' => $document));
+    }
+    public function documentUpdate(Request $request, $id)
+    {
+        $document=\App\Models\Document::find($id);
+        $document->document_date = Input::get('document_date');
+        $document->actual_date = Input::get('actual_date');
+        $document->save();
+        $user=\App\Models\User::find($document->user_id);
+        return Redirect::action('AdminController@organization', [$user->organization_id]);
+    }
 
 
 }

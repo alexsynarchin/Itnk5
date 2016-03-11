@@ -126,6 +126,14 @@ Route::group(['middleware' => 'auth'],
             'as' => 'admin.document.store',
             'uses' => 'AdminController@documentStore'
         ]);
+        Route::get('admin/document/{id}/edit',[
+                'as' => 'admin.document.edit',
+                'uses' => 'AdminController@documentEdit'
+            ]);
+        Route::patch('admin/{id}/document',[
+            'as' => 'admin.document.update',
+            'uses' => 'AdminController@documentUpdate'
+        ]);
         //Reports
         Route::post('report/{id}',[
             'as' => 'report.store',
