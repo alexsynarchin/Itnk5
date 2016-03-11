@@ -92,7 +92,7 @@
                                 <td>{{number_format($document->doc_carrying_amount, 2,'.', ' ')}}</td>
                                 <td>{{number_format($document->doc_residual_value, 2, '.', ' ')}}</td>
                                 <td class="actions icons">
-                                    <a href=""><i class="fa fa-eye"></i></a>
+                                    <a href="{{route('admin.document.show',[$document->id])}}"><i class="fa fa-eye"></i></a>
                                     <a href="{{route('admin.document.edit',[$document->id])}}"><i class="fa fa-pencil-square-o"></i> </a>
                                     <a  href="{{route('document.delete',['id'=>$document->id])}}"><i class="fa fa-trash"></i></a>
                                 </td>

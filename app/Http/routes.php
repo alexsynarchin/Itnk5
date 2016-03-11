@@ -134,6 +134,11 @@ Route::group(['middleware' => 'auth'],
             'as' => 'admin.document.update',
             'uses' => 'AdminController@documentUpdate'
         ]);
+        Route::get('admin/document/{id}',[
+            'as' => 'admin.document.show',
+            'uses' => 'AdminController@documentShow'
+        ]);
+        Route::controller('admin', 'AdminController');
         //Reports
         Route::post('report/{id}',[
             'as' => 'report.store',
