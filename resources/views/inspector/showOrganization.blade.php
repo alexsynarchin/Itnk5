@@ -56,7 +56,7 @@
         </div>
         <div class="document box">
             <div class="box-header with-border">
-                <h3 class="box-title"><i class="fa fa-file-text-o"></i> Документы первичного ввода</h3>
+                <h3 class="box-title"><i class="fa fa-file-text-o"></i> Документы ввода остатков</h3>
             </div><!-- /.box-header -->
             <div class="box-body">
                 <table class="list table table-bordered table-hover">

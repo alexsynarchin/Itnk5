@@ -38,7 +38,9 @@ class ItemController extends Controller
     public function getDocumentItems(Request $request)
     {
         $id=$request->get('document_id');
-        $items = \App\Models\Item::where('document_id','=', $id);
+        $document=\App\Models\Document::find($id);
+
+        $items = \App\Models\Item::where('document_id','=', $id)->with('variable');
         $datatables = Datatables::of($items)
         ->addColumn('action',function ($item) {
             return '<a href="/item/'.$item->id.'" class="actions icons"><i class="fa fa-eye"></i></a><a href="/item/'.$item->id.'/edit" class="actions icons"><i class="fa fa-pencil-square-o"></i></a><a href="/item/destroy/'.$item->id.'" class="actions icons"><i class="fa fa-trash"></i></a>';
