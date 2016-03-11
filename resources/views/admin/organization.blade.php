@@ -60,7 +60,9 @@
             <div class="box-body">
                 <div class="control-bnts row">
                     <div class="col-xs-6">
-                        <a class="add-btn btn btn-success" href="{{route('admin.document.create',[$organization->user->id])}}"><i class="fa fa-plus-square-o"></i> Создать документ первичного ввода</a> <form method="post" class="inline" action=""><button type="submit" class="add-btn btn btn-primary">Рассчитать суммы документов</button></form>
+                        <a class="add-btn btn btn-success" href="{{route('admin.document.create',[$organization->user->id])}}"><i class="fa fa-plus-square-o"></i> Создать документ первичного ввода</a> <form method="post" class="inline" action="{{action('OrganizationController@postCalcSumsFirstEnter', [$organization->id])}}">
+                            <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                            <button type="submit" class="add-btn btn btn-primary">Обновить итоговые суммы по организации</button></form>
                     </div>
                 </div>
                 <table class="list table table-bordered table-hover">
