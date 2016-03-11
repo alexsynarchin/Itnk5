@@ -60,7 +60,7 @@
             <div class="box-body">
                 <div class="control-bnts row">
                     <div class="col-xs-6">
-                        <a class="add-btn btn btn-success" href=""><i class="fa fa-plus-square-o"></i> Создать документ первичного ввода</a> <form method="post" class="inline" action=""><button type="submit" class="add-btn btn btn-primary">Рассчитать суммы документов</button></form>
+                        <a class="add-btn btn btn-success" href="{{route('admin.document.create',[$organization->user->id])}}"><i class="fa fa-plus-square-o"></i> Создать документ первичного ввода</a> <form method="post" class="inline" action=""><button type="submit" class="add-btn btn btn-primary">Рассчитать суммы документов</button></form>
                     </div>
                 </div>
                 <table class="list table table-bordered table-hover">
@@ -94,7 +94,7 @@
                                 <td class="actions icons">
                                     <a href=""><i class="fa fa-eye"></i></a>
                                     <a href=""><i class="fa fa-pencil-square-o"></i> </a>
-                                    <a  href=""><i class="fa fa-trash"></i></a>
+                                    <a  href="{{route('document.delete',['id'=>$document->id])}}"><i class="fa fa-trash"></i></a>
                                 </td>
                             </tr>
                         @endforeach

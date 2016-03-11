@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Input;
+use Illuminate\Support\Facades\Redirect;
 use App\Models;
 use View;
 
@@ -28,6 +30,25 @@ class AdminController extends Controller
         $reports=$organization->reports;
         return View::make('admin.organization', compact('organization','reports','documents'));
     }
+    public function documentCreate($id)
+    {
+        $user_id=$id;
+        return View::make('admin.document.create', ['user_id'=> $user_id] );
+    }
+    public function documentStore($id)
+    {
+        $document = \App\Models\Document::create(Input::all());
+        $user=\App\Models\User::find($id);
+        $organization=$user->organization;
+        $user->organization->last_document_number++;
+        $user->organization->save();
+        $document->document_number=$user->organization->last_document_number;
+        $document->user_id = $id;
+        $document->document_type='residues_entering';
+        $document->save();
+        return Redirect::action('AdminController@organization', [$user->organization->id]);
+    }
+
 
 
 }

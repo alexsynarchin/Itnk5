@@ -109,6 +109,7 @@ Route::group(['middleware' => 'auth'],
         Route::controller('organizations', 'OrganizationController',[
             'getAdminOrganizations' =>'admin.organizations'
         ]);
+        //Admin
         Route::get('admin',[
             'as' => 'admin.index',
             'uses' => 'AdminController@index'
@@ -116,6 +117,14 @@ Route::group(['middleware' => 'auth'],
         Route::get('admin/organization/{id}',[
             'as' => 'admin.organization',
             'uses' => 'AdminController@organization'
+        ]);
+        Route::get('admin/{id}/document/create',[
+            'as' => 'admin.document.create',
+            'uses' => 'AdminController@documentCreate'
+        ]);
+        Route::post('admin/{id}/document',[
+            'as' => 'admin.document.store',
+            'uses' => 'AdminController@documentStore'
         ]);
         //Reports
         Route::post('report/{id}',[
