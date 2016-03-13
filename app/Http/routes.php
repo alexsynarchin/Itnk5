@@ -24,10 +24,15 @@ Route::get('documents',[
     'middleware' => 'auth',
     'uses' => 'DocumentController@index'
 ]);
-Route::group(['prefix' => 'reports', 'middleware' => 'auth'], function(){
+Route::get('reports',[
+    'middleware' => 'auth',
+    'uses' => 'ReportController@index',
+    'as' => 'reports'
+]);
+Route::group(['prefix' => 'report/{id}', 'middleware' => 'auth'], function(){
     Route::get('/', [
         function(){
-            return View::make('reports');
+            return View::make('report');
         }
     ]);
     Route::get('purchase',
@@ -139,7 +144,7 @@ Route::group(['middleware' => 'auth'],
             'uses' => 'AdminController@documentShow'
         ]);
         Route::controller('admin', 'AdminController');
-        //Reports
+        //Reports Admin
         Route::post('report/{id}',[
             'as' => 'report.store',
             'uses' => 'ReportController@store'

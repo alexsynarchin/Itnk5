@@ -115,8 +115,8 @@
         </ol>
 
     </section>
-@stop
-@section('user-scripts')
-        <!-- page script -->
+    @stop
+    @section('user-scripts')
+            <!-- page script -->
 
-@stop
+@stops

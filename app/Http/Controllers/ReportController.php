@@ -9,9 +9,20 @@ use App\Http\Controllers\Controller;
 use App\Models;
 use View;
 use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Auth;
 
 class ReportController extends Controller
 {
+    public function index() {
+        $organization =Auth::user()->organization;
+        $reports= $organization->reports;
+        if ($reports->count()){
+            return View::make('report.index');
+        }
+        else{
+            return View::make('report.empty');
+        }
+    }
 
     public function store($id)
     {

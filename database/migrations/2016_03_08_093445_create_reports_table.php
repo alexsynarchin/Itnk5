@@ -12,7 +12,7 @@ class CreateReportsTable extends Migration
      */
     public function up()
     {
-        Schema::create('reports', function(Blueprint $table){
+        Schema::create('report', function(Blueprint $table){
             $table->increments('id');
             $table->timestamps();
             $table->integer('year')->unsigned();
@@ -34,6 +34,6 @@ class CreateReportsTable extends Migration
      */
     public function down()
     {
-        Schema::drop('reports');
+        Schema::drop('report');
     }
 }
