@@ -31,9 +31,8 @@ Route::get('reports',[
 ]);
 Route::group(['prefix' => 'report/{id}', 'middleware' => 'auth'], function(){
     Route::get('/', [
-        function(){
-            return View::make('report');
-        }
+        'as' => 'report.show',
+        'uses' => 'ReportController@show'
     ]);
     Route::get('purchase',
             function(){

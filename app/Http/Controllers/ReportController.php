@@ -17,7 +17,7 @@ class ReportController extends Controller
         $organization =Auth::user()->organization;
         $reports= $organization->reports;
         if ($reports->count()){
-            return View::make('report.index');
+            return View::make('report.index',compact('reports'));
         }
         else{
             return View::make('report.empty');
@@ -63,4 +63,7 @@ class ReportController extends Controller
             return Redirect::action('AdminController@organization', [$id]);
         }
      }
+    public function show(){
+
+    }
 }
