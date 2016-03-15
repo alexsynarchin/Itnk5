@@ -32,7 +32,7 @@
             <div class="box-body">
                 <div class="control-bnts row">
                     <div class="col-xs-8">
-                        <form method="post" class="inline" action="{{action('DocumentController@postDocSave', [$document->id])}}"><input type="hidden" name="_token" value="{{ csrf_token() }}"><button type="submit" class="add-btn btn btn-success">Сохранить документ</button></form> <a href="{{URL::previous()}}" class="btn btn-danger">ЗАКРЫТЬ ДОКУМЕНТ</a>
+                        <form method="post" class="inline" action="{{action('DocumentController@postDocSave', [$document->id])}}"><input type="hidden" name="_token" value="{{ csrf_token() }}"><button type="submit" class="add-btn btn btn-success">Сохранить документ</button></form> <a href="{{action('AdminController@organization',$document->user->organization_id)}}" class="btn btn-danger">ЗАКРЫТЬ ДОКУМЕНТ</a>
                     </div>
                 </div>
                 <div class="row">
