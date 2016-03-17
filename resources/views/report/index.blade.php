@@ -12,16 +12,16 @@
     </section>
     <section class="content">
         @foreach($reports as $report)
-        <div class="report-box box box-primary">
+        <div class="report-box  box box-primary">
             <div class="box-header with-border">
                 <h3 class="box-title">Учетный период - {{App\Models\Report::$report_quarter[$report->quarter]}} квартал {{$report->year}} г.</h3>
                 <div class="box-tools pull-right">
-                    <span class="label label-primary">{{App\Models\Report::$report_state[$report->state]}}</span>
+                    <span  class="reportState-{{$report->state}} label">{{App\Models\Report::$report_state[$report->state]}}</span>
                 </div><!-- /.box-tools -->
             </div><!-- /.box-header -->
             <div class="box-body">
                 <div class="control-bnts row">
-                    <a href="" class="add-btn btn btn-success"><i class="fa fa-sign-in"></i> Перейти к отчету</a>
+                    <a href="{{route('report.show', [$report->id])}}" class="add-btn btn btn-success"><i class="fa fa-sign-in"></i> Перейти к отчету</a>
                     <a href="" class="add-btn btn btn-primary"><i class="fa fa-print"></i> Печать</a>
                 </div>
                 <table class="list table table-bordered table-hover">
@@ -70,4 +70,20 @@
         </div><!-- /.box -->
         @endforeach
     </section>
+@stop
+@section('user-scripts')
+    <script type="text/javascript">
+        var acceptedReports = document.getElementsByClassName('reportState-accepted');
+        var not_acceptedReports = document.getElementsByClassName('reportState-not_accepted');
+        var inspectionReports = document.getElementsByClassName('reportState-inspection');
+        for (var i = 0; i < acceptedReports.length; i++){
+            acceptedReports[i].classList.add('label-success');
+        }
+        for (var i = 0; i < not_acceptedReports.length; i++){
+            not_acceptedReports[i].classList.add('label-danger');
+        }
+        for (var i = 0; i < inspectionReports.length; i++){
+            inspectionReports[i].classList.add('label-warning');
+        }
+    </script>
 @stop

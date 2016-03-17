@@ -13,7 +13,7 @@
             <!-- Optionally, you can add icons to the links -->
             <li class="{{ Request::is( 'home') ? 'active' : '' }}"><a href="/home"><i class="fa fa-dashboard"></i> <span>Главная</span></a></li>
             <li class="{{ Request::is( 'residues_entering') ? 'active' : '' }}"><a href="/residues_entering"><i class="fa fa-folder-open-o"></i> <span>Ввод остатков</span></a></li>
-            <li class="{{ Request::is( 'report') ? 'active' : '' }}"><a href="/reports"><i class="fa fa-file-text-o"></i> <span>Отчеты - 2015</span></a></li>
+            <li class="{{ Request::is( 'report') ? 'active' : '' }}"><a href="/reports"><i class="fa fa-file-text-o"></i> <span>Отчеты</span></a></li>
             <li class="{{ Request::is( 'items') ? 'active' : '' }}"><a href="/items"><i class="fa fa-database"></i> <span>Основные средства</span></a></li>
             @if(Auth::user() -> username == 'admin')
                 <li class="{{ Request::is( 'admin') ? 'active' : '' }}"><a href="/admin"><i class="fa fa-pencil-square-o"></i></i> <span>Администрирование</span></a></li>

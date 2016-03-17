@@ -5785,11 +5785,11 @@ h6,
   font-size: 1.4em;
   padding: 3px;
 }
-.dlya_pidorka {
+.report_empty {
   font-family: "KelsonRegular", sans-serif;
 }
 .report-box .label {
-  font-size: 1.1em;
+  font-size: 1.2em;
 }
 .report-box .box-title {
   font-size: 22px;
@@ -5797,6 +5797,9 @@ h6,
 table.table-bordered tbody td {
   line-height: 1;
   padding-bottom: 0;
+}
+.report-inner-nav {
+  margin-bottom: 15px;
 }
 
 /*# sourceMappingURL=admin.css.map */

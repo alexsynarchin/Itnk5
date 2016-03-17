@@ -269,8 +269,8 @@ class ItemController extends Controller
             $item->financing_source=Input::get('financing_source');
             $item->additional_field=Input::get('additional_field');
             $item->save();
-            $variable=\App\Models\Item::find($id)->variable();
-            $variable -> exploitation_date = Input::get('exploitation_date');
+            $variable=\App\Models\Item::find($id)->variable;
+            $item->variable -> exploitation_date = Input::get('exploitation_date');
             $item->variable -> residual_value = Input::get('residual_value');
             $item->variable -> monthly_rate = Input::get('monthly_rate');
             $item->variable -> useful_life = Input::get('useful_life');

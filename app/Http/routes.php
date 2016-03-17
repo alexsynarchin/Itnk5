@@ -34,17 +34,18 @@ Route::group(['prefix' => 'report/{id}', 'middleware' => 'auth'], function(){
         'as' => 'report.show',
         'uses' => 'ReportController@show'
     ]);
-    Route::get('purchase',
-            function(){
-                return View::make('documents.purchase');
-            }
-        );
-    Route::get('depreciation',function(){
-        return View::make('documents.depreciation');
-    });
-    Route::get('decommission', function(){
-       return View::make('documents.decommission');
-    });
+    Route::get('purchase', [
+       'as' => 'report.purchase',
+       'uses' => 'ReportController@purchase'
+           ]);
+    Route::get('depreciation',[
+        'as' => 'report.depreciation',
+        'uses' => 'ReportController@depreciation'
+    ]);
+    Route::get('decommission', [
+        'as' => 'report.decommission',
+        'uses' => 'ReportController@decommission'
+    ]);
 });
 Route::get('items',[
     'middleware' => 'auth',

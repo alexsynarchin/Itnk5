@@ -10,10 +10,10 @@ class Report extends Model
         'year', 'quarter'
     ];
     public static $report_quarter = [
-        1 => 'Первый',
-        2 => 'Второй',
-        3 => 'Третий',
-        4 => 'Четвертый'
+        1 => '1',
+        2 => '2',
+        3 => '3',
+        4 => '4'
     ];
     public  static  $report_state = [
         'not_accepted' => 'Не принят',

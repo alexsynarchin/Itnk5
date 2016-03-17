@@ -56,14 +56,30 @@ class ReportController extends Controller
         else{
             $report= new \App\Models\Report;
             $report -> year = 2015;
-            $report -> quarter = 4;
+            $report -> quarter = 1;
             $report -> organization_id = $id;
             $report ->state = 'not_accepted';
             $report->save();
             return Redirect::action('AdminController@organization', [$id]);
         }
      }
-    public function show(){
-
+    public function show($id)
+    {
+    $report = \App\Models\Report::find($id);
+    return View::make('report.show',compact('report'));
+    }
+    public function purchase($id)
+    {
+        $report = \App\Models\Report::find($id);
+        $documents =Auth::user()->documents->where('document_type', 'purchase');
+        return View::make('report.purchase',compact('report'));
+    }
+    public function depreciation($id) {
+        $report = \App\Models\Report::find($id);
+        return View::make('report.depreciation',compact('report'));
+    }
+    public function decommission($id){
+        $report = \App\Models\Report::find($id);
+        return View::make('report.decommission',compact('report'));
     }
 }
