@@ -14,53 +14,45 @@
         @include('report.partials.report_navigation')
         <div class="document box">
             <div class="box-header with-border">
-                <h3 class="box-title"><i class="fa fa-file-text-o"></i> Документы приобретения <span class="label bg-aqua">4 квартал 2015 года</span></h3>
+                <h3 class="box-title"><i class="fa fa-file-text-o"></i> Документы приобретения</h3>
             </div><!-- /.box-header -->
             <div class="box-body">
                 <div class="control-bnts row">
                     <div class="col-xs-4">
-                        <a class="add-btn btn btn-primary" href="#"><i class="fa fa-plus-square-o"></i> Создать документ приобретения</a>
+                        <a class="add-btn btn btn-primary" href="{{action('DocumentController@reportCreate',[$report->id, $document_type])}}"><i class="fa fa-plus-square-o"></i> Создать документ приобретения</a>
                     </div>
                 </div>
                 <table class="list table table-bordered table-hover">
-                    <thead>
-                    <tr>
-                        <th>№</th>
-                        <th>
-                            Раздел учета ОС
-                        </th>
-                        <th>
-                            Балансовая стоимость
-                        </th>
-                        <th>Остаточная стоимость</th>
-                    </tr>
-                    </thead>
                     <tbody>
-                    <tr>
-                        <td>1</td>
-                        <td>Автомобили</td>
-                        <td>12 000 000</td>
-                        <td>10 000 000</td>
-                    </tr>
-                    <tr>
-                        <td>2</td>
-                        <td>Движимое имущество</td>
-                        <td>1 200 370</td>
-                        <td>602 300</td>
-                    </tr>
-                    <tr>
-                        <td>4</td>
-                        <td>Особо ценное движимое имущество</td>
-                        <td>3 000 000</td>
-                        <td>2 200 000</td>
-                    </tr>
-                    <tr>
-                        <td>3</td>
-                        <td>Здания и сооружения</td>
-                        <td>12 000 000</td>
-                        <td>10 000 000</td>
-                    </tr>
-                    </tbody>
+                    <thead>
+                    <th>Номер</th>
+                    <th>
+                        Вид Основных средств
+                    </th>
+                    <th>
+                        Дата документа
+                    </th>
+                    <th>
+                        Дата актуализации остатков
+                    </th>
+                    <th>Действия</th>
+                    </thead>
+                    @if($documents->count())
+                        @foreach($documents as $document)
+                            <tr>
+                                <td>{{$document->id}}</td>
+                                <td>{{ App\Models\Document::$os_types[$document->os_type] }}</td>
+                                <td>{{$document->document_date}}</td>
+                                <td>{{$document->actual_date}}</td>
+                                <td class="actions icons">
+                                    <a href="{{action('DocumentController@show', [$document->id])}}"><i class="fa fa-eye"></i></a>
+                                    <a href="{{action('DocumentController@edit',array($document->id))}}"><i class="fa fa-pencil-square-o"></i> </a>
+                                    <a  href="{{URL::route('document.delete', array('id'=>$document->id))}}"><i class="fa fa-trash"></i></a>
+                                </td>
+                                </td>
+                            </tr>
+                        @endforeach
+                    @endif
                 </table>
             </div><!-- /.box-body -->
             <div class="box-footer clearfix">

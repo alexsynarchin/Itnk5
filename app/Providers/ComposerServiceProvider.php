@@ -15,6 +15,8 @@ class ComposerServiceProvider extends ServiceProvider
         view()->composer(
             'document.residues_entering', 'App\Http\ViewComposers\documentResiduesEnteringComposer'
         );
+        view()->composer('report.purchase', 'App\Http\ViewComposers\documentPurchaseComposer'
+        );
     }
     /**
      * Register the service provider.

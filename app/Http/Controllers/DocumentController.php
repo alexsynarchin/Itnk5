@@ -36,8 +36,13 @@ class DocumentController extends Controller
     }
     public function create($document_type)
     {
-        $type = $document_type;
-        return View::make('document.create',compact('type'));
+        $document_title=\App\Models\Document::documentTitle($document_type);
+        return View::make('document.create',compact('document_type','document_title'));
+    }
+    public  function reportCreate($id, $document_type){
+        $report_id=$id;
+        $document_title=\App\Models\Document::documentTitle($document_type);
+        return View::make('document.create',compact('document_type','document_title','report_id'));
     }
 
     /**
@@ -68,11 +73,13 @@ class DocumentController extends Controller
     public function show($id)
     {
         $document = \App\Models\Document::find($id);
+        $document_type=$document->document_type;
+        $document_title=\App\Models\Document::documentTitle($document_type);
         // Если такого документа нет, то вернем пользователю ошибку 404 - Не найдено
         if (!$document) {
             App::abort(404);
         }
-        return View::make('document.view', array(  'document' => $document ));
+        return View::make('document.view', compact('document','document_title'));
     }
 
     /**
@@ -84,7 +91,9 @@ class DocumentController extends Controller
     public function edit($id)
     {
         $document = \App\Models\Document::find($id);
-        return View::make('document.edit', array('document' => $document));
+        $document_type=$document->document_type;
+        $document_title=\App\Models\Document::documentTitle($document_type);
+        return View::make('document.edit', compact('document','document_title'));
     }
 
     /**

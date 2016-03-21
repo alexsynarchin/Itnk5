@@ -2,12 +2,12 @@
 @section('content')
     <section class="content-header">
         <h1>
-            Новый документ ввода остатков
+            Новый документ {{$document_title}}
             <small>Система ИТНК-ОБЗОР</small>
         </h1>
         <ol class="breadcrumb">
             <li><a href="/home"><i class="fa fa-dashboard"></i> Панель управления</a></li>
-            <li class="active">Новый документ ввода остатков</li>
+            <li class="active">Новый документ {{$document_title}}</li>
         </ol>
     </section>
     <section class="content">
@@ -17,7 +17,10 @@
             </div><!-- /.box-header -->
             <!-- form start -->
             {!!  Form::open(array('action'=> 'DocumentController@store', 'method' => 'post', 'role' => 'form', 'class' => 'form-horizontal'))!!}
-            <input type="hidden" name="document_type" value="{{$type}}">
+            @if($document_type =='purchase')
+            <input type="hidden" name="report_id" value="{{$report_id}}">
+            @endif
+            <input type="hidden" name="document_type" value="{{$document_type}}">
             <div class="box-body">
                 <div class="form-group">
                     <div class="os-form-group col-md-4 col-md-offset-1 col-xs-4 col-xs-offset-1">

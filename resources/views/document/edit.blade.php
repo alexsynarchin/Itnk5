@@ -2,12 +2,12 @@
 @section('content')
     <section class="content-header">
         <h1>
-           Документ ввода остатков № {{$document -> document_number}}
+           Документ {{$document_title}} № {{$document -> document_number}}
             <small>Система ИТНК-ОБЗОР</small>
         </h1>
         <ol class="breadcrumb">
             <li><a href="/home"><i class="fa fa-dashboard"></i> Панель управления</a></li>
-            <li class="active">Документ ввода остатков № {{$document -> document_number}}</li>
+            <li class="active">Документ {{$document_title}} № {{$document -> document_number}}</li>
         </ol>
     </section>
     <section class="content">

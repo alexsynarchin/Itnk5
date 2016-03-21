@@ -80,6 +80,10 @@ Route::group(['middleware' => 'auth'],
             'as' => 'document.create',
             'uses' => 'DocumentController@create'
         ]);
+        Route::get('report/{id}/{document_type}/create',[
+            'as' => 'report.document.create',
+            'uses' => 'DocumentController@reportCreate'
+        ]);
         Route::controller('document', 'DocumentController');
         //Основные средства
         Route::get('{id}/item/create',[

@@ -2,12 +2,12 @@
 @section('content')
     <section class="content-header">
         <h1>
-            Документ  ввода остатков № {{$document -> document_number}}
+                Документ  {{$document_title}} № {{$document -> document_number}}
             <small>Система ИТНК-ОБЗОР</small>
         </h1>
         <ol class="breadcrumb">
             <li><a href="/home"><i class="fa fa-dashboard"></i> Панель управления</a></li>
-            <li class="active">Документ  ввода остатков № {{$document -> document_number}}</li>
+            <li class="active">Документ  {{$document_title}} № {{$document -> document_number}}</li>
         </ol>
     </section>
     <section class="content">
@@ -34,6 +34,11 @@
                     <div class="col-xs-8">
                         <a href="{{route('item.create', [$document->id])}}" class="add-btn btn btn-primary"><i class="fa fa-plus-square-o"></i> Добавить основное средство</a>
                         <form method="post" class="inline" action="{{action('DocumentController@postDocSave', [$document->id])}}"><input type="hidden" name="_token" value="{{ csrf_token() }}"><button type="submit" class="add-btn btn btn-success">Сохранить документ</button></form>
+                        @if($document->document_type == 'purchase')
+                        <a href="{{action('ReportController@purchase',$document->report_id)}}" class="add-btn btn btn-danger"><i class="fa fa-plus-square-o"></i> Закрыть документ</a>
+                        @elseif($document->document_type == 'residues_entering')
+                            <a href="{{action('DocumentController@residues_entering')}}" class="add-btn btn btn-danger"><i class="fa fa-plus-square-o"></i> Закрыть документ</a>
+                        @endif
                     </div>
                 </div>
                 <div class="document_sum">

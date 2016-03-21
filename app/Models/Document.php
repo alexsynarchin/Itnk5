@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Document extends Model
 {
-    protected $fillable = ['document_date', 'actual_date', 'os_type'];
+    protected $fillable = ['document_date', 'actual_date', 'os_type', 'document_type','report_id'];
     public function items(){
         return $this->hasMany('App\Models\Item','document_id');
     }
@@ -20,4 +20,15 @@ class Document extends Model
         'parcels' => 'Земельные участки',
         'car'   =>  'Автомобили'
     );
+    public static function documentTitle ($document_type){
+        switch($document_type){
+            case 'purchase':
+                $document_title="Приобретения";
+                break;
+            case 'residues_entering':
+                $document_title="Ввода остатков";
+
+        }
+        return $document_title;
+    }
 }
