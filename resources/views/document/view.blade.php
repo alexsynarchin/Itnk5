@@ -41,6 +41,19 @@
                         @endif
                     </div>
                 </div>
+                <div class="row">
+                    <form action="{{action('DocumentController@postImport',[$document->id])}}" method="post" class="form-horizontal col-xs-12" enctype="multipart/form-data">
+                        <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                        <div class="form-group">
+                            <div class="col-xs-10">
+                                <input type="file" name="file" class="form-control">
+                            </div>
+                            <div class="col-xs-2">
+                                <button type="submit" class="btn btn-primary">Импортировать</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
                 <div class="document_sum">
                     <label>Сумма по балансовой стоимости:</label> <span>{{$document->doc_carrying_amount}}</span><br>
                     <label>Сумма по остаточной стоимости:</label> <span>{{$document->doc_residual_value}}</span>
