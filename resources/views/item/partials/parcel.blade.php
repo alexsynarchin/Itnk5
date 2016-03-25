@@ -5,7 +5,7 @@
     </div>
     <div class="col-md-6 col-xs-6">
         <label for="cadastral" class="control-label">Кадастровый номер:</label>
-        <input required="required" type="number" class="form-control" name="cadastral" value="{{isset($item->parcel->cadastral) ? $item->parcel->cadastral : null }}">
+        <input required="required" type="text" class="form-control" name="cadastral" value="{{isset($item->parcel->cadastral) ? $item->parcel->cadastral : null }}">
     </div>
 </div>
 <div class="form-group">
