@@ -21,7 +21,9 @@
                     <div class="box-header with-border">
                         <a href="" class="btn btn-success btn-lg">Отправить на проверку</a>
                         <div class="box-tools pull-right">
-                            <span id="reportState-{{$residue->state}}" class="label">{{App\Models\Residue::$residual_entering_state[$residue->state]}}</span>
+                            @if(isset($residue->state))
+                                <span id="reportState-{{$residue->state}}" class="label">{{App\Models\Residue::$residual_entering_state[$residue->state]}}</span>
+                            @endif
                         </div><!-- /.box-tools -->
                     </div><!-- /.box-header -->
                 </div><!-- /.box-header -->
