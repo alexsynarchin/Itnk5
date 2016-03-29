@@ -16,9 +16,14 @@
     <section class="content">
         <!-- Main content -->
         <section class="content">
-            <div class="document box">
+            <div class="report-box box">
                 <div class="box-header with-border">
-                    <h3 class="box-title"><i class="fa fa-file-text-o"></i> Документы ввода остатков</h3>
+                    <div class="box-header with-border">
+                        <a href="" class="btn btn-success btn-lg">Отправить на проверку</a>
+                        <div class="box-tools pull-right">
+                            <span id="reportState-{{$residue->state}}" class="label">{{App\Models\Residue::$residual_entering_state[$residue->state]}}</span>
+                        </div><!-- /.box-tools -->
+                    </div><!-- /.box-header -->
                 </div><!-- /.box-header -->
                 <div class="box-body">
                     <div class="control-bnts row">
@@ -62,6 +67,22 @@
             </div>
         </section><!-- /.content -->
     </section><!-- /.content -->
+@stop
+@section('user-scripts')
+    <script type="text/javascript">
+        var acceptedReport = document.getElementById('reportState-accepted');
+        var not_acceptedReport = document.getElementById('reportState-not_accepted');
+        var inspectionReport = document.getElementById('reportState-inspection');
+        if (acceptedReport != null){
+            acceptedReport.classList.add('label-success');
+        }
+        if (not_acceptedReport != null){
+            not_acceptedReport.classList.add('label-danger');
+        }
+        if (inspectionReport != null) {
+            inspectionReport.classList.add('label-warning');
+        }
+    </script>
 @stop
 
 

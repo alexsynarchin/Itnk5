@@ -244,6 +244,19 @@ class AdminController extends Controller
         }
         return redirect()->back();
     }
+public function residueStore($id){
+    $organization = \App\Models\Organization::find($id);
+    $residue = $organization ->residue;
+    if(isset($residue)){
 
+    }
+    else{
+        $residue = new \App\Models\Residue;
+        $residue->organization_id = $id;
+        $residue ->state = 'not_accepted';
+        $residue -> save();
+    }
+    return redirect() ->back();
+}
 
 }

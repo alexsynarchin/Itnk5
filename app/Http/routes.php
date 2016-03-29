@@ -47,6 +47,19 @@ Route::group(['prefix' => 'report/{id}', 'middleware' => 'auth'], function(){
         'uses' => 'ReportController@decommission'
     ]);
 });
+//Inspector
+Route::group(['prefix' => 'inspector', 'middleware' => 'auth'], function(){
+    Route::get('/',[
+        'as' => 'inspector.index',
+        'uses' => 'InspectorController@index'
+    ]);
+    Route::group(['prefix' =>'organization/{id}'],function(){
+        Route::get('/',[
+            'as' => 'inspector.show.organization',
+            'uses' => 'InspectorController@showOrganization'
+        ]);
+    });
+});
 Route::get('items',[
     'middleware' => 'auth',
     'as' => 'items',
@@ -153,21 +166,16 @@ Route::group(['middleware' => 'auth'],
             'as' => 'report.store',
             'uses' => 'ReportController@store'
         ]);
-        //Ispector
-        Route::get('inspector',[
-            'as' => 'inspector.index',
-            'uses' => 'InspectorController@index'
+        //Residues entering
+        Route::post('residue/{id}',[
+            'as' => 'residue.store',
+            'uses' => 'AdminController@residueStore'
         ]);
-        Route::get('inspector/organization/{id}',[
-            'as' => 'inspector.show.organization',
-            'uses' => 'InspectorController@showOrganization'
-        ]);
+        //Inspector
         Route::controller('inspector', 'InspectorController', [
             'getOrganizations' => 'inspector.organizations'
         ]);
-    }
-
-);
+    });
 // Logging in and out
 get('/auth/login', 'Auth\AuthController@getLogin');
 post('/auth/login', 'Auth\AuthController@postLogin');

@@ -52,6 +52,25 @@
                     </div><!-- box-footer -->
                 </div><!-- /.box -->
             </div>
+            <div class="col-md-6">
+                <div class="box">
+                    <div class="box-header with-border">
+                        <h3 class="box-title"><i class="fa fa-file-text-o"></i> Ввод остатков</h3>
+                    </div><!-- /.box-header -->
+                    <div class="box-body">
+                        <div class="control-bnts row">
+                            <div class="col-xs-4">
+                                {!!  Form::open(array('url' => action('AdminController@residueStore',[$organization->id]), 'method' => 'post', 'role' => 'form')) !!}
+                                <button type="submit" class="add-btn btn btn-primary">СОЗДАТЬ ОТЧЕТ ВВОДА ОСТАТКОВ</button>
+                                {!!  Form::close() !!}
+                            </div>
+                        </div>
+
+                    </div><!-- /.box-body -->
+                    <div class="box-footer">
+                    </div><!-- box-footer -->
+                </div><!-- /.box -->
+            </div>
         </div>
         <div class="document box">
             <div class="box-header with-border">

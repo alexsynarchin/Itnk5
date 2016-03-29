@@ -19,7 +19,7 @@ class InspectorController extends Controller
     }
     public function getOrganizations()
     {
-        $organizations= \App\Models\Organization::all();
+        $organizations= \App\Models\Organization::where('type','client');
         $datatables = Datatables::of($organizations)
             ->addColumn('action',function($organization){
                 return '<a href="inspector/organization/'.$organization->id.'" class="actions icons"><i class="fa fa-eye"></i></a>';

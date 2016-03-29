@@ -32,7 +32,9 @@ class DocumentController extends Controller
     public function residues_entering()
     {
         $documents = Auth::user() -> documents;
-        return View::make('document.residues_entering', ['documents'=>$documents]);
+        $organization=Auth::user() -> organization;
+        $residue = $organization -> residue;
+        return View::make('document.residues_entering', compact('documents','organization','residue'));
     }
     public function create($document_type)
     {
