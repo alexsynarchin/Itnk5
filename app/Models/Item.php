@@ -25,6 +25,9 @@ class Item extends Model
     public  function car(){
         return $this->hasOne('App\Models\Car');
     }
+    public function deprecation(){
+        return $this->hasMany('App\Models\Deprecation');
+    }
     public static $os_finance = array(
         'budget' => 'Бюджет',
         'out_budget' => 'Внебюджет'

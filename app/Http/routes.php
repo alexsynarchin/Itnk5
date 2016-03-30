@@ -38,10 +38,32 @@ Route::group(['prefix' => 'report/{id}', 'middleware' => 'auth'], function(){
        'as' => 'report.purchase',
        'uses' => 'ReportController@purchase'
            ]);
-    Route::get('depreciation',[
-        'as' => 'report.depreciation',
-        'uses' => 'ReportController@depreciation'
-    ]);
+    Route::group(['prefix' => 'depreciation', 'middleware' => 'auth'], function(){
+        Route::get('/',[
+            'as' => 'report.depreciation',
+            'uses' => 'ReportController@depreciation'
+        ]);
+        Route::get('create',[
+            'as' => 'depreciation.create',
+            'uses' => 'DepreciationController@create'
+        ]);
+        Route::post('/',[
+            'as' => 'depreciation.store',
+            'uses' => 'DepreciationController@store'
+        ]);
+        Route::get('edit',[
+            'as' => 'depreciation.store',
+            'uses' => 'DepreciationController@edit'
+        ]);
+        Route::patch('/',[
+            'as' => 'depreciation.update',
+            'uses' => 'DepreciationController@update'
+        ]);
+        Route::get('destroy',[
+            'as' => 'depreciation.delete',
+            'uses' => 'DepreciationController@destroy'
+        ]);
+    });
     Route::get('decommission', [
         'as' => 'report.decommission',
         'uses' => 'ReportController@decommission'
@@ -174,6 +196,10 @@ Route::group(['middleware' => 'auth'],
         //Inspector
         Route::controller('inspector', 'InspectorController', [
             'getOrganizations' => 'inspector.organizations'
+        ]);
+        Route::controller('report','ReportController');
+        Route::controller('depreciation', 'DepreciationController',[
+            'getReportDepreciation' => 'report.depreciation.items'
         ]);
     });
 // Logging in and out

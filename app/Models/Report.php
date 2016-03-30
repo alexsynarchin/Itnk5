@@ -20,7 +20,12 @@ class Report extends Model
         'inspection' => 'На проверке',
         'accepted' => 'Принят'
     ];
-    public function organization(){
+    public function organization()
+    {
         return $this->belongsTo('App\Models\Organization', 'organization_id');
+    }
+    public function depreciations()
+    {
+        return $this->hasMany('App\Models\Depreciation');
     }
 }
