@@ -71,7 +71,7 @@ class ReportController extends Controller
     public function purchase($id)
     {
         $report = \App\Models\Report::find($id);
-        $documents =Auth::user()->documents->where('document_type', 'purchase');
+        $documents = $report -> documents;
         return View::make('report.purchase',compact('report','documents'));
     }
     public function depreciation($id) {

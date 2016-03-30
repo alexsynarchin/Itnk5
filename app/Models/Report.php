@@ -28,4 +28,8 @@ class Report extends Model
     {
         return $this->hasMany('App\Models\Depreciation');
     }
+    public function documents()
+    {
+        return $this->hasMany('App\Models\Document', 'report_id');
+    }
 }
