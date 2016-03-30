@@ -60,4 +60,42 @@ class DepreciationController extends Controller
             });
         return $datatables->make(true);
     }
+    public function postImport($id)
+    {
+        $report = \App\Models\Report::find($id);
+        if(Input::hasFile('file')){
+            $file=Input::file('file');
+            $filename = $file->getClientOriginalName();
+            $destinationPath = public_path().'/uploads/';
+            Input::file('file')->move($destinationPath, $filename);
+            $handle=fopen(public_path().'/uploads/'.$filename, "r");
+            if ($handle !== FALSE){
+                while (($data = fgetcsv($handle, 1000, ';')) !==FALSE){
+                    $depreciation = new \App\Models\Depreciation();
+                    $name = iconv("Windows-1251", "utf-8", $data[1]);
+                    $depreciation->name = $name;
+                    $depreciation -> number = $data[2];
+                    $carrying_amount=$data[2];
+                    $carrying_amount=str_replace(",",".",$carrying_amount);
+                    $carrying_amount=str_replace(" ","",$carrying_amount);
+                    $depreciation -> carrying_amount = $carrying_amount;
+                    $sum=$data[3];
+                    $sum=str_replace(",",".",$carrying_amount);
+                    $sum=str_replace(" ","",$carrying_amount);
+                    $depreciation -> sum = $sum;
+                    $sum=$data[3];
+                    $sum=str_replace(",",".",$carrying_amount);
+                    $sum=str_replace(" ","",$carrying_amount);
+                    $depreciation -> sum = $sum;
+                    $residual_value=$data[4];
+                    $sum=str_replace(",",".",$residual_value);
+                    $sum=str_replace(" ","",$residual_value);
+                    $depreciation -> residual_value = $residual_value;
+                    $depreciation ->report_id = $id;
+                    $depreciation ->save();
+                }
+            }
+        }
+        return redirect()->back();
+    }
 }

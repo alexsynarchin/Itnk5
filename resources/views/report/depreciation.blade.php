@@ -19,7 +19,7 @@
             <div class="box-body">
                 <div class="control-bnts">
                     <div class="row">
-                        <form action="" method="post" class="form-horizontal col-xs-12" enctype="multipart/form-data">
+                        <form action="{{action('DepreciationController@postImport',[$report->id])}}" method="post" class="form-horizontal col-xs-12" enctype="multipart/form-data">
                             <input type="hidden" name="_token" value="{{ csrf_token() }}">
                             <div class="form-group">
                                 <div class="col-xs-10">
