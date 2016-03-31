@@ -18,7 +18,7 @@
                 @include('organization.partials.form')
             </div><!-- /.box-body -->
             <div class="box-footer center">
-                <button type="submit" class="btn btn-success">СОХРАНИТЬ ОРГАНИЗАЦИЮ</button> <a href="{{URL::previous()}}" class="btn btn-primary">ЗАКРЫТЬ БЕЗ СОХРАНЕНИЯ</a>
+                <button type="submit" class="btn btn-success">СОХРАНИТЬ ДАННЫЕ</button> <a href="{{action('AdminController@index')}}" class="btn btn-primary">ЗАКРЫТЬ</a>
             </div><!-- /.box-footer -->
             {!!  Form::close() !!}
         </div>
