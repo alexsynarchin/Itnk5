@@ -13,14 +13,14 @@
 <div class="form-group">
     <div class="col-md-4 col-xs-4">
         <label for="name" class="control-label">Балансовая стоимость:</label>
-        <input required="required" type="number" name="carrying_amount" class="form-control" value="{{$depreciation->carrying_amount or null}}">
+        <input required="required" type="decimal" name="carrying_amount" class="form-control" value="{{$depreciation->carrying_amount or null}}">
     </div>
     <div class="col-md-4 col-xs-4">
         <label for="name" class="control-label">Начисленный износ:</label>
-        <input required="required" type="number" name="sum" class="form-control" value="{{$depreciation->sum or null}}">
+        <input required="required" type="decimal" name="sum" class="form-control" value="{{$depreciation->sum or null}}">
     </div>
     <div class="col-md-4 col-xs-4">
         <label for="name" class="control-label">Остаточная стоимость:</label>
-        <input required="required" type="number" name="residual_value" class="form-control" value="{{$depreciation->residual_value or null}}">
+        <input required="required" type="decimal" name="residual_value" class="form-control" value="{{$depreciation->residual_value or null}}">
     </div>
 </div>
