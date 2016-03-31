@@ -171,6 +171,7 @@ class OrganizationController extends Controller
         $sum_org_cars_residual_value = 0;
         $user=\App\Models\Organization::find($id)->user;
         $documents=\App\Models\User::find($user->id)-> documents;
+        $documents = $documents->where('document_type', 'residues_entering');
         foreach ($documents as $document){
             $type=$document->os_type;
             if($type =='movables'){

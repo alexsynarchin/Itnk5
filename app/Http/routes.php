@@ -75,6 +75,10 @@ Route::group(['prefix' => 'inspector', 'middleware' => 'auth'], function(){
         'as' => 'inspector.index',
         'uses' => 'InspectorController@index'
     ]);
+    Route::get('reports',[
+        'as' =>'inspector.reports',
+        'uses' => 'InspectorController@reports'
+    ]);
     Route::group(['prefix' =>'organization/{id}'],function(){
         Route::get('/',[
             'as' => 'inspector.show.organization',

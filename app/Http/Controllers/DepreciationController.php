@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Input;
+use Illuminate\Support\Facades\Auth;
 use DB;
 use Illuminate\Support\Facades\Redirect;
 use Yajra\Datatables\Datatables;
@@ -54,10 +55,15 @@ class DepreciationController extends Controller
     {
         $id=$request->get('report_id');
         $depreciations = \App\Models\Depreciation::where('report_id','=', $id);
-        $datatables = Datatables::of($depreciations)
-            ->addColumn('action',function ($depreciation) {
-                return '<a href="/report/'.$depreciation->id.'/depreciation/edit" class="actions icons"><i class="fa fa-pencil-square-o"></i></a><a href="/report/'.$depreciation->id.'/depreciation/destroy" class="actions icons"><i class="fa fa-trash"></i></a>';
-            });
+        if(Auth::user() -> username == '1-0275071849') {
+            $datatables = Datatables::of($depreciations);
+        }
+        else{
+            $datatables = Datatables::of($depreciations)
+                ->addColumn('action',function ($depreciation) {
+                    return '<a href="/report/'.$depreciation->id.'/depreciation/edit" class="actions icons"><i class="fa fa-pencil-square-o"></i></a><a href="/report/'.$depreciation->id.'/depreciation/destroy" class="actions icons"><i class="fa fa-trash"></i></a>';
+                });
+        }
         return $datatables->make(true);
     }
     public function postImport($id)

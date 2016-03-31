@@ -32,4 +32,9 @@ class InspectorController extends Controller
         $documents =  \App\Models\User::find($organization->user->id)->documents;
         return View::make('inspector.showOrganization', compact('organization','documents','user'));
     }
+    public function reports()
+    {
+        $reports=\App\Models\Report::where('state','inspection')->get();
+        return View::make('inspector.reports',compact('reports'));
+    }
 }

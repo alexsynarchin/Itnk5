@@ -2,9 +2,16 @@
 @section('content')
     <section class="content-header">
         <h1>
-            Отчет - за  {{App\Models\Report::$report_quarter[$report->quarter]}} квартал {{$report->year}} г
-            <small>Система ИТНК-ОБЗОР</small>
+            @if(Auth::user() -> username == '1-0275071849')
+                {{$report->organization->full_name}}
+            @else
+                Отчет - за  {{App\Models\Report::$report_quarter[$report->quarter]}} квартал {{$report->year}} г
+                <small>Система ИТНК-ОБЗОР</small>
+            @endif
         </h1>
+        @if(Auth::user() -> username == '1-0275071849')
+            <h3>Отчет - за  {{App\Models\Report::$report_quarter[$report->quarter]}} квартал {{$report->year}} г</h3>
+        @endif
         <ol class="breadcrumb">
             <li><a href="/home"><i class="fa fa-dashboard"></i> Панель управления</a></li>
             <li class="active">Отчеты</li>

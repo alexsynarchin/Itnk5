@@ -13,6 +13,7 @@
     <section class="content">
         <div class="document box">
             <div class="box-header with-border">
+                @if(Auth::user() -> username != '1-0275071849')
                 <div class="form-group">
                     <div class="os-form-group col-xs-3">
                         <label class="control-label">Дата документа:</label><span class="date">{{$document->document_date}}</span>
@@ -28,11 +29,14 @@
                     <!-- Here is a label for example -->
                     <span class="label label-danger">Черновик</span>
                 </div><!-- /.box-tools -->
+                @endif
             </div><!-- /.box-header -->
             <div class="box-body">
                 <div class="control-bnts row">
                     <div class="col-xs-8">
+                        @if(Auth::user() -> username != '1-0275071849')
                         <a href="{{route('item.create', [$document->id])}}" class="add-btn btn btn-primary"><i class="fa fa-plus-square-o"></i> Добавить основное средство</a>
+                        @endif
                         <form method="post" class="inline" action="{{action('DocumentController@postDocSave', [$document->id])}}"><input type="hidden" name="_token" value="{{ csrf_token() }}"><button type="submit" class="add-btn btn btn-success">Сохранить документ</button></form>
                         @if($document->document_type == 'purchase')
                         <a href="{{action('ReportController@purchase',$document->report_id)}}" class="add-btn btn btn-danger"><i class="fa fa-plus-square-o"></i> Закрыть документ</a>
@@ -41,6 +45,7 @@
                         @endif
                     </div>
                 </div>
+                @if(Auth::user() -> username != '1-0275071849')
                 <div class="row">
                     <form action="{{action('DocumentController@postImport',[$document->id])}}" method="post" class="form-horizontal col-xs-12" enctype="multipart/form-data">
                         <input type="hidden" name="_token" value="{{ csrf_token() }}">
@@ -54,6 +59,7 @@
                         </div>
                     </form>
                 </div>
+                @endif
                 <div class="document_sum">
                     <label>Сумма по балансовой стоимости:</label> <span>{{$document->doc_carrying_amount}}</span><br>
                     <label>Сумма по остаточной стоимости:</label> <span>{{$document->doc_residual_value}}</span>

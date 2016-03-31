@@ -22,7 +22,6 @@
                     </div>
                     <div class="col-xs-3"><a href="{{route('admin.document.edit',[$document->id])}}" class="edit-btn btn btn-warning">Редактировать документ</a> </div>
                 </div>
-
                 <div class="box-tools pull-right">
                     <!-- Buttons, labels, and many other things can be placed here! -->
                     <!-- Here is a label for example -->

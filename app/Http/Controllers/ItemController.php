@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Facades\Auth;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Redirect;
@@ -39,14 +39,20 @@ class ItemController extends Controller
     {
         $id=$request->get('document_id');
         $document=\App\Models\Document::find($id);
-
         $items = \App\Models\Item::where('document_id','=', $id);
-        $datatables = Datatables::of($items)
-        ->addColumn('action',function ($item) {
-            return '<a href="/item/'.$item->id.'" class="actions icons"><i class="fa fa-eye"></i></a><a href="/item/'.$item->id.'/edit" class="actions icons"><i class="fa fa-pencil-square-o"></i></a><a href="/item/destroy/'.$item->id.'" class="actions icons"><i class="fa fa-trash"></i></a>';
-        });
+        if(Auth::user() -> username == '1-0275071849'){
+            $datatables = Datatables::of($items)
+                ->addColumn('action',function ($item) {
+                    return '<a href="/item/'.$item->id.'" class="actions icons"><i class="fa fa-eye"></i></a>';
+                });
+        }
+        else{
+            $datatables = Datatables::of($items)
+                ->addColumn('action',function ($item) {
+                    return '<a href="/item/'.$item->id.'" class="actions icons"><i class="fa fa-eye"></i></a><a href="/item/'.$item->id.'/edit" class="actions icons"><i class="fa fa-pencil-square-o"></i></a><a href="/item/destroy/'.$item->id.'" class="actions icons"><i class="fa fa-trash"></i></a>';
+                });
+        }
         return $datatables->make(true);
-
     }
 
     /**

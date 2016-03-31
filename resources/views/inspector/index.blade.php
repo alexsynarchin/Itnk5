@@ -11,9 +11,9 @@
         </ol>
     </section>
     <section class="content">
+        @include('inspector.partials.inspector_navigation')
         <div class="box">
             <div class="box-header with-border">
-                <h3 class="box-title"><i class="fa fa-file-text-o"></i> Организации</h3>
             </div><!-- /.box-header -->
             <div class="box-body">
                 <table class="table table-bordered" id="organizations-table">

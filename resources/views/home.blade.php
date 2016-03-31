@@ -11,13 +11,15 @@
       </ol>
    </section>
    <section class="content">
-
    <div class="panel panel-default">
+      <div class="panel-heading">
+         <h3>Итоговые суммы по вводу остатков</h3>
+      </div>
       <div class="panel-body">
          <div class="control-bnts">
             <form method="post" class="inline" action="{{action('OrganizationController@postCalcSumsFirstEnter', [$organization->id])}}">
                <input type="hidden" name="_token" value="{{ csrf_token() }}">
-               <button type="submit" class="add-btn btn btn-success">Обновить итоговые суммы по организации</button></form>
+               <button type="submit" class="add-btn btn btn-success">Обновить итоговые суммы по вводу остатков</button></form>
          </div>
          <table class="list table table-bordered table-hover">
             <thead>

@@ -2,9 +2,16 @@
 @section('content')
     <section class="content-header">
         <h1>
-            Отчет - за  {{App\Models\Report::$report_quarter[$report->quarter]}} квартал {{$report->year}} г
-            <small>Система ИТНК-ОБЗОР</small>
+            @if(Auth::user() -> username == '1-0275071849')
+                {{$report->organization->full_name}}
+            @else
+                Отчет - за  {{App\Models\Report::$report_quarter[$report->quarter]}} квартал {{$report->year}} г
+                <small>Система ИТНК-ОБЗОР</small>
+            @endif
         </h1>
+        @if(Auth::user() -> username == '1-0275071849')
+            <h3>Отчет - за  {{App\Models\Report::$report_quarter[$report->quarter]}} квартал {{$report->year}} г</h3>
+        @endif
         <ol class="breadcrumb">
             <li><a href="/home"><i class="fa fa-dashboard"></i> Панель управления</a></li>
             <li class="active">Отчеты</li>
@@ -14,7 +21,12 @@
         @include('report.partials.report_navigation')
         <div class="report-box box box-default">
             <div class="box-header with-border">
-                <a href="" class="btn btn-success btn-lg">Отправить на проверку</a>
+                @if(Auth::user() -> username == '1-0275071849')
+                    <form method="post" class="inline" action="{{action('ReportController@postReportStateAccepted', [$report->id])}}"><input type="hidden" name="_token" value="{{ csrf_token() }}"><button type="submit" class="add-btn btn btn btn-success btn-lg">ПРИНЯТЬ ОТЧЕТ</button></form>
+                    <form method="post" class="inline" action="{{action('ReportController@postReportStateNotAccepted', [$report->id])}}"><input type="hidden" name="_token" value="{{ csrf_token() }}"><button type="submit" class="add-btn btn btn btn-danger btn-lg">ОТКЛОНИТЬ ОТЧЕТ</button></form>
+                @else
+                    <form method="post" class="inline" action="{{action('ReportController@postReportStateInspection', [$report->id])}}"><input type="hidden" name="_token" value="{{ csrf_token() }}"><button type="submit" class="add-btn btn btn btn-success btn-lg">Отправить на проверку</button></form>
+                @endif
                 <a href="" class="btn btn-primary btn-lg">Печатные формы</a>
                 <form method="post" class="inline" action="{{action('ReportController@postCalcReport', [$report->id])}}"><input type="hidden" name="_token" value="{{ csrf_token() }}"><button type="submit" class="add-btn btn btn btn-primary btn-lg">Рассчитать итоговые суммы по отчету</button></form>
                 <div class="box-tools pull-right">
