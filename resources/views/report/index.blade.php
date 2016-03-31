@@ -22,7 +22,6 @@
             <div class="box-body">
                 <div class="control-bnts row">
                     <a href="{{route('report.show', [$report->id])}}" class="add-btn btn btn-success"><i class="fa fa-sign-in"></i> Перейти к отчету</a>
-                    <a href="" class="add-btn btn btn-primary"><i class="fa fa-print"></i> Печать</a>
                 </div>
                 <table class="list table table-bordered table-hover">
                     <thead>
