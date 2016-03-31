@@ -80,8 +80,8 @@ class DepreciationController extends Controller
                     $carrying_amount=str_replace(" ","",$carrying_amount);
                     $depreciation -> carrying_amount = $carrying_amount;
                     $sum=$data[4];
-                    $sum=str_replace(",",".",$carrying_amount);
-                    $sum=str_replace(" ","",$carrying_amount);
+                    $sum=str_replace(",",".",$sum);
+                    $sum=str_replace(" ","",$sum);
                     $depreciation -> sum = $sum;
                     $residual_value=$data[5];
                     $sum=str_replace(",",".",$residual_value);
