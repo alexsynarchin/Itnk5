@@ -72,18 +72,18 @@ class DepreciationController extends Controller
             if ($handle !== FALSE){
                 while (($data = fgetcsv($handle, 1000, ';')) !==FALSE){
                     $depreciation = new \App\Models\Depreciation();
-                    $name = iconv("Windows-1251", "utf-8", $data[0]);
+                    $name = iconv("Windows-1251", "utf-8", $data[1]);
                     $depreciation->name = $name;
-                    $depreciation -> number = $data[1];
-                    $carrying_amount=$data[2];
+                    $depreciation -> number = $data[2];
+                    $carrying_amount=$data[3];
                     $carrying_amount=str_replace(",",".",$carrying_amount);
                     $carrying_amount=str_replace(" ","",$carrying_amount);
                     $depreciation -> carrying_amount = $carrying_amount;
-                    $sum=$data[3];
+                    $sum=$data[4];
                     $sum=str_replace(",",".",$carrying_amount);
                     $sum=str_replace(" ","",$carrying_amount);
                     $depreciation -> sum = $sum;
-                    $residual_value=$data[4];
+                    $residual_value=$data[5];
                     $sum=str_replace(",",".",$residual_value);
                     $sum=str_replace(" ","",$residual_value);
                     $depreciation -> residual_value = $residual_value;
