@@ -16,11 +16,30 @@
             <div class="box-header with-border">
                 <a href="" class="btn btn-success btn-lg">Отправить на проверку</a>
                 <a href="" class="btn btn-primary btn-lg">Печатные формы</a>
+                <form method="post" class="inline" action="{{action('ReportController@postCalcReport', [$report->id])}}"><input type="hidden" name="_token" value="{{ csrf_token() }}"><button type="submit" class="add-btn btn btn btn-primary btn-lg">Рассчитать итоговые суммы по отчету</button></form>
                 <div class="box-tools pull-right">
                     <span id="reportState-{{$report->state}}" class="label">{{App\Models\Report::$report_state[$report->state]}}</span>
                 </div><!-- /.box-tools -->
             </div><!-- /.box-header -->
             <div class="box-body">
+                <h3>Итоговые суммы по отчету</h3>
+                <table class="list table table-bordered table-hover">
+                    <thead>
+                    <tr>
+                        <th>Балансовая стоимость</th>
+                        <th>Начисленный износ</th>
+                        <th>Остаточная стоимость</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td>{{number_format($report->report_total_carrying_amount, 2,'.', ' ') }}</td>
+                        <td>{{number_format($report->report_wearout_value, 2,'.', ' ') }}</td>
+                        <td>{{number_format($report->report_total_residual_value, 2,'.', ' ') }}</td>
+                    </tr>
+                    </tbody>
+                </table>
+                <h3>Сводные данные по приобретению</h3>
                 <table class="list table table-bordered table-hover">
                     <thead>
                     <tr>
@@ -44,7 +63,7 @@
                         <td>{{number_format($report->report_cars_carrying_amount, 2,'.', ' ') }}</td>
                     </tr>
                     <tr>
-                        <td>Начисленный износ</td>
+                        <td>Остаточная стоимость</td>
                         <td>{{number_format($report->report_residual_value, 2,'.', ' ') }}</td>
                         <td>{{number_format($report->report_movables_residual_value, 2,'.', ' ') }}</td>
                         <td>{{number_format($report->report_value_movables_residual_value, 2,'.', ' ') }}</td>
@@ -52,15 +71,23 @@
                         <td>{{number_format($report->report_parcels_residual_value, 2,'.', ' ') }}</td>
                         <td>{{number_format($report->report_cars_residual_value, 2,'.', ' ') }}</td>
                     </tr>
+                    </tbody>
+                </table>
+                <h3>Сводные данные по начислению износа</h3>
+                <table class="list table table-bordered table-hover">
+                    <thead>
                     <tr>
+                        <td>Балансовая стоимость</td>
+                        <td>Начисление износа</td>
                         <td>Остаточная стоимость</td>
-                        <td>{{number_format($report->report_wearout_value, 2,'.', ' ') }}</td>
-                        <td>{{number_format($report->report_movables_wearout_value, 2,'.', ' ') }}</td>
-                        <td>{{number_format($report->report_value_movables_wearout_value, 2,'.', ' ') }}</td>
-                        <td>{{number_format($report->report_buildings_wearout_value, 2,'.', ' ') }}</td>
-                        <td>{{number_format($report->report_parcels_wearout_value, 2,'.', ' ') }}</td>
-                        <td>{{number_format($report->report_cars_wearout_value, 2,'.', ' ') }}</td>
                     </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>{{number_format($report->report_wearout_carrying_amount, 2,'.', ' ') }}</td>
+                            <td>{{number_format($report->report_wearout_value, 2,'.', ' ') }}</td>
+                            <td>{{number_format($report->report_wearout_residual_value, 2,'.', ' ') }}</td>
+                        </tr>
                     </tbody>
                 </table>
             </div><!-- /.box-body -->

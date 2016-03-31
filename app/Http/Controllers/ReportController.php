@@ -82,4 +82,32 @@ class ReportController extends Controller
         $report = \App\Models\Report::find($id);
         return View::make('report.decommission',compact('report'));
     }
+    public function postCalcReport($id)
+    {
+        $report =\App\Models\Report::find($id);
+        $documents = $report -> documents;
+        //carrying amount
+        $report -> report_carrying_amount = $documents->sum('doc_carrying_amount');
+        $report -> report_movables_carrying_amount = $documents->where('os_type','movables')->sum('doc_carrying_amount');
+        $report -> report_value_movables_carrying_amount = $documents->where('os_type','value_movables')->sum('doc_carrying_amount');
+        $report -> report_buildings_carrying_amount = $documents->where('os_type','buildings')->sum('doc_carrying_amount');
+        $report -> report_parcels_carrying_amount = $documents->where('os_type','parcels')->sum('doc_carrying_amount');
+        $report -> report_cars_carrying_amount = $documents->where('os_type','cars')->sum('doc_carrying_amount');
+        //residual
+        $report -> report_residual_value = $documents->sum('doc_residual_value');
+        $report -> report_movables_residual_value = $documents->where('os_type','movables')->sum('doc_residual_value');
+        $report -> report_value_movables_residual_value = $documents->where('os_type','value_movables')->sum('doc_residual_value');
+        $report -> report_buildings_residual_value = $documents->where('os_type','buildings')->sum('doc_residual_value');
+        $report -> report_parcels_residual_value = $documents->where('os_type','parcels')->sum('doc_residual_value');
+        $report -> report_cars_residual_value = $documents->where('os_type','cars')->sum('doc_residual_value');
+        $report->save();
+        $depreciations = $report ->depreciations;
+        $report->report_wearout_value = $depreciations ->sum('sum');
+        $report->report_wearout_carrying_amount = $depreciations ->sum('carrying_amount');
+        $report->report_wearout_residual_value = $depreciations ->sum('residual_value');
+        $report->report_total_carrying_amount = $report->report_wearout_residual_value + $report -> report_carrying_amount;
+        $report->report_total_residual_value = $report -> report_residual_value + $report->report_wearout_residual_value;
+        $report->save();
+        return redirect()->back();
+    }
 }

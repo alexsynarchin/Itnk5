@@ -26,43 +26,17 @@
                 </div>
                 <table class="list table table-bordered table-hover">
                     <thead>
-                        <tr>
-                            <th></th>
-                            <th>Итого</th>
-                            <th>Движимое имущество</th>
-                            <th>Особо ценное движимое имущество</th>
-                            <th>Здания и сооружения</th>
-                            <th>Земельные участки</th>
-                            <th>Автомобили</th>
-                        </tr>
+                    <tr>
+                        <th>Балансовая стоимость</th>
+                        <th>Начисленный износ</th>
+                        <th>Остаточная стоимость</th>
+                    </tr>
                     </thead>
                     <tbody>
                     <tr>
-                        <td>Балансовая стоимость</td>
-                        <td>{{number_format($report->report_carrying_amount, 2,'.', ' ') }}</td>
-                        <td>{{number_format($report->report_movables_carrying_amount, 2,'.', ' ') }}</td>
-                        <td>{{number_format($report->report_value_movables_carrying_amount, 2,'.', ' ') }}</td>
-                        <td>{{number_format($report->report_buildings_carrying_amount, 2,'.', ' ') }}</td>
-                        <td>{{number_format($report->report_parcels_carrying_amount, 2,'.', ' ') }}</td>
-                        <td>{{number_format($report->report_cars_carrying_amount, 2,'.', ' ') }}</td>
-                    </tr>
-                    <tr>
-                        <td>Начисленный износ</td>
-                        <td>{{number_format($report->report_residual_value, 2,'.', ' ') }}</td>
-                        <td>{{number_format($report->report_movables_residual_value, 2,'.', ' ') }}</td>
-                        <td>{{number_format($report->report_value_movables_residual_value, 2,'.', ' ') }}</td>
-                        <td>{{number_format($report->report_buildings_residual_value, 2,'.', ' ') }}</td>
-                        <td>{{number_format($report->report_parcels_residual_value, 2,'.', ' ') }}</td>
-                        <td>{{number_format($report->report_cars_residual_value, 2,'.', ' ') }}</td>
-                    </tr>
-                    <tr>
-                        <td>Остаточная стоимость</td>
+                        <td>{{number_format($report->report_total_carrying_amount, 2,'.', ' ') }}</td>
                         <td>{{number_format($report->report_wearout_value, 2,'.', ' ') }}</td>
-                        <td>{{number_format($report->report_movables_wearout_value, 2,'.', ' ') }}</td>
-                        <td>{{number_format($report->report_value_movables_wearout_value, 2,'.', ' ') }}</td>
-                        <td>{{number_format($report->report_buildings_wearout_value, 2,'.', ' ') }}</td>
-                        <td>{{number_format($report->report_parcels_wearout_value, 2,'.', ' ') }}</td>
-                        <td>{{number_format($report->report_cars_wearout_value, 2,'.', ' ') }}</td>
+                        <td>{{number_format($report->report_total_residual_value, 2,'.', ' ') }}</td>
                     </tr>
                     </tbody>
                 </table>
