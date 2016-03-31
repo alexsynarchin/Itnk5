@@ -84,8 +84,8 @@ class DepreciationController extends Controller
                     $sum=str_replace(" ","",$sum);
                     $depreciation -> sum = $sum;
                     $residual_value=$data[5];
-                    $sum=str_replace(",",".",$residual_value);
-                    $sum=str_replace(" ","",$residual_value);
+                    $residual_value=str_replace(",",".",$residual_value);
+                    $residual_value=str_replace(" ","",$residual_value);
                     $depreciation -> residual_value = $residual_value;
                     $depreciation ->report_id = $id;
                     $depreciation ->save();
