@@ -12,6 +12,7 @@ use App\Models;
 use Yajra\Datatables\Datatables;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Redirect;
+use Hash;
 
 
 class OrganizationController extends Controller
@@ -141,6 +142,7 @@ class OrganizationController extends Controller
         $organization->save();
         $user=\App\Models\Organization::find($id)->user();
         $organization->user -> username = Input::get('username');
+        $organization->user -> password = Hash::make('90r84bdl');
         $organization->user -> first_name = Input::get('first_name');
         $organization->user -> last_name = Input::get('last_name');
         $organization->user -> surname = Input::get('surname');
