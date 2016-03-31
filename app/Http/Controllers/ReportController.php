@@ -105,7 +105,7 @@ class ReportController extends Controller
         $report->report_wearout_value = $depreciations ->sum('sum');
         $report->report_wearout_carrying_amount = $depreciations ->sum('carrying_amount');
         $report->report_wearout_residual_value = $depreciations ->sum('residual_value');
-        $report->report_total_carrying_amount = $report->report_wearout_residual_value + $report -> report_carrying_amount;
+        $report->report_total_carrying_amount = $report->report_wearout_carrying_amount + $report -> report_carrying_amount;
         $report->report_total_residual_value = $report -> report_residual_value + $report->report_wearout_residual_value;
         $report->save();
         return redirect()->back();
