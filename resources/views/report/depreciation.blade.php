@@ -41,6 +41,7 @@
                         </form>
                     </div>
                     <a href="{{route('depreciation.create', [$report->id])}}" class="add-btn btn btn-primary"><i class="fa fa-plus-square-o"></i> Начислить износ основному средству</a>
+                    <form method="post" class="inline" action="{{action('DepreciationController@postDeleteAll', [$report->id])}}"><input type="hidden" name="_token" value="{{ csrf_token() }}"><button type="submit" class="add-btn btn btn btn-danger">Удалить все данные по начислению износа для отчета</button></form>
                 </div>
                 @endif
                 <table class="table table-bordered" id="depreciations-table">

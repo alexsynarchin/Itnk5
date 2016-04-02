@@ -100,4 +100,10 @@ class DepreciationController extends Controller
         }
         return redirect()->back();
     }
+    public function postDeleteAll($id)
+    {
+
+        $depreciations = \App\Models\Depreciation::where('report_id', $id) -> delete();
+        return redirect() -> back();
+    }
 }
