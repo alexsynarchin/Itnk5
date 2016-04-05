@@ -52,7 +52,7 @@ Route::group(['prefix' => 'report/{id}', 'middleware' => 'auth'], function(){
             'uses' => 'DepreciationController@store'
         ]);
         Route::get('edit',[
-            'as' => 'depreciation.store',
+            'as' => 'depreciation.edit',
             'uses' => 'DepreciationController@edit'
         ]);
         Route::patch('/',[
@@ -68,6 +68,32 @@ Route::group(['prefix' => 'report/{id}', 'middleware' => 'auth'], function(){
         'as' => 'report.decommission',
         'uses' => 'ReportController@decommission'
     ]);
+    Route::group(['prefix' => 'decommission','middleware' => 'auth'], function(){
+        Route::get('/', [
+            'as' => 'report.decommission',
+            'uses' => 'ReportController@decommission'
+        ]);
+        Route::get('create',[
+            'as' => 'decommission.create',
+            'uses' => 'DecommissionController@create'
+        ]);
+        Route::post('/',[
+            'as' => 'decommission.store',
+            'uses' => 'DecommissionController@store'
+        ]);
+        Route::get('edit',[
+            'as' => 'decommission.edit',
+            'uses' => 'DecommissionController@edit'
+        ]);
+        Route::patch('/',[
+            'as' => 'decommission.update',
+            'uses' => 'DecommissionController@update'
+        ]);
+        Route::get('destroy',[
+            'as' => 'decommission.delete',
+            'uses' => 'DecommissionController@destroy'
+        ]);
+    });
 });
 //Inspector
 Route::group(['prefix' => 'inspector', 'middleware' => 'auth'], function(){
@@ -204,6 +230,9 @@ Route::group(['middleware' => 'auth'],
         Route::controller('report','ReportController');
         Route::controller('depreciation', 'DepreciationController',[
             'getReportDepreciation' => 'report.depreciation.items'
+        ]);
+        Route::controller('decommission', 'DecommissionController',[
+            'getReportDecommission' => 'report.decommission.items'
         ]);
     });
 // Logging in and out

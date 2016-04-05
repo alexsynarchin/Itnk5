@@ -13,6 +13,6 @@ class Depreciation extends Model
     }
     public function report()
     {
-        return $this->belongsTo('App\Models\Item', 'report_id');
+        return $this->belongsTo('App\Models\Report', 'report_id');
     }
 }
