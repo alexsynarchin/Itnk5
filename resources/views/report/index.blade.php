@@ -28,6 +28,7 @@
                     <tr>
                         <th>Балансовая стоимость</th>
                         <th>Начисленный износ</th>
+                        <th>Сумма списания</th>
                         <th>Остаточная стоимость</th>
                     </tr>
                     </thead>
@@ -35,6 +36,7 @@
                     <tr>
                         <td>{{number_format($report->report_total_carrying_amount, 2,'.', ' ') }}</td>
                         <td>{{number_format($report->report_wearout_value, 2,'.', ' ') }}</td>
+                        <td>{{number_format($report->decommission_carrying_amount, 2,'.', ' ') }}</td>
                         <td>{{number_format($report->report_total_residual_value, 2,'.', ' ') }}</td>
                     </tr>
                     </tbody>

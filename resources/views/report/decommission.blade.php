@@ -53,6 +53,7 @@
                     <tr>
                         <th>Инвертарный номер</th>
                         <th>Наименование</th>
+                        <th>Балансовая стоимость</th>
                         <th>Сумма списания</th>
                         <th>Дата списания</th>
                         <th>Вид списания</th>
@@ -90,6 +91,7 @@
                     columns: [
                         { data: 'number', name: 'number' },
                         { data: 'name', name: 'name' },
+                        {data:'carrying_amount', name:'carrying_amount'},
                         {data:'sum', name:'sum'},
                         {data:'date',name:'date'},
                         {data:'decommission_type', name:'decommission_type'}
@@ -119,6 +121,7 @@
                     columns: [
                         { data: 'number', name: 'number' },
                         { data: 'name', name: 'name' },
+                        {data:'carrying_amount', name:'carrying_amount'},
                         {data:'sum', name:'sum'},
                         {data:'date',name:'date'},
                         {data:'decommission_type', name:'decommission_type'},

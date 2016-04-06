@@ -28,6 +28,10 @@ class Report extends Model
     {
         return $this->hasMany('App\Models\Depreciation');
     }
+    public function decommissions()
+    {
+        return $this->hasMany('App\Models\Decommission');
+    }
     public function documents()
     {
         return $this->hasMany('App\Models\Document', 'report_id');
