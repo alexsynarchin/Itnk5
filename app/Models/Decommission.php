@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Decommission extends Model
 {
-    protected $fillable=['name','number','sum','date','document','type'];
+    protected $fillable=['name','number','sum','date','document','type','carrying_amount'];
     public  static $decommission_type=[
         'sale' => 'Продажа',
         'gratuitous transfer' => 'Безвозмездная передача',

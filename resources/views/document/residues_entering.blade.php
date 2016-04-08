@@ -46,6 +46,12 @@
                         <th>
                             Дата актуализации остатков
                         </th>
+                        <th>
+                            Балансовая стоимость
+                        </th>
+                        <th>
+                            Остаточная стоимость
+                        </th>
                         <th>Действия</th>
                         </thead>
                         @if($documents->count())
@@ -55,6 +61,8 @@
                                     <td>{{ App\Models\Document::$os_types[$document->os_type] }}</td>
                                     <td>{{$document->document_date}}</td>
                                     <td>{{$document->actual_date}}</td>
+                                    <td>{{number_format($document->doc_carrying_amount, 2,'.', ' ')}}</td>
+                                    <td>{{number_format($document->doc_residual_value, 2,'.', ' ')}}</td>
                                     <td class="actions icons">
                                         <a href="{{action('DocumentController@show', [$document->id])}}"><i class="fa fa-eye"></i></a>
                                         <a href="{{action('DocumentController@edit',array($document->id))}}"><i class="fa fa-pencil-square-o"></i> </a>
