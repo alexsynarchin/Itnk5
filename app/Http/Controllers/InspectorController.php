@@ -42,7 +42,7 @@ class InspectorController extends Controller
     {
         $report=\App\Models\Report::find($id);
         $organization = $report -> organization;
-        Excel::create($organization->short_name .'_' . $organization -> inn .'_' . $report -> quarter . "_квартал_" . $report -> year . "_года", function($excel)use($report) {
+        Excel::create('test', function($excel)use($report) {
             $excel->sheet('Итоговые данные по отчету', function($sheet)use($report) {
                 $sheet->fromArray(array(
                     array('Балансовая стоимость', 'Начисленный износ', 'Сумма списания', 'Остаточная стоимость'),
