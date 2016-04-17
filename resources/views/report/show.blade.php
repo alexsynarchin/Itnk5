@@ -27,7 +27,9 @@
                 @else
                     <form method="post" class="inline" action="{{action('ReportController@postReportStateInspection', [$report->id])}}"><input type="hidden" name="_token" value="{{ csrf_token() }}"><button type="submit" class="add-btn btn btn btn-success btn-lg">Отправить на проверку</button></form>
                 @endif
-                <a href="" class="btn btn-primary btn-lg">Печатные формы</a>
+                <form method="post" class="inline" action="{{action('InspectorController@postReportExcel', [$report->id])}}">
+                    <input type="hidden" name="_token" value="{{ csrf_token() }}"><button type="submit" class="btn btn-primary btn-lg">Печатные формы</button>
+                </form>
                 <form method="post" class="inline" action="{{action('ReportController@postCalcReport', [$report->id])}}"><input type="hidden" name="_token" value="{{ csrf_token() }}"><button type="submit" class="add-btn btn btn btn-primary btn-lg">Рассчитать итоговые суммы по отчету</button></form>
                 <div class="box-tools pull-right">
                     <span id="reportState-{{$report->state}}" class="label">{{App\Models\Report::$report_state[$report->state]}}</span>

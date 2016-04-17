@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use View;
+use Excel;
 use App\Models;
 use Yajra\Datatables\Datatables;
 use Illuminate\Support\Facades\Redirect;
@@ -36,5 +37,29 @@ class InspectorController extends Controller
     {
         $reports=\App\Models\Report::where('state','inspection')->get();
         return View::make('inspector.reports',compact('reports'));
+    }
+    public  function postReportExcel($id)
+    {
+        $report=\App\Models\Report::find($id);
+        $organization = $report -> organization;
+        Excel::create($organization->short_name .'_' . $organization -> inn .'_' . $report -> quarter . "_квартал_" . $report -> year . "_года", function($excel)use($report) {
+            $excel->sheet('Итоговые данные по отчету', function($sheet)use($report) {
+                $sheet->fromArray(array(
+                    array('Балансовая стоимость', 'Начисленный износ', 'Сумма списания', 'Остаточная стоимость'),
+                    array($report->report_total_carrying_amount, $report->report_wearout_value, $report->decommission_carrying_amount, $report->report_total_residual_value)
+                ), null, 'A1', false, false);
+            });
+
+            // Our second sheet
+            $excel->sheet('Раздел "Приобретение"', function($sheet) {
+
+            });
+
+
+
+        })->download('xlsx');
+
+
+        return redirect()->back();
     }
 }

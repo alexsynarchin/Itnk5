@@ -138,6 +138,7 @@ return [
         Illuminate\View\ViewServiceProvider::class,
         Illuminate\Html\HtmlServiceProvider::class,
 
+
         /*
          * Application Service Providers...
          */
@@ -147,6 +148,7 @@ return [
         App\Providers\RouteServiceProvider::class,
         Yajra\Datatables\DatatablesServiceProvider::class,
         App\Providers\ComposerServiceProvider::class,
+        'Maatwebsite\Excel\ExcelServiceProvider',
     ],
 
     /*
@@ -197,6 +199,7 @@ return [
         'View'      => Illuminate\Support\Facades\View::class,
         'Form'     => 'Illuminate\Html\FormFacade',
         'Html'     => 'Illuminate\Html\HtmlFacade',
+        'Excel' => 'Maatwebsite\Excel\Facades\Excel',
     ],
 
 ];
