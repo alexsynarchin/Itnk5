@@ -57,7 +57,7 @@ class InspectorController extends Controller
 
             });
 
-        })->store('xls', storage_path('excel/exports'), true);
+        })->store('xlsx', storage_path('excel/exports'), true);
 
 
         return Response::download($file['full']);
