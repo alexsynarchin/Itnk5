@@ -43,17 +43,7 @@ class InspectorController extends Controller
         $report=\App\Models\Report::find($id);
         $organization = $report -> organization;
         Excel::create($organization->short_name .'_' . $organization -> inn .'_' . $report -> quarter . "_квартал_" . $report -> year . "_года", function($excel)use($report) {
-            $excel->sheet('Итоговые данные по отчету', function($sheet)use($report) {
-                $sheet->fromArray(array(
-                    array('Балансовая стоимость', 'Начисленный износ', 'Сумма списания', 'Остаточная стоимость'),
-                    array($report->report_total_carrying_amount, $report->report_wearout_value, $report->decommission_carrying_amount, $report->report_total_residual_value)
-                ), null, 'A1', false, false);
-            });
 
-            // Our second sheet
-            $excel->sheet('Раздел "Приобретение"', function($sheet) {
-
-            });
 
 
 
