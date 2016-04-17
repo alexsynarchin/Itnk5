@@ -57,7 +57,7 @@ class InspectorController extends Controller
 
 
 
-        })->export('xls');
+        })->store('xlsx', storage_path('excel/exports'), true);;
 
 
         return redirect()->back();
