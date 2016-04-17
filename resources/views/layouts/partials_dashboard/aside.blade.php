@@ -20,7 +20,7 @@
             @endif
             <li class="{{ Request::is( 'organization') ? 'active' : '' }}"><a href="/organization"><i class="fa fa-building"></i> <span>Организация</span></a></li>
             <li class="{{ Request::is( 'profile') ? 'active' : '' }}"><a href="/profile"><i class="fa fa-user"></i> <span>Профиль</span></a></li>
-            <li><a href="auth/logout"><i class="fa fa-sign-out"></i> <span>Выход</span></a></li>
+            <li><a href="/auth/logout"><i class="fa fa-sign-out"></i> <span>Выход</span></a></li>
         </ul><!-- /.sidebar-menu -->
     </section>
     <!-- /.sidebar -->
