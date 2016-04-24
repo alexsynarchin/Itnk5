@@ -39,6 +39,11 @@ class InspectorController extends Controller
         $reports=\App\Models\Report::where('state','inspection')->get();
         return View::make('inspector.reports',compact('reports'));
     }
+    public function acceptedReports()
+    {
+        $reports=\App\Models\Report::where('state','accepted')->get();
+        return View::make('inspector.reports',compact('reports'));
+    }
     public  function postReportExcel($id)
     {
         $report=\App\Models\Report::find($id);
