@@ -50,7 +50,7 @@ class InspectorController extends Controller
         $organization = $report -> organization;
         $filename =$organization->short_name .'_' . $organization -> inn .'_' . $report -> quarter . "_квартал_" . $report -> year . "_года";
         $file = Excel::create($filename, function($excel)use($report) {
-            $excel->sheet('Сводные данные по отчету', function($sheet)use($report) {
+            $excel->sheet(' Сводные данные по отчету', function($sheet)use($report) {
                 $sheet->mergeCells('A1:E1');
                 $sheet->mergeCells('A5:E5');
                 $sheet->mergeCells('A10:E10');
@@ -74,16 +74,31 @@ class InspectorController extends Controller
                     array($report->decommission_carrying_amount,$report->decommission_sum)
                 ), null, 'A1', false, false);
             });
-
-
-            $excel->sheet('Раздел приобретение', function($sheet)use($report) {
-
+           $excel->sheet('Приобретение', function($sheet)use($report) {
+                $items = $report ->items;
+                foreach($items as $item) {
+                    $data[] = array($item->number, $item->name, $item->carrying_amount, $item->okof != 0 ? $item->okof: 'Земельный участок',isset($item->variable->residual_value) ? $item->variable->residual_value: 0);
+                }
                 $sheet->fromArray(array(
-                    array('Балансовая стоимость', 'Начисленный износ', 'Сумма списания', 'Остаточная стоимость'),
-                    array($report->report_total_carrying_amount, $report->report_wearout_value, $report->decommission_carrying_amount, $report->report_total_residual_value)
+                    array('Инвертарный номер','Наименование','Балансовая стоимость', 'Код ОКОФ', 'Остаточная стоимость'),
                 ), null, 'A1', false, false);
+                $sheet->fromModel($data,null,'A1', false, false);
             });
 
+            $excel->sheet('Начисление износа', function($sheet)use($report) {
+                $depreciations = $report ->depreciations()->get(['number','name','carrying_amount','sum','residual_value']);
+                $sheet->fromArray(array(
+                    array('Инвертарный номер','Наименование','Балансовая стоимость', 'Начисленный износ', 'Остаточная стоимость'),
+                ), null, 'A1', false, false);
+                $sheet->fromModel($depreciations,null,'A1', false, false);
+            });
+            $excel->sheet('Списание', function($sheet)use($report) {
+                $decommissions = $report ->decommissions()->get(['number','name','carrying_amount','sum','date','type']);
+                $sheet->fromArray(array(
+                    array('Инвертарный номер','Наименование','Балансовая стоимость', 'Сумма списания', 'Дата списания', 'Вид списания'),
+                ), null, 'A1', false, false);
+                $sheet->fromModel($decommissions,null,'A1', false, false);
+            });
         })->store('xlsx', storage_path('excel/exports'), true);
 
 

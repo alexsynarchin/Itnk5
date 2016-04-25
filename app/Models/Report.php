@@ -36,4 +36,7 @@ class Report extends Model
     {
         return $this->hasMany('App\Models\Document', 'report_id');
     }
+    public  function items(){
+        return $this -> hasManyThrough('App\Models\Item', 'App\Models\Document');
+    }
 }
