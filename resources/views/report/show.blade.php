@@ -10,7 +10,7 @@
             @endif
         </h1>
         @if(Auth::user() -> username == '1-0275071849')
-            <h3>Отчет - за  {{App\Models\Report::$report_quarter[$report->quarter]}} квартал {{$report->year}} г</h3>
+            <h4>Отчет - за  {{App\Models\Report::$report_quarter[$report->quarter]}} квартал {{$report->year}} г</h4>
         @endif
         <ol class="breadcrumb">
             <li><a href="/home"><i class="fa fa-dashboard"></i> Панель управления</a></li>
@@ -22,21 +22,21 @@
         <div class="report-box box box-default">
             <div class="box-header with-border">
                 @if(Auth::user() -> username == '1-0275071849')
-                    <form method="post" class="inline" action="{{action('ReportController@postReportStateAccepted', [$report->id])}}"><input type="hidden" name="_token" value="{{ csrf_token() }}"><button type="submit" class="add-btn btn btn btn-success btn-lg">ПРИНЯТЬ ОТЧЕТ</button></form>
-                    <form method="post" class="inline" action="{{action('ReportController@postReportStateNotAccepted', [$report->id])}}"><input type="hidden" name="_token" value="{{ csrf_token() }}"><button type="submit" class="add-btn btn btn btn-danger btn-lg">ОТКЛОНИТЬ ОТЧЕТ</button></form>
+                    <form method="post" class="inline" action="{{action('ReportController@postReportStateAccepted', [$report->id])}}"><input type="hidden" name="_token" value="{{ csrf_token() }}"><button type="submit" class="add-btn btn btn btn-success">ПРИНЯТЬ ОТЧЕТ</button></form>
+                    <form method="post" class="inline" action="{{action('ReportController@postReportStateNotAccepted', [$report->id])}}"><input type="hidden" name="_token" value="{{ csrf_token() }}"><button type="submit" class="add-btn btn btn btn-danger">ОТКЛОНИТЬ ОТЧЕТ</button></form>
                 @else
-                    <form method="post" class="inline" action="{{action('ReportController@postReportStateInspection', [$report->id])}}"><input type="hidden" name="_token" value="{{ csrf_token() }}"><button type="submit" class="add-btn btn btn btn-success btn-lg">Отправить на проверку</button></form>
+                    <form method="post" class="inline" action="{{action('ReportController@postReportStateInspection', [$report->id])}}"><input type="hidden" name="_token" value="{{ csrf_token() }}"><button type="submit" class="add-btn btn btn btn-success">Отправить на проверку</button></form>
                 @endif
                 <form method="post" class="inline" action="{{action('InspectorController@postReportExcel', [$report->id])}}">
-                    <input type="hidden" name="_token" value="{{ csrf_token() }}"><button type="submit" class="btn btn-primary btn-lg">Печатные формы</button>
+                    <input type="hidden" name="_token" value="{{ csrf_token() }}"><button type="submit" class="btn btn-primary">Печатные формы</button>
                 </form>
-                <form method="post" class="inline" action="{{action('ReportController@postCalcReport', [$report->id])}}"><input type="hidden" name="_token" value="{{ csrf_token() }}"><button type="submit" class="add-btn btn btn btn-primary btn-lg">Рассчитать итоговые суммы по отчету</button></form>
+                <form method="post" class="inline" action="{{action('ReportController@postCalcReport', [$report->id])}}"><input type="hidden" name="_token" value="{{ csrf_token() }}"><button type="submit" class="add-btn btn btn btn-primary">Рассчитать итоговые суммы по отчету</button></form>
                 <div class="box-tools pull-right">
                     <span id="reportState-{{$report->state}}" class="label">{{App\Models\Report::$report_state[$report->state]}}</span>
                 </div><!-- /.box-tools -->
             </div><!-- /.box-header -->
             <div class="box-body">
-                <h3>Итоговые суммы по отчету</h3>
+                <h4>Итоговые суммы по отчету</h4>
                 <table class="list table table-bordered table-hover">
                     <thead>
                     <tr>
@@ -55,7 +55,7 @@
                     </tr>
                     </tbody>
                 </table>
-                <h3>Сводные данные по приобретению</h3>
+                <h4>Сводные данные по приобретению</h4>
                 <table class="list table table-bordered table-hover">
                     <thead>
                     <tr>
@@ -89,7 +89,7 @@
                     </tr>
                     </tbody>
                 </table>
-                <h3>Сводные данные по начислению износа</h3>
+                <h4>Сводные данные по начислению износа</h4>
                 <table class="list table table-bordered table-hover">
                     <thead>
                     <tr>
@@ -106,7 +106,7 @@
                         </tr>
                     </tbody>
                 </table>
-                <h3>Сводные данные по списанию основных средств</h3>
+                <h4>Сводные данные по списанию основных средств</h4>
                 <table class="list table table-bordered table-hover">
                     <thead>
                     <tr>

@@ -13,16 +13,13 @@
     <section class="content">
         @foreach($reports as $report)
         <div class="report-box  box box-primary">
-            <div class="box-header with-border">
-                <h3 class="box-title">Учетный период - {{App\Models\Report::$report_quarter[$report->quarter]}} квартал {{$report->year}} г.</h3>
+            <div class="box-header with-border ">
+                <h3 class="box-title">Учетный период - {{App\Models\Report::$report_quarter[$report->quarter]}} квартал {{$report->year}} г.</h3> <a href="{{route('report.show', [$report->id])}}" class="add-btn btn btn-success"><i class="fa fa-sign-in"></i> Перейти к отчету</a>
                 <div class="box-tools pull-right">
                     <span  class="reportState-{{$report->state}} label">{{App\Models\Report::$report_state[$report->state]}}</span>
                 </div><!-- /.box-tools -->
             </div><!-- /.box-header -->
             <div class="box-body">
-                <div class="control-bnts row">
-                    <a href="{{route('report.show', [$report->id])}}" class="add-btn btn btn-success"><i class="fa fa-sign-in"></i> Перейти к отчету</a>
-                </div>
                 <table class="list table table-bordered table-hover">
                     <thead>
                     <tr>
