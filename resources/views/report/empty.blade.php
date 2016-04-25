@@ -119,4 +119,4 @@
     @section('user-scripts')
             <!-- page script -->
 
-@stops
+@stop
