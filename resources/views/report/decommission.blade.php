@@ -10,7 +10,7 @@
             @endif
         </h1>
         @if(Auth::user() -> username == '1-0275071849')
-            <h3>Отчет - за  {{App\Models\Report::$report_quarter[$report->quarter]}} квартал {{$report->year}} г</h3>
+            <h4>Отчет - за  {{App\Models\Report::$report_quarter[$report->quarter]}} квартал {{$report->year}} г</h4>
         @endif
         <ol class="breadcrumb">
             <li><a href="/home"><i class="fa fa-dashboard"></i> Панель управления</a></li>
