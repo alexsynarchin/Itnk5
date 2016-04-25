@@ -21,14 +21,13 @@
         @include('report.partials.report_navigation')
         <div class="document box">
             <div class="box-header with-border">
-                <h3 class="box-title">  </h3>
+                <h3 class="box-title"> Списание </h3>
             </div><!-- /.box-header -->
             <div class="box-body">
+                @if(Auth::user() -> username != '1-0275071849')
                 <div class="control-bnts row">
-                    @if(Auth::user() -> username != '1-0275071849')
                         <div class="control-bnts">
                             <div class="row">
-
                                 <form action="{{action('DecommissionController@postImport',[$report->id])}}" method="post" class="form-horizontal col-xs-12" enctype="multipart/form-data">
                                     <input type="hidden" name="_token" value="{{ csrf_token() }}">
                                     <div class="form-group">
@@ -44,26 +43,24 @@
                             <a href="{{route('decommission.create', [$report->id])}}" class="add-btn btn btn-primary"><i class="fa fa-plus-square-o"></i> Ввести данные о списании Основного средства</a>
                             <form method="post" class="inline" action="{{action('DecommissionController@postDeleteAll', [$report->id])}}"><input type="hidden" name="_token" value="{{ csrf_token() }}"><button type="submit" class="add-btn btn btn btn-danger">Удалить все данные по списанию для отчета</button></form>
                         </div>
-                    @endif
                 </div>
+                @endif
+                    <table class="table table-bordered" id="decommission-table">
+                        <thead>
+                        <tr>
+                            <th>Инвертарный номер</th>
+                            <th>Наименование</th>
+                            <th>Балансовая стоимость</th>
+                            <th>Сумма списания</th>
+                            <th>Дата списания</th>
+                            <th>Вид списания</th>
+                            @if(Auth::user() -> username != '1-0275071849')
+                                <th>Действия</th>
+                            @endif
+                        </tr>
+                        </thead>
+                    </table>
             </div><!-- /.box-body -->
-            <div class="box-footer clearfix">
-                <table class="table table-bordered" id="decommission-table">
-                    <thead>
-                    <tr>
-                        <th>Инвертарный номер</th>
-                        <th>Наименование</th>
-                        <th>Балансовая стоимость</th>
-                        <th>Сумма списания</th>
-                        <th>Дата списания</th>
-                        <th>Вид списания</th>
-                        @if(Auth::user() -> username != '1-0275071849')
-                            <th>Действия</th>
-                        @endif
-                    </tr>
-                    </thead>
-                </table>
-            </div>
         </div>
     </section>
     @stop

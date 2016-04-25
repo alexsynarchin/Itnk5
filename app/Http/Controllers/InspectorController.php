@@ -50,16 +50,24 @@ class InspectorController extends Controller
         $organization = $report -> organization;
         $filename =$organization->short_name .'_' . $organization -> inn .'_' . $report -> quarter . "_квартал_" . $report -> year . "_года";
         $file = Excel::create($filename, function($excel)use($report) {
+            $excel->sheet('Сводные данные по отчету', function($sheet)use($report) {
+                $sheet->mergeCells('A1:E1');
+                $sheet->fromArray(array(
+                    array('Итоговые суммы по отчету'),
+                    array('Балансовая стоимость', 'Начисленный износ', 'Сумма списания', 'Остаточная стоимость'),
+                    array($report->report_total_carrying_amount, $report->report_wearout_value, $report->decommission_carrying_amount, $report->report_total_residual_value)
+                ), null, 'A2', false, false);
+                array('');
+                array('Сводные данные по прибретению');
+            });
+
+
             $excel->sheet('Итоговые данные по отчету', function($sheet)use($report) {
+
                 $sheet->fromArray(array(
                     array('Балансовая стоимость', 'Начисленный износ', 'Сумма списания', 'Остаточная стоимость'),
                     array($report->report_total_carrying_amount, $report->report_wearout_value, $report->decommission_carrying_amount, $report->report_total_residual_value)
                 ), null, 'A1', false, false);
-            });
-
-            // Our second sheet
-            $excel->sheet('Раздел "Приобретение"', function($sheet) {
-
             });
 
         })->store('xlsx', storage_path('excel/exports'), true);
