@@ -118,5 +118,4 @@
     @stop
     @section('user-scripts')
             <!-- page script -->
-
-@stop
+    @stop

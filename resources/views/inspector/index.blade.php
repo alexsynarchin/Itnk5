@@ -16,6 +16,12 @@
             <div class="box-header with-border">
             </div><!-- /.box-header -->
             <div class="box-body">
+                <div class="control-bnts row">
+                    <form method="post" class="inline" action="{{action('InspectorController@postOrganizationExcel')}}">
+                        <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                        <button type="submit" class="btn btn-primary">Сводный отчет</button>
+                    </form>
+                </div>
                 <table class="table table-bordered" id="organizations-table">
                     <thead>
                     <tr>

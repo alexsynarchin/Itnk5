@@ -104,4 +104,37 @@ class InspectorController extends Controller
 
         return Response::download($file['full']);
     }
+    public function postOrganizationExcel()
+    {
+        $organizations= \App\Models\Organization::where('type','client')->where('id','!=', 1)->get();
+        $filename = 'Сводный отчет';
+        $file = Excel::create($filename, function($excel)use($organizations){
+            $excel -> sheet('Сводный отчет',function($sheet)use($organizations){
+                foreach($organizations as $organization){
+                    $reports = \App\Models\Report::where('organization_id', '=', $organization->id)->where('state','=','accepted')->get();
+                    if ($reports->count()){
+                        $maxYear= \App\Models\Report::where('organization_id', '=', $organization->id)->where('state','=','accepted') -> max('year');
+                        $maxQuarter = \App\Models\Report::where('organization_id', '=', $organization->id)->where(function($query)use($maxYear){
+                            $query->where('year','=', $maxYear)
+                            ->where('state','=','accepted');
+                        })->max('quarter');
+                        $report = \App\Models\Report::where('organization_id', '=', $organization->id)->where(function($query)use($maxYear,$maxQuarter) {
+                            $query->where('year','=', $maxYear)
+                                ->where('quarter','=', $maxQuarter);
+                        })->first();
+                        $data[] = array($organization->short_name,$report->report_total_carrying_amount, $report->report_wearout_value,$report->decommission_carrying_amount,$report->report_total_residual_value);
+                    }
+                    else{
+                        $data[]=array($organization->short_name,$organization->org_carrying_amount,0,0,$organization->org_residual_value);
+                    }
+                }
+                $sheet->fromArray(array(
+                    array('Организация','Балансовая стоимость','Начисленный износ', 'Сумма списания', 'Остаточная стоимость'),
+                ), null, 'A1', false, false);
+
+                $sheet->fromModel($data,null,'A1', false, false);
+            });
+        })->store('xlsx', storage_path('excel/exports'), true);
+        return Response::download($file['full']);
+    }
 }
