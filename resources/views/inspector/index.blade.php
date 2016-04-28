@@ -25,10 +25,10 @@
                     <div class="form-group">
                         <div class="col-xs-12">
                             <h5>Выберите учетные периоды:</h5>
-                            {!! Form::label('1 квартал') !!} {!! Form::checkbox('quarters[]', 1, true) !!}
-                            {!! Form::label('2 квартал') !!} {!! Form::checkbox('quarters[]', 2, true) !!}
-                            {!! Form::label('3 квартал') !!} {!! Form::checkbox('quarters[]', 3, true) !!}
-                            {!! Form::label('4 квартал') !!} {!! Form::checkbox('quarters[]', 4, true) !!}
+                            {!! Form::label('1 квартал') !!} {!! Form::checkbox('quarters[1]', 1, true) !!}
+                            {!! Form::label('2 квартал') !!} {!! Form::checkbox('quarters[2]', 2, true) !!}
+                            {!! Form::label('3 квартал') !!} {!! Form::checkbox('quarters[3]', 3, true) !!}
+                            {!! Form::label('4 квартал') !!} {!! Form::checkbox('quarters[4]', 4, true) !!}
                         </div>
 
                     </div>

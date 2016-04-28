@@ -109,25 +109,25 @@ class InspectorController extends Controller
         $organizations= \App\Models\Organization::where('type','client')->where('id','!=', 1)->get();
         $year= $request->input('year');
         $quarters= $request->input('quarters');
-        if($quarters[0] == true){
+        if(isset($quarters[1])){
             $first = ' 1,';
         }
         else{
             $first='';
         }
-        if($quarters[1] == true){
+        if(isset($quarters[2])){
             $second = ' 2,';
         }
         else{
             $second='';
         }
-        if($quarters[2] == true){
+        if(isset($quarters[3])){
             $third = ' 3,';
         }
         else{
             $third='';
         }
-        if($quarters[3] == true){
+        if(isset($quarters[4])){
             $fourth = ' 4';
         }
         else{
