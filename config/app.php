@@ -149,6 +149,7 @@ return [
         Yajra\Datatables\DatatablesServiceProvider::class,
         App\Providers\ComposerServiceProvider::class,
         'Maatwebsite\Excel\ExcelServiceProvider',
+        Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class,
     ],
 
     /*

@@ -14,14 +14,29 @@
         @include('inspector.partials.inspector_navigation')
         <div class="box">
             <div class="box-header with-border">
+                <form method="post" class="form-horizontal" action="{{action('InspectorController@postOrganizationExcel')}}">
+                    <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                    <div class="form-group">
+                        <div class="col-xs-12">
+                            <label>Выберите год:</label>
+                            {!!  Form::select('year', [2015=>'2015', 2016=>'2016'], 2015)!!}
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-xs-12">
+                            <h5>Выберите учетные периоды:</h5>
+                            {!! Form::label('1 квартал') !!} {!! Form::checkbox('quarters[]', 1, false) !!}
+                            {!! Form::label('2 квартал') !!} {!! Form::checkbox('quarters[]', 2, false) !!}
+                            {!! Form::label('3 квартал') !!} {!! Form::checkbox('quarters[]', 3, false) !!}
+                            {!! Form::label('4 квартал') !!} {!! Form::checkbox('quarters[]', 4, false) !!}
+                        </div>
+
+                    </div>
+
+                    <button type="submit" class="btn btn-primary">Сводный отчет</button>
+                </form>
             </div><!-- /.box-header -->
             <div class="box-body">
-                <div class="control-bnts row">
-                    <form method="post" class="inline" action="{{action('InspectorController@postOrganizationExcel')}}">
-                        <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                        <button type="submit" class="btn btn-primary">Сводный отчет</button>
-                    </form>
-                </div>
                 <table class="table table-bordered" id="organizations-table">
                     <thead>
                     <tr>

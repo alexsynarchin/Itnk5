@@ -104,10 +104,36 @@ class InspectorController extends Controller
 
         return Response::download($file['full']);
     }
-    public function postOrganizationExcel()
+    public function postOrganizationExcel(Request $request)
     {
         $organizations= \App\Models\Organization::where('type','client')->where('id','!=', 1)->get();
-        $filename = 'Сводный отчет';
+        $year= $request->input('year');
+        $quarters= $request->input('quarters');
+        if($quarters[0] == true){
+            $first = ' 1,';
+        }
+        else{
+            $first='';
+        }
+        if($quarters[1] == true){
+            $second = ' 2,';
+        }
+        else{
+            $second='';
+        }
+        if($quarters[2] == true){
+            $third = ' 3,';
+        }
+        else{
+            $third='';
+        }
+        if($quarters[3] == true){
+            $fourth = ' 4';
+        }
+        else{
+            $fourth='';
+        }
+        $filename = 'Сводный отчет за '.$year.' год'.$first.$second.$third.$fourth.' квартал';
         $file = Excel::create($filename, function($excel)use($organizations){
             $excel -> sheet('Сводный отчет',function($sheet)use($organizations){
                 foreach($organizations as $organization){
@@ -117,7 +143,7 @@ class InspectorController extends Controller
                         $maxQuarter = \App\Models\Report::where('organization_id', '=', $organization->id)->where(function($query)use($maxYear){
                             $query->where('year','=', $maxYear)
                             ->where('state','=','accepted');
-                        })->max('quarter');
+                          })->max('quarter');
                         $report = \App\Models\Report::where('organization_id', '=', $organization->id)->where(function($query)use($maxYear,$maxQuarter) {
                             $query->where('year','=', $maxYear)
                                 ->where('quarter','=', $maxQuarter);
