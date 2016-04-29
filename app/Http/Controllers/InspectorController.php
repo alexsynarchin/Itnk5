@@ -12,6 +12,7 @@ use Response;
 use App\Models;
 use Yajra\Datatables\Datatables;
 use Illuminate\Support\Facades\Redirect;
+use DB;
 
 class InspectorController extends Controller
 {
@@ -74,7 +75,7 @@ class InspectorController extends Controller
                     array($report->decommission_carrying_amount,$report->decommission_sum)
                 ), null, 'A1', false, false);
             });
-           $excel->sheet('Приобретение', function($sheet)use($report) {
+            $excel->sheet('Приобретение', function($sheet)use($report) {
                 $items = $report ->items;
                 foreach($items as $item) {
                     $data[] = array($item->number, $item->name, $item->carrying_amount, $item->okof != 0 ? $item->okof: 'Земельный участок',isset($item->variable->residual_value) ? $item->variable->residual_value: 0);
@@ -134,33 +135,256 @@ class InspectorController extends Controller
             $fourth='';
         }
         $filename = 'Сводный отчет за '.$year.' год'.$first.$second.$third.$fourth.' квартал';
-        $file = Excel::create($filename, function($excel)use($organizations){
-            $excel -> sheet('Сводный отчет',function($sheet)use($organizations){
-                foreach($organizations as $organization){
-                    $reports = \App\Models\Report::where('organization_id', '=', $organization->id)->where('state','=','accepted')->get();
-                    if ($reports->count()){
-                        $maxYear= \App\Models\Report::where('organization_id', '=', $organization->id)->where('state','=','accepted') -> max('year');
-                        $maxQuarter = \App\Models\Report::where('organization_id', '=', $organization->id)->where(function($query)use($maxYear){
-                            $query->where('year','=', $maxYear)
-                            ->where('state','=','accepted');
-                          })->max('quarter');
-                        $report = \App\Models\Report::where('organization_id', '=', $organization->id)->where(function($query)use($maxYear,$maxQuarter) {
-                            $query->where('year','=', $maxYear)
-                                ->where('quarter','=', $maxQuarter);
-                        })->first();
-                        $data[] = array($organization->short_name,$report->report_total_carrying_amount, $report->report_wearout_value,$report->decommission_carrying_amount,$report->report_total_residual_value);
-                    }
-                    else{
-                        $data[]=array($organization->short_name,$organization->org_carrying_amount,0,0,$organization->org_residual_value);
+
+        $file = Excel::create($filename, function($excel)use($organizations,$year,$quarters){
+            $excel->getDefaultStyle()
+                ->getAlignment()
+                ->setHorizontal(\PHPExcel_Style_Alignment::HORIZONTAL_LEFT);
+            $excel -> sheet('Сводный отчет',function($sheet)use($organizations,$year,$quarters){
+                $min =min($quarters);
+                $iterations = count($quarters);
+                $sheet->setMergeColumn(array(
+                    'columns' => array('A','B','C','D'),
+                    'rows' => array(
+                        array(1,2)
+                    )
+                ));
+                $sheet->row(1,["№", "Организация","ИНН", "Балансовая стоимость"]);
+                $sheet ->setWidth('B',45);
+                $sheet->setWidth('C', 13);
+                $sheet->getStyle('A')->getAlignment()->applyFromArray(
+                    array('horizontal' => 'center')
+                );
+                $sheet->setWidth('D', 22);
+                if($iterations == 1){
+                    $number=1;
+                    $row=3;
+                    $sheet->getColumnDimension('E')->setAutoSize(true);
+                    $sheet->mergeCells('E1:H1');
+                    $sheet->setCellValue('E1', $min.' квартал');
+                    $sheet->mergeCells('I1:I2');
+                    $sheet->setWidth('G', 23);
+                    $sheet->setWidth('H', 23);
+                    $sheet->setWidth('I', 23);
+                    $sheet->fromArray(array(
+                        array('Статус','Износ','Приобретение','Списание'),
+                    ), null, 'E2', false, false);
+                    $sheet->setCellValue('I1','Остаточная стоимость');
+                    $sheet->cells('A1:I2', function($cells){
+                        $cells->setAlignment('center');
+                        $cells->setValignment('middle');
+                    });
+                    foreach ($organizations as $organization){
+                        $report=DB::table('reports')->whereOrganization_idAndYearAndQuarter($organization->id,$year,$min)->first();
+                        $start=[$number, $organization->short_name,$organization->inn,isset($report->report_total_carrying_amount) ?  $report->report_total_carrying_amount:0];
+                        $middle=$this->middle($report);
+                        $end=[isset($report->report_wearout_residual_value) ? $report->report_wearout_residual_value : 0];
+                        $sheet->row($row,array_merge($start,$middle,$end));
+                        $row++;
+                        $sheet->row($row,array('','Особоценное движимое имущество',''));
+                        $row++;
+                        $sheet->row($row,array('','Автомобили',''));
+                        $row++;
+                        $sheet->row($row,array('','Движимое имущество',''));
+                        $row++;
+                        $sheet->row($row,array('','Здания и сооружения',''));
+                        $row++;
+                        $sheet->row($row,array('','Земельные участки',''));
+                        $row++;
+                        $number++;
                     }
                 }
-                $sheet->fromArray(array(
-                    array('Организация','Балансовая стоимость','Начисленный износ', 'Сумма списания', 'Остаточная стоимость'),
-                ), null, 'A1', false, false);
-
-                $sheet->fromModel($data,null,'A1', false, false);
+                if($iterations == 2 ){
+                    $number=1;
+                    $row=3;
+                    $sheet->getColumnDimension('E')->setAutoSize(true);
+                    $sheet->getColumnDimension('I')->setAutoSize(true);
+                    $sheet->mergeCells('E1:H1');
+                    $sheet->mergeCells('I1:L1');
+                    $sheet->setCellValue('E1', $min.' квартал');
+                    $sheet->setCellValue('I1', ($min+1).' квартал');
+                    $sheet->setWidth('G', 15);
+                    $sheet->setWidth('H', 15);
+                    $sheet->setWidth('I', 15);
+                    $sheet->setWidth('J', 15);
+                    $sheet->setWidth('K', 15);
+                    $sheet->setWidth('L', 15);
+                    $sheet->fromArray(array(
+                        array('Статус','Износ','Приобретение','Списание'),
+                    ), null, 'E2', false, false);
+                    $sheet->fromArray(array(
+                        array('Статус','Износ','Приобретение','Списание'),
+                    ), null, 'I2', false, false);
+                    $sheet->mergeCells('M1:M2');
+                    $sheet->setWidth('M', 23);
+                    $sheet->setCellValue('M1','Остаточная стоимость');
+                    $sheet->cells('A1:M2', function($cells){
+                        $cells->setAlignment('center');
+                        $cells->setValignment('middle');
+                    });
+                    foreach ($organizations as $organization){
+                        $report=DB::table('reports')->whereOrganization_idAndYearAndQuarter($organization->id,$year,$min)->first();
+                        $report1=DB::table('reports')->whereOrganization_idAndYearAndQuarter($organization->id,$year,($min+1))->first();
+                        $start=[$number, $organization->short_name,$organization->inn,isset($report->report_total_carrying_amount) ?  $report->report_total_carrying_amount:0];
+                        $middle=$this->middle($report);
+                        $middle1=$this->middle($report1);
+                        $end=[isset($report1->report_wearout_residual_value) ? $report1->report_wearout_residual_value : 0];
+                        $sheet->row($row,array_merge($start,$middle,$middle1,$end));
+                        $row++;
+                        $sheet->row($row,array('','Особоценное движимое имущество',''));
+                        $row++;
+                        $sheet->row($row,array('','Автомобили',''));
+                        $row++;
+                        $sheet->row($row,array('','Движимое имущество',''));
+                        $row++;
+                        $sheet->row($row,array('','Здания и сооружения',''));
+                        $row++;
+                        $sheet->row($row,array('','Земельные участки',''));
+                        $row++;
+                        $number++;
+                    }
+                }
+                if($iterations == 3 ){
+                    $number=1;
+                    $row=3;
+                    $sheet->getColumnDimension('E')->setAutoSize(true);
+                    $sheet->getColumnDimension('I')->setAutoSize(true);
+                    $sheet->getColumnDimension('M')->setAutoSize(true);
+                    $sheet->mergeCells('E1:H1');
+                    $sheet->mergeCells('I1:L1');
+                    $sheet->mergeCells('M1:P1');
+                    $sheet->setCellValue('E1', $min.' квартал');
+                    $sheet->setCellValue('I1', ($min+1).' квартал');
+                    $sheet->setCellValue('M1', ($min+2).' квартал');
+                    $sheet->setWidth('G', 15);
+                    $sheet->setWidth('H', 15);
+                    $sheet->setWidth('I', 15);
+                    $sheet->setWidth('J', 15);
+                    $sheet->setWidth('K', 15);
+                    $sheet->setWidth('L', 15);
+                    $sheet->setWidth('N', 15);
+                    $sheet->setWidth('O', 15);
+                    $sheet->setWidth('P', 15);
+                    $sheet->fromArray(array(
+                        array('Статус','Износ','Приобретение','Списание'),
+                    ), null, 'E2', false, false);
+                    $sheet->fromArray(array(
+                        array('Статус','Износ','Приобретение','Списание'),
+                    ), null, 'I2', false, false);
+                    $sheet->setCellValue('M2','Статус');
+                    $sheet->setCellValue('N2','Износ');
+                    $sheet->setCellValue('O2','Приобретение');
+                    $sheet->setCellValue('P2','Списание');
+                    $sheet->mergeCells('Q1:Q2');
+                    $sheet->setWidth('Q', 23);
+                    $sheet->setCellValue('Q1','Остаточная стоимость');
+                    $sheet->cells('A1:Q2', function($cells){
+                        $cells->setAlignment('center');
+                        $cells->setValignment('middle');
+                    });
+                    foreach ($organizations as $organization){
+                        $report=DB::table('reports')->whereOrganization_idAndYearAndQuarter($organization->id,$year,$min)->first();
+                        $report1=DB::table('reports')->whereOrganization_idAndYearAndQuarter($organization->id,$year,($min+1))->first();
+                        $report2=DB::table('reports')->whereOrganization_idAndYearAndQuarter($organization->id,$year,($min+2))->first();
+                        $start=[$number, $organization->short_name,$organization->inn,isset($report->report_total_carrying_amount) ?  $report->report_total_carrying_amount:0];
+                        $middle=$this->middle($report);
+                        $middle1=$this->middle($report1);
+                        $middle2=$this->middle($report2);
+                        $end=[isset($report2->report_wearout_residual_value) ? $report2->report_wearout_residual_value : 0];
+                        $sheet->row($row,array_merge($start,$middle,$middle1,$middle2,$end));
+                        $row++;
+                        $sheet->row($row,array('','Особоценное движимое имущество',''));
+                        $row++;
+                        $sheet->row($row,array('','Автомобили',''));
+                        $row++;
+                        $sheet->row($row,array('','Движимое имущество',''));
+                        $row++;
+                        $sheet->row($row,array('','Здания и сооружения',''));
+                        $row++;
+                        $sheet->row($row,array('','Земельные участки',''));
+                        $row++;
+                        $number++;
+                    }
+                }
+                if($iterations == 4 ){
+                    $number=1;
+                    $row=3;
+                    $sheet->getColumnDimension('E')->setAutoSize(true);
+                    $sheet->getColumnDimension('I')->setAutoSize(true);
+                    $sheet->getColumnDimension('M')->setAutoSize(true);
+                    $sheet->getColumnDimension('Q')->setAutoSize(true);
+                    $sheet->mergeCells('E1:H1');
+                    $sheet->mergeCells('I1:L1');
+                    $sheet->mergeCells('M1:P1');
+                    $sheet->mergeCells('Q1:T1');
+                    $sheet->setCellValue('E1', $min.' квартал');
+                    $sheet->setCellValue('I1', ($min+1).' квартал');
+                    $sheet->setCellValue('M1', ($min+2).' квартал');
+                    $sheet->setCellValue('Q1', ($min+3).' квартал');
+                    $sheet->setWidth('G', 15);
+                    $sheet->setWidth('H', 15);
+                    $sheet->setWidth('I', 15);
+                    $sheet->setWidth('J', 15);
+                    $sheet->setWidth('K', 15);
+                    $sheet->setWidth('L', 15);
+                    $sheet->setWidth('N', 15);
+                    $sheet->setWidth('O', 15);
+                    $sheet->setWidth('P', 15);
+                    $sheet->setWidth('R', 15);
+                    $sheet->setWidth('S', 15);
+                    $sheet->setWidth('T', 15);
+                    $sheet->fromArray(array(
+                        array('Статус','Износ','Приобретение','Списание'),
+                    ), null, 'E2', false, false);
+                    $sheet->fromArray(array(
+                        array('Статус','Износ','Приобретение','Списание'),
+                    ), null, 'I2', false, false);
+                    $sheet->setCellValue('M2','Статус');
+                    $sheet->setCellValue('N2','Износ');
+                    $sheet->setCellValue('O2','Приобретение');
+                    $sheet->setCellValue('P2','Списание');
+                    $sheet->setCellValue('Q2','Статус');
+                    $sheet->setCellValue('R2','Износ');
+                    $sheet->setCellValue('S2','Приобретение');
+                    $sheet->setCellValue('T2','Списание');
+                    $sheet->mergeCells('U1:U2');
+                    $sheet->setWidth('U', 23);
+                    $sheet->setCellValue('U1','Остаточная стоимость');
+                    $sheet->cells('A1:U2', function($cells){
+                        $cells->setAlignment('center');
+                        $cells->setValignment('middle');
+                    });
+                    foreach ($organizations as $organization){
+                        $report=DB::table('reports')->whereOrganization_idAndYearAndQuarter($organization->id,$year,$min)->first();
+                        $report1=DB::table('reports')->whereOrganization_idAndYearAndQuarter($organization->id,$year,($min+1))->first();
+                        $report2=DB::table('reports')->whereOrganization_idAndYearAndQuarter($organization->id,$year,($min+2))->first();
+                        $report3=DB::table('reports')->whereOrganization_idAndYearAndQuarter($organization->id,$year,($min+3))->first();
+                        $start=[$number, $organization->short_name,$organization->inn,isset($report->report_total_carrying_amount) ?  $report->report_total_carrying_amount:0];
+                        $middle=$this->middle($report);
+                        $middle1=$this->middle($report1);
+                        $middle2=$this->middle($report2);
+                        $middle3=$this->middle($report3);
+                        $end=[isset($report3->report_wearout_residual_value) ? $report3->report_wearout_residual_value : 0];
+                        $sheet->row($row,array_merge($start,$middle,$middle1,$middle2,$middle3,$end));
+                        $row++;
+                        $sheet->row($row,array('','Особоценное движимое имущество',''));
+                        $row++;
+                        $sheet->row($row,array('','Автомобили',''));
+                        $row++;
+                        $sheet->row($row,array('','Движимое имущество',''));
+                        $row++;
+                        $sheet->row($row,array('','Здания и сооружения',''));
+                        $row++;
+                        $sheet->row($row,array('','Земельные участки',''));
+                        $row++;
+                        $number++;
+                    }
+                }
             });
         })->store('xlsx', storage_path('excel/exports'), true);
         return Response::download($file['full']);
+    }
+    public function middle($report){
+        return [isset($report->state) ? \App\Models\Report::$report_state[$report->state] : '',isset($report->report_wearout_value) ? $report->report_wearout_value : 0,isset($report->report_carrying_amount) ? $report->report_carrying_amount : 0,isset($report->decommission_carrying_amount)? $report->decommission_carrying_amount : 0];
     }
 }
