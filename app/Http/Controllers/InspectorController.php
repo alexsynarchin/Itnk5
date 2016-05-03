@@ -107,7 +107,8 @@ class InspectorController extends Controller
     }
     public function postOrganizationExcel(Request $request)
     {
-        $organizations= \App\Models\Organization::where('type','client')->where('id','!=', 1)->get();
+        $ids = [1,27];
+        $organizations= \App\Models\Organization::where('type','client')->whereNotIn('id', $ids)->get();
         $year= $request->input('year');
         $quarters= $request->input('quarters');
         if(isset($quarters[1])){
