@@ -60,8 +60,10 @@
         $(function() {
             $('#organizations-table').DataTable({
                 "language": {
+                    "decimal": ",",
+                    "thousands": ".",
                     "url": "https://cdn.datatables.net/plug-ins/1.10.10/i18n/Russian.json",
-                    "thousands": ","
+
                 },
                 processing: true,
                 serverSide: true,

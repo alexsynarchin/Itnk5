@@ -197,12 +197,12 @@ class OrganizationController extends Controller
         $organization_id = $user->organization_id;
         $organization=\App\Models\Organization::find($organization_id);
         $organization->org_movables_carrying_amount=$sum_org_movables_carrying_amount;
-        $organization->org_value_movables_carrying_amount=$sum_org_value_movables_carrying_amount;
+        $organization->org_value_movables_carrying_amount=$sum_org_value_movables_carrying_amount+$sum_org_cars_carrying_amount;
         $organization->org_cars_carrying_amount = $sum_org_cars_carrying_amount;
         $organization->org_buildings_carrying_amount=$sum_org_buildings_carrying_amount;
         $organization->org_parcels_carrying_amount=$sum_org_parcels_carrying_amount;
         $organization->org_movables_residual_value=$sum_org_movables_residual_value;
-        $organization->org_value_movables_residual_value=$sum_org_value_movables_residual_value;
+        $organization->org_value_movables_residual_value=$sum_org_value_movables_residual_value+$sum_org_cars_residual_value;
         $organization->org_buildings_residual_value=$sum_org_buildings_residual_value;
         $organization ->org_cars_residual_value = $sum_org_cars_residual_value;
         $organization->org_carrying_amount=$organization->org_movables_carrying_amount+$organization->org_value_movables_carrying_amount+$organization->org_buildings_carrying_amount+$organization->org_parcels_carrying_amount + $organization -> org_cars_carrying_amount ;

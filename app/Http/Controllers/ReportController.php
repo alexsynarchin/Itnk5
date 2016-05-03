@@ -89,14 +89,14 @@ class ReportController extends Controller
         //carrying amount
         $report -> report_carrying_amount = $documents->sum('doc_carrying_amount');
         $report -> report_movables_carrying_amount = $documents->where('os_type','movables')->sum('doc_carrying_amount');
-        $report -> report_value_movables_carrying_amount = $documents->where('os_type','value_movables')->sum('doc_carrying_amount');
+        $report -> report_value_movables_carrying_amount = $documents->where('os_type','value_movables')->sum('doc_carrying_amount')+$documents->where('os_type','car')->sum('doc_carrying_amount');
         $report -> report_buildings_carrying_amount = $documents->where('os_type','buildings')->sum('doc_carrying_amount');
         $report -> report_parcels_carrying_amount = $documents->where('os_type','parcels')->sum('doc_carrying_amount');
         $report -> report_cars_carrying_amount = $documents->where('os_type','car')->sum('doc_carrying_amount');
         //residual
         $report -> report_residual_value = $documents->sum('doc_residual_value');
         $report -> report_movables_residual_value = $documents->where('os_type','movables')->sum('doc_residual_value');
-        $report -> report_value_movables_residual_value = $documents->where('os_type','value_movables')->sum('doc_residual_value');
+        $report -> report_value_movables_residual_value = $documents->where('os_type','value_movables')->sum('doc_residual_value')+$documents->where('os_type','car')->sum('doc_residual_value');
         $report -> report_buildings_residual_value = $documents->where('os_type','buildings')->sum('doc_residual_value');
         $report -> report_parcels_residual_value = $documents->where('os_type','parcels')->sum('doc_residual_value');
         $report -> report_cars_residual_value = $documents->where('os_type','car')->sum('doc_residual_value');
