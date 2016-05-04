@@ -47,7 +47,11 @@ class InspectorController extends Controller
     }
     public  function postReportExcel(Request $request)
     {
-       $file=Excel::create('Filename', function($excel) {
+        $id =$request->input('report_id');
+        $report=\App\Models\Report::find($id);
+        $organization = $report -> organization;
+        $filename = $report -> quarter . "_квартал_" . $report -> year . "_года";
+       $file=Excel::create($filename, function($excel) {
 
         })->store('xlsx', storage_path('excel/exports'), true);
         /*$report=\App\Models\Report::find($id);
