@@ -49,14 +49,8 @@ class InspectorController extends Controller
     {
         $id =$request->input('report_id');
         $report=\App\Models\Report::find($id);
-        $organization = $report -> organization;
-        $filename = $report -> quarter . "_квартал_" . $report -> year . "_года";
-       $file=Excel::create($filename, function($excel) {
-
-        })->store('xlsx', storage_path('excel/exports'), true);
-        /*$report=\App\Models\Report::find($id);
-        $organization = $report -> organization;
-        $filename =$organization->short_name .'_' . $organization -> inn .'_' . $report -> quarter . "_квартал_" . $report -> year . "_года";
+        $organization =\App\Models\Organization::find($report->organization_id);
+        $filename = $organization->inn."_".$report -> quarter . "_квартал_" . $report -> year . "_года";
         $file = Excel::create($filename, function($excel)use($report) {
             $excel->sheet(' Сводные данные по отчету', function($sheet)use($report) {
                 $sheet->mergeCells('A1:E1');
@@ -108,7 +102,7 @@ class InspectorController extends Controller
                 ), null, 'A1', false, false);
                 $sheet->fromModel($decommissions,null,'A1', false, false);
             });
-        })->store('xls', storage_path('excel/exports'), true);*/
+        })->store('xls', storage_path('excel/exports'), true);
 
 
        return Response::download($file['full']);
