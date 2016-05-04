@@ -50,6 +50,7 @@ class InspectorController extends Controller
         Excel::create('Filename', function($excel) {
 
         })->export('xls');
+        return redirect()->back();
         /*$report=\App\Models\Report::find($id);
         $organization = $report -> organization;
         $filename =$organization->short_name .'_' . $organization -> inn .'_' . $report -> quarter . "_квартал_" . $report -> year . "_года";
