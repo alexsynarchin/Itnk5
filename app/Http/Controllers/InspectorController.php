@@ -47,7 +47,9 @@ class InspectorController extends Controller
     }
     public  function postReportExcel(Request $request)
     {
-        
+       $file=Excel::create('Filename', function($excel) {
+
+        });
         return redirect()->back();
         /*$report=\App\Models\Report::find($id);
         $organization = $report -> organization;
