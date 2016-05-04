@@ -76,32 +76,7 @@ class InspectorController extends Controller
                     array($report->decommission_carrying_amount,$report->decommission_sum)
                 ), null, 'A1', false, false);
             });
-            $excel->sheet('Приобретение', function($sheet)use($report) {
-                $items = $report ->items;
-                $sheet->fromArray(array(
-                    array('Инвертарный номер','Наименование','Балансовая стоимость', 'Код ОКОФ', 'Остаточная стоимость'),
-                ), null, 'A1', false, false);
-                $row =2;
-                foreach($items as $item) {
-                    $sheet->row($row,[$item->number, $item->name, $item->carrying_amount, $item->okof != 0 ? $item->okof: 'Земельный участок',isset($item->variable->residual_value) ? $item->variable->residual_value: 0]);
-                    $row++;
-                }
-            });
-
-            $excel->sheet('Начисление износа', function($sheet)use($report) {
-                $depreciations = $report ->depreciations()->get(['number','name','carrying_amount','sum','residual_value']);
-                $sheet->fromArray(array(
-                    array('Инвертарный номер','Наименование','Балансовая стоимость', 'Начисленный износ', 'Остаточная стоимость'),
-                ), null, 'A1', false, false);
-                $sheet->fromModel($depreciations,null,'A1', false, false);
-            });
-            $excel->sheet('Списание', function($sheet)use($report) {
-                $decommissions = $report ->decommissions()->get(['number','name','carrying_amount','sum','date','type']);
-                $sheet->fromArray(array(
-                    array('Инвертарный номер','Наименование','Балансовая стоимость', 'Сумма списания', 'Дата списания', 'Вид списания'),
-                ), null, 'A1', false, false);
-                $sheet->fromModel($decommissions,null,'A1', false, false);
-            });
+           
         })->export('xlsx');
 
 
