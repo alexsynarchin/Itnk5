@@ -45,7 +45,7 @@ class InspectorController extends Controller
         $reports=\App\Models\Report::where('state','accepted')->get();
         return View::make('inspector.reports',compact('reports'));
     }
-    public  function postReportExcel($id)
+    public  function postReportExcel(Request $request)
     {
         Excel::create('Filename', function($excel) {
 
