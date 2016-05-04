@@ -28,6 +28,7 @@
                     <form method="post" class="inline" action="{{action('ReportController@postReportStateInspection', [$report->id])}}"><input type="hidden" name="_token" value="{{ csrf_token() }}"><button type="submit" class="add-btn btn btn btn-success">Отправить на проверку</button></form>
                 @endif
                 <form method="post" class="inline" action="{{action('InspectorController@postReportExcel')}}">
+                    <input type="hidden" name="report_id" value="{{$report->id}}">
                     <input type="hidden" name="_token" value="{{ csrf_token() }}"><button type="submit" class="btn btn-primary">Печатные формы</button>
                 </form>
                 <form method="post" class="inline" action="{{action('ReportController@postCalcReport', [$report->id])}}"><input type="hidden" name="_token" value="{{ csrf_token() }}"><button type="submit" class="add-btn btn btn btn-primary">Рассчитать итоговые суммы по отчету</button></form>

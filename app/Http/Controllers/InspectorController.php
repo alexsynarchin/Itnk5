@@ -47,10 +47,8 @@ class InspectorController extends Controller
     }
     public  function postReportExcel(Request $request)
     {
-       $file=Excel::create('Filename', function($excel) {
-
-        })->store('xlsx', storage_path('excel/exports'), true);
-        /*$report=\App\Models\Report::find($id);
+        $id = $request ->input('report_id');
+        $report=\App\Models\Report::find($id);
         $organization = $report -> organization;
         $filename =$organization->short_name .'_' . $organization -> inn .'_' . $report -> quarter . "_квартал_" . $report -> year . "_года";
         $file = Excel::create($filename, function($excel)use($report) {
@@ -104,10 +102,10 @@ class InspectorController extends Controller
                 ), null, 'A1', false, false);
                 $sheet->fromModel($decommissions,null,'A1', false, false);
             });
-        })->store('xls', storage_path('excel/exports'), true);*/
+        })->export('xlsx');
 
 
-       return Response::download($file['full']);
+       return redirect()->back;
     }
     public function postOrganizationExcel(Request $request)
     {
