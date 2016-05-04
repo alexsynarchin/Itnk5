@@ -59,6 +59,9 @@
     <script>
         $(function() {
             $('#organizations-table').DataTable({
+                "search": {
+                    "caseInsensitive": false
+                },
                 "language": {
                     "decimal": ",",
                     "thousands": ".",
