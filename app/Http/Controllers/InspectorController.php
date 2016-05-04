@@ -103,10 +103,10 @@ class InspectorController extends Controller
                 ), null, 'A1', false, false);
                 $sheet->fromModel($decommissions,null,'A1', false, false);
             });
-        })->export('xlsx');
+        })->download('xlsx');
 
 
-        return Response::download($file['full']);
+        
     }
     public function postOrganizationExcel(Request $request)
     {
