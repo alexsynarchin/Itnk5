@@ -49,7 +49,7 @@ class InspectorController extends Controller
     {
        $file=Excel::create('Filename', function($excel) {
 
-        });
+        })->export('xlsx');
         return redirect()->back();
         /*$report=\App\Models\Report::find($id);
         $organization = $report -> organization;
