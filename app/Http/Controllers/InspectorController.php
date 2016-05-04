@@ -47,8 +47,10 @@ class InspectorController extends Controller
     }
     public  function postReportExcel(Request $request)
     {
-        $id = $request ->input('report_id');
-        $report=\App\Models\Report::find($id);
+       $file=Excel::create('Filename', function($excel) {
+
+        })->store('xlsx', storage_path('excel/exports'), true);
+        /*$report=\App\Models\Report::find($id);
         $organization = $report -> organization;
         $filename =$organization->short_name .'_' . $organization -> inn .'_' . $report -> quarter . "_квартал_" . $report -> year . "_года";
         $file = Excel::create($filename, function($excel)use($report) {
@@ -76,11 +78,36 @@ class InspectorController extends Controller
                     array($report->decommission_carrying_amount,$report->decommission_sum)
                 ), null, 'A1', false, false);
             });
-           
-        })->export('xlsx');
+            $excel->sheet('Приобретение', function($sheet)use($report) {
+                $items = $report ->items;
+                $sheet->fromArray(array(
+                    array('Инвертарный номер','Наименование','Балансовая стоимость', 'Код ОКОФ', 'Остаточная стоимость'),
+                ), null, 'A1', false, false);
+                $row =2;
+                foreach($items as $item) {
+                    $sheet->row($row,[$item->number, $item->name, $item->carrying_amount, $item->okof != 0 ? $item->okof: 'Земельный участок',isset($item->variable->residual_value) ? $item->variable->residual_value: 0]);
+                    $row++;
+                }
+            });
+
+            $excel->sheet('Начисление износа', function($sheet)use($report) {
+                $depreciations = $report ->depreciations()->get(['number','name','carrying_amount','sum','residual_value']);
+                $sheet->fromArray(array(
+                    array('Инвертарный номер','Наименование','Балансовая стоимость', 'Начисленный износ', 'Остаточная стоимость'),
+                ), null, 'A1', false, false);
+                $sheet->fromModel($depreciations,null,'A1', false, false);
+            });
+            $excel->sheet('Списание', function($sheet)use($report) {
+                $decommissions = $report ->decommissions()->get(['number','name','carrying_amount','sum','date','type']);
+                $sheet->fromArray(array(
+                    array('Инвертарный номер','Наименование','Балансовая стоимость', 'Сумма списания', 'Дата списания', 'Вид списания'),
+                ), null, 'A1', false, false);
+                $sheet->fromModel($decommissions,null,'A1', false, false);
+            });
+        })->store('xls', storage_path('excel/exports'), true);*/
 
 
-       return redirect()->back;
+       return Response::download($file['full']);
     }
     public function postOrganizationExcel(Request $request)
     {
