@@ -77,16 +77,13 @@ class InspectorController extends Controller
             });
             $excel->sheet('Приобретение', function($sheet)use($report) {
                 $items = $report ->items;
+                foreach($items as $item) {
+                    $data[] = array($item->number, $item->name, $item->carrying_amount, $item->okof != 0 ? $item->okof: 'Земельный участок',isset($item->variable->residual_value) ? $item->variable->residual_value: 0);
+                }
                 $sheet->fromArray(array(
                     array('Инвертарный номер','Наименование','Балансовая стоимость', 'Код ОКОФ', 'Остаточная стоимость'),
                 ), null, 'A1', false, false);
-                $row=2;
-                foreach($items as $item) {
-                    $data=[$item->number, $item->name, $item->carrying_amount, $item->okof != 0 ? $item->okof: 'Земельный участок',isset($item->variable->residual_value) ? $item->variable->residual_value: 0];
-                    $sheet->row($row,$data);
-                    $row++;
-                }
-
+                $sheet->fromModel($items,null,'A1', false, false);
             });
 
             $excel->sheet('Начисление износа', function($sheet)use($report) {
@@ -103,10 +100,10 @@ class InspectorController extends Controller
                 ), null, 'A1', false, false);
                 $sheet->fromModel($decommissions,null,'A1', false, false);
             });
-        })->download('xlsx');
+        })->export('xlsx');
 
 
-        
+        return Response::download($file['full']);
     }
     public function postOrganizationExcel(Request $request)
     {
