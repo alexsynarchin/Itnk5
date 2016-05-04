@@ -51,13 +51,19 @@ class InspectorController extends Controller
         $report=\App\Models\Report::find($id);
         $organization =\App\Models\Organization::find($report->organization_id);
         $filename = $organization->inn."_".$report -> quarter . "_квартал_" . $report -> year . "_года";
-        $file = Excel::create($filename, function($excel)use($report) {
-            $excel->sheet(' Сводные данные по отчету', function($sheet)use($report) {
+        $file = Excel::create($filename, function($excel)use($report,$organization) {
+            $excel->sheet(' Сводные данные по отчету', function($sheet)use($report,$organization) {
                 $sheet->mergeCells('A1:E1');
-                $sheet->mergeCells('A5:E5');
-                $sheet->mergeCells('A10:E10');
-                $sheet->mergeCells('A14:E14');
+                $sheet->mergeCells('A2:E2');
+                $sheet->mergeCells('A6:E6');
+                $sheet->mergeCells('A11:E11');
+                $sheet->mergeCells('A15:E15');
+                $sheet->cells('A1:E1', function($cells){
+                    $cells->setAlignment('center');
+                    $cells->setValignment('middle');
+                });
                 $sheet->fromArray(array(
+                    array($organization->inn." ".$organization->short_name." ".$report -> quarter . " квартал " . $report -> year . " года"),
                     array('Итоговые суммы по отчету'),
                     array('Балансовая стоимость', 'Начисленный износ', 'Сумма списания', 'Остаточная стоимость'),
                     array($report->report_total_carrying_amount, $report->report_wearout_value, $report->decommission_carrying_amount, $report->report_total_residual_value),
@@ -76,28 +82,46 @@ class InspectorController extends Controller
                     array($report->decommission_carrying_amount,$report->decommission_sum)
                 ), null, 'A1', false, false);
             });
-            $excel->sheet('Приобретение', function($sheet)use($report) {
+            $excel->sheet('Приобретение', function($sheet)use($report,$organization) {
+                $sheet->mergeCells('A1:E1');
+                $sheet->cells('A1:E1', function($cells){
+                    $cells->setAlignment('center');
+                    $cells->setValignment('middle');
+                });
                 $items = $report ->items;
                 $sheet->fromArray(array(
+                    array($organization->inn." ".$organization->short_name." ".$report -> quarter . " квартал " . $report -> year . " года"),
                     array('Инвертарный номер','Наименование','Балансовая стоимость', 'Код ОКОФ', 'Остаточная стоимость'),
                 ), null, 'A1', false, false);
-                $row =2;
+                $row =3;
                 foreach($items as $item) {
                     $sheet->row($row,[$item->number, $item->name, $item->carrying_amount, $item->okof != 0 ? $item->okof: 'Земельный участок',isset($item->variable->residual_value) ? $item->variable->residual_value: 0]);
                     $row++;
                 }
             });
 
-            $excel->sheet('Начисление износа', function($sheet)use($report) {
+            $excel->sheet('Начисление износа', function($sheet)use($report,$organization) {
+                $sheet->mergeCells('A1:E1');
+                $sheet->cells('A1:E1', function($cells){
+                    $cells->setAlignment('center');
+                    $cells->setValignment('middle');
+                });
                 $depreciations = $report ->depreciations()->get(['number','name','carrying_amount','sum','residual_value']);
                 $sheet->fromArray(array(
+                    array($organization->inn." ".$organization->short_name." ".$report -> quarter . " квартал " . $report -> year . " года"),
                     array('Инвертарный номер','Наименование','Балансовая стоимость', 'Начисленный износ', 'Остаточная стоимость'),
                 ), null, 'A1', false, false);
                 $sheet->fromModel($depreciations,null,'A1', false, false);
             });
-            $excel->sheet('Списание', function($sheet)use($report) {
+            $excel->sheet('Списание', function($sheet)use($report,$organization) {
+                $sheet->mergeCells('A1:E1');
+                $sheet->cells('A1:E1', function($cells){
+                    $cells->setAlignment('center');
+                    $cells->setValignment('middle');
+                });
                 $decommissions = $report ->decommissions()->get(['number','name','carrying_amount','sum','date','type']);
                 $sheet->fromArray(array(
+                    array($organization->inn." ".$organization->short_name." ".$report -> quarter . " квартал " . $report -> year . " года"),
                     array('Инвертарный номер','Наименование','Балансовая стоимость', 'Сумма списания', 'Дата списания', 'Вид списания'),
                 ), null, 'A1', false, false);
                 $sheet->fromModel($decommissions,null,'A1', false, false);
