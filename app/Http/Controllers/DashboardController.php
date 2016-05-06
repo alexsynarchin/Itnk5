@@ -27,4 +27,8 @@ class DashboardController extends Controller
         $items = \App\Models\Item::all();
         return \View::make('items')->with('items',$items);
     }
+    public function help()
+    {
+        return view('help');
+    }
 }

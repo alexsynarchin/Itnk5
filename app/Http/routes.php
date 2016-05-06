@@ -29,6 +29,11 @@ Route::get('reports',[
     'uses' => 'ReportController@index',
     'as' => 'reports'
 ]);
+Route::get('help',[
+    'middleware' => 'auth',
+    'uses' => 'DashboardController@help',
+    'as' => 'help'
+]);
 Route::group(['prefix' => 'report/{id}', 'middleware' => 'auth'], function(){
     Route::get('/', [
         'as' => 'report.show',
