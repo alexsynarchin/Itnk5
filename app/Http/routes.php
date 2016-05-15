@@ -232,6 +232,17 @@ Route::group(['middleware' => 'auth'],
             'as' => 'residue.store',
             'uses' => 'AdminController@residueStore'
         ]);
+        //File download
+        Route::get('organization-document/{id}',[
+            'as' => 'download.orgdoc',
+            'uses' => 'DashboardController@download'
+        ]);
+        //Files delete
+        Route::get('organization-document/{id}/destroy',
+            [
+                'as' => 'orgdoc.delete',
+                'uses' => 'AdminController@destroyOrgDoc'
+            ]);
         //Inspector
         Route::controller('inspector', 'InspectorController', [
             'getOrganizations' => 'inspector.organizations'

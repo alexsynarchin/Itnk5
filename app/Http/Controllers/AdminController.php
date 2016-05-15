@@ -10,6 +10,8 @@ use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Redirect;
 use App\Models;
 use View;
+use Storage;
+use File;
 
 class AdminController extends Controller
 {
@@ -27,8 +29,9 @@ class AdminController extends Controller
         $organization=\App\Models\Organization::find($id);
         $user=\App\Models\Organization::find($id)->user;
         $documents=\App\Models\User::find($organization->user->id)->documents;
+        $orgdocs = $organization ->orgdocs;
         $reports=$organization->reports;
-        return View::make('admin.organization', compact('organization','reports','documents'));
+        return View::make('admin.organization', compact('organization','reports','documents','orgdocs'));
     }
     public function documentCreate($id)
     {
@@ -257,6 +260,41 @@ public function residueStore($id){
         $residue -> save();
     }
     return redirect() ->back();
-}
+    }
+    public function postOrgDocUpload(Request $request, $id)
+    {
+        if($request->file('OrgDoc')->isValid()){
+            $start_year=2016;
+            $max_year=\App\Models\OrgDoc::where('organization_id',$id)->max('year');
+            if (isset($max_year)){
+                $year=++$max_year;
+            }
+            else{
+                $year=$start_year;
+            }
+            $file =$request->file('OrgDoc');
+            $extension = $file->getClientOriginalExtension();
+            Storage::disk('local')->put('/organizations/'.$id.'/orgDocs/'.$file->getFilename().'.'.$extension,  File::get($file));
+            $document = new \App\Models\OrgDoc();
+            $document ->organization_id = $id;
+            $document->year=$year;
+            $document -> mime = $file -> getClientMimeType();
+            $document -> original_filename = $file ->getClientOriginalName();
+            $document ->filename = $file->getFilename().'.'.$extension;
+            $document->save();
+            return redirect()->back();
+        }
+        else{
+            return redirect()->back();
+        }
 
+    }
+    public  function destroyOrgDoc($id)
+    {
+        $orgdoc=\App\Models\OrgDoc::find($id);
+        $file_path =storage_path().'/app'.'/organizations/'.$orgdoc->organization_id.'/orgDocs/'.$orgdoc->filename;
+        if(File::exists($file_path)) File::delete($file_path);
+        $orgdoc->delete();
+        return redirect()->back();
+    }
 }

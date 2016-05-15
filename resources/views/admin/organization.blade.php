@@ -123,5 +123,52 @@
                     </tbody></table>
             </div><!-- /.box-body -->
         </div>
+        <div class="box">
+            <div class="box-header with-border">
+                <h3>Договор</h3>
+            </div>
+            <div class="box-body">
+                <div class="control-bnts row">
+                    {!!  Form::open(array('url' => action('AdminController@postOrgDocUpload',[$organization->id]), 'method' => 'post', 'role' => 'form','files' => true)) !!}
+                    <div class="form-group">
+                        <input type="file" name="OrgDoc" id="OrgDoc">
+                    </div>
+                    <button  class="add-btn btn btn-primary" type="submit">Загрузить договор</button>
+                    {!!  Form::close() !!}
+                </div>
+                <table class="list table table-bordered table-hover">
+                    <thead>
+                        <tr>
+                            <th>
+                                Год
+                            </th>
+                            <th>
+                                Название файла
+                            </th>
+                            <th></th>
+                            <th></th>
+                        </tr>
+                        @if($orgdocs->count())
+                            @foreach($orgdocs as $orgdoc)
+                                <tr>
+                                    <td>
+                                        {{$orgdoc -> year}}
+                                    </td>
+                                    <td>
+                                        {{$orgdoc -> original_filename}}
+                                    </td>
+                                    <td>
+                                        <a href="{{route('download.orgdoc',[$orgdoc->id])}}">Скачать</a>
+                                    </td>
+                                    <td>
+                                        <a  href="{{URL::route('orgdoc.delete',[$orgdoc->id])}}"><i class="fa fa-trash"></i> Удалить</a>
+                                    </td>
+                                </tr>
+                            @endforeach
+                        @endif
+                    </thead>
+                </table>
+            </div>
+        </div>
     </section>
 @stop

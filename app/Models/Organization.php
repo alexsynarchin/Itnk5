@@ -17,4 +17,8 @@ class Organization extends Model
     public function residue(){
         return $this -> hasOne('App\Models\Residue', 'organization_id');
     }
+    public function orgdocs()
+    {
+        return $this -> hasMany('App\Models\OrgDoc', 'organization_id');
+    }
 }

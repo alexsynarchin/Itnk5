@@ -31,4 +31,10 @@ class DashboardController extends Controller
     {
         return view('help');
     }
+    public function download($id)
+    {
+        $entry = \App\Models\OrgDoc::where('id',$id)->firstOrFail();
+        $filepath =storage_path().'/app'.'/organizations/'.$entry->organization_id.'/orgDocs/'.$entry->filename;
+        return response()->download($filepath, $entry->original_filename);
+    }
 }

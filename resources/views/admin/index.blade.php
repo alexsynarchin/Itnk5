@@ -28,6 +28,7 @@
                         <th>ИНН</th>
                         <th>Балансовая стоимость</th>
                         <th>Остаточная стоимость</th>
+                        <th>Договор</th>
                         <th>Действия</th>
                     </tr>
                     </thead>
@@ -62,6 +63,7 @@
                     { data: 'inn', name: 'inn' },
                     { data: 'org_carrying_amount', name: 'org_carrying_amount' },
                     { data: 'org_residual_value', name: 'org_residual_value' },
+                    {data:'document',name:'document',orderable: false, searchable: false},
                     {data: 'action', name: 'action', orderable: false, searchable: false}
 
                 ]

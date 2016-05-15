@@ -88,5 +88,42 @@
                 </div>
             </div>
         </div>
+        <div class="box">
+            <div class="box-header with-border">
+                <h3>Договора</h3>
+            </div>
+            <div class="box-body">
+                <table class="list table table-bordered table-hover">
+                    <thead>
+                    <tr>
+                        <th>
+                            Год
+                        </th>
+                        <th>
+                            Название файла
+                        </th>
+                        <th>
+
+                        </th>
+                    </tr>
+                    @if($orgdocs->count())
+                        @foreach($orgdocs as $orgdoc)
+                            <tr>
+                                <td>
+                                    {{$orgdoc -> year}}
+                                </td>
+                                <td>
+                                    {{$orgdoc -> original_filename}}
+                                </td>
+                                <td>
+                                    <a href="{{route('download.orgdoc',[$orgdoc->id])}}">Скачать</a>
+                                </td>
+                            </tr>
+                        @endforeach
+                    @endif
+                    </thead>
+                </table>
+            </div>
+        </div>
     </section>
 @stop

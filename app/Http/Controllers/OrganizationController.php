@@ -25,14 +25,25 @@ class OrganizationController extends Controller
     public function index()
     {
         $organization=Auth::user()->organization;
-        return View::make('organization',['organization' => $organization]);
+        $orgdocs = $organization ->orgdocs;
+        return View::make('organization',compact('organization','orgdocs'));
     }
     public function getAdminOrganizations(){
         $organizations= \App\Models\Organization::all();
         $datatables = Datatables::of($organizations)
-        ->addColumn('action',function($organization){
-            return '<a href="admin/organization/'.$organization->id.'" class="actions icons"><i class="fa fa-eye"></i></a><a href="/organization/'.$organization->id.'/edit" class="actions icons"><i class="fa fa-pencil-square-o"></i></a>';
-        });
+        ->addColumn('document',function($organization){
+            $orgdocs =$organization ->orgdocs;
+            if($orgdocs->count()){
+                $document='Загружен';
+            }
+            else{
+                $document='Не Загружен';
+            }
+            return $document;
+        })
+            ->addColumn('action',function($organization){
+                return '<a href="admin/organization/'.$organization->id.'" class="actions icons"><i class="fa fa-eye"></i></a><a href="/organization/'.$organization->id.'/edit" class="actions icons"><i class="fa fa-pencil-square-o"></i></a>';
+            });
         return $datatables->make(true);
     }
 
