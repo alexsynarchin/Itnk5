@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Report extends Model
 {
+    protected $dates =['inspection_date','accepted_date'];
     protected $fillable=[
         'year', 'quarter'
     ];

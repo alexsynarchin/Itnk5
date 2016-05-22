@@ -10,6 +10,7 @@ use App\Models;
 use View;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Auth;
+use Carbon\Carbon;
 
 class ReportController extends Controller
 {
@@ -117,6 +118,7 @@ class ReportController extends Controller
     {
         $report = \App\Models\Report::find($id);
         $report -> state = 'inspection';
+        $report ->inspection_date =Carbon::now();
         $report->save();
         return redirect() -> back();
     }
@@ -124,6 +126,7 @@ class ReportController extends Controller
     {
         $report = \App\Models\Report::find($id);
         $report -> state = 'accepted';
+        $report ->accepted_date =Carbon::now();
         $report->save();
         return redirect() -> back();
     }

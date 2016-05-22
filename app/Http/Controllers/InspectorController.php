@@ -37,12 +37,12 @@ class InspectorController extends Controller
     }
     public function reports()
     {
-        $reports=\App\Models\Report::where('state','inspection')->get();
+        $reports=\App\Models\Report::where('state','inspection')->orderBy('inspection_date','desc')->get();
         return View::make('inspector.reports',compact('reports'));
     }
     public function acceptedReports()
     {
-        $reports=\App\Models\Report::where('state','accepted')->get();
+        $reports=\App\Models\Report::where('state','accepted')->orderBy('accepted_date','desc')->get();
         return View::make('inspector.reports',compact('reports'));
     }
     public  function postReportExcel(Request $request)

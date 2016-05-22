@@ -17,6 +17,14 @@
                 <div class="box-header with-border">
                     <h4 class="box-title">{{$report->organization->short_name}}. Учетный период - {{App\Models\Report::$report_quarter[$report->quarter]}} квартал {{$report->year}} г.</h4> <a href="{{route('report.show', [$report->id])}}" class="add-btn btn btn-success"><i class="fa fa-sign-in"></i> Перейти к отчету</a>
                     <div class="box-tools pull-right">
+                        <span>
+                            @if ($report->state == 'accepted')
+                                {{$report->accepted_date->format('d.m.Y H:i:s')}}
+                            @endif
+                                @if ($report->state == 'inspection')
+                                    {{$report->inspection_date->format('d.m.Y H:i:s')}}
+                                @endif
+                        </span>
                         <span  class="reportState-{{$report->state}} label">{{App\Models\Report::$report_state[$report->state]}}</span>
                     </div><!-- /.box-tools -->
                 </div><!-- /.box-header -->
