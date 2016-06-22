@@ -41,6 +41,21 @@ class OrganizationController extends Controller
             }
             return $document;
         })
+            ->addColumn('repetition', function($organization){
+                $user = $organization -> user;
+                $documents_movalbes = $user -> documents()->whereDocument_typeAndOs_type('residues_entering','movables')->count();
+                $document_value_movables = $user -> documents()->whereDocument_typeAndOs_type('residues_entering','value_movables')->count();
+                $document_car = $user -> documents()->whereDocument_typeAndOs_type('residues_entering','car')->count();
+                $document_buildings = $user -> documents()->whereDocument_typeAndOs_type('residues_entering','buildings')->count();
+                $document_parcels = $user -> documents()->whereDocument_typeAndOs_type('residues_entering','parcels')->count();
+                if (($documents_movalbes > 1) || ($document_value_movables > 1) || ($document_car > 1) || ($document_buildings > 1) || ($document_parcels > 1)){
+                    $repetition = 'Есть повтор';
+                }
+                else{
+                    $repetition ='Нет';
+                }
+                return $repetition;
+            })
             ->addColumn('action',function($organization){
                 return '<a href="admin/organization/'.$organization->id.'" class="actions icons"><i class="fa fa-eye"></i></a><a href="/organization/'.$organization->id.'/edit" class="actions icons"><i class="fa fa-pencil-square-o"></i></a>';
             });
