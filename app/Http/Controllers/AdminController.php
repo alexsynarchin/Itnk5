@@ -28,7 +28,7 @@ class AdminController extends Controller
     {
         $organization=\App\Models\Organization::find($id);
         $user=\App\Models\Organization::find($id)->user;
-        $documents=\App\Models\User::find($organization->user->id)->documents;
+        $documents=\App\Models\User::find($organization->user->id)->documents->where('document_type','residues_entering');
         $orgdocs = $organization ->orgdocs;
         $reports=$organization->reports;
         return View::make('admin.organization', compact('organization','reports','documents','orgdocs'));
