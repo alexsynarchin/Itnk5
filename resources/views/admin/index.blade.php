@@ -39,6 +39,13 @@
 
             </div><!-- box-footer -->
         </div><!-- /.box -->
+        <div class="row">
+            <div class="col-xs-4">
+                {!!  Form::open(array('url' => action('ReportController@AddForAll'), 'method' => 'post', 'role' => 'form')) !!}
+                <button type="submit" class="add-btn btn btn-primary">Отчеты за следующий квартал</button>
+                {!!  Form::close() !!}
+            </div>
+        </div>
     </section>
 @stop
 @section('user-scripts')

@@ -221,12 +221,17 @@ Route::group(['middleware' => 'auth'],
             'as' => 'admin.document.show',
             'uses' => 'AdminController@documentShow'
         ]);
+        Route::post('all-reports',[
+            'as' => 'allReports.create',
+            'uses' => 'ReportController@AddForAll'
+        ]);
         Route::controller('admin', 'AdminController');
         //Reports Admin
         Route::post('report/{id}',[
             'as' => 'report.store',
             'uses' => 'ReportController@store'
         ]);
+
         //Residues entering
         Route::post('residue/{id}',[
             'as' => 'residue.store',

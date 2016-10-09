@@ -137,4 +137,45 @@ class ReportController extends Controller
         $report->save();
         return redirect() -> back();
     }
+    public function AddForAll()
+    {
+        $organizations = \App\Models\Organization::all();
+        foreach ($organizations as $organization){
+            $id = $organization -> id;
+            $reports = $organization ->reports;
+            if ($reports->count()){
+                $maxYear= \App\Models\Report::where('organization_id', '=', $id) -> max('year');
+                $maxQuarter = \App\Models\Report::where('organization_id', '=', $id)->where('year','=', $maxYear)->max('quarter');
+                if($maxQuarter == 4 && $maxYear != 2016)
+                {
+                    $year = ++$maxYear;
+                    $report= new \App\Models\Report;
+                    $report -> year = $year;
+                    $report -> quarter = 1;
+                    $report -> organization_id = $id;
+                    $report ->state = 'not_accepted';
+                    $report->save();
+                }
+                elseif ($maxQuarter !=4){
+                    $quarter = $maxQuarter+1;
+                    $report= new \App\Models\Report;
+                    $report -> year = $maxYear;
+                    $report -> quarter = $quarter;
+                    $report -> organization_id = $id;
+                    $report ->state = 'not_accepted';
+                    $report->save();
+                }
+
+            }
+            else{
+                $report= new \App\Models\Report;
+                $report -> year = 2015;
+                $report -> quarter = 1;
+                $report -> organization_id = $id;
+                $report ->state = 'not_accepted';
+                $report->save();
+            }
+        }
+        return redirect() -> back();
+    }
 }
